@@ -6,12 +6,13 @@
 	import '../../../../app.css';
 	import ModalValidator from '../Modal/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
-	import { refreshAll } from '$app/navigation';
+
 
 	let users: IUser[] = $state([]);
 	let roles: IRole[] = $state([]);
 	let cours: ICours[] = $state([]);
 	let categories: ICategory[] = $state([]);
+	
 
 	onMount(async () => {
 		// Fetch tous les roles
