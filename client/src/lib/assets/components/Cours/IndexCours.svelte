@@ -11,8 +11,6 @@
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import ModalValidator from '../Modal/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
-	import { marked } from 'marked';
-
 
 	let cours: ICours | null = $state(null);
 	let user: IUserLocalStorage | null = $state(null);
@@ -21,10 +19,17 @@
 	let modifier = $state(false);
 	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
 
+	let editData = $state({
+		title: '',
+		littleSummary: '',
+		difficulty: 0
+	});
 
 	$effect(() => {
-		if (modifier) {
-			textAreaAdjust(document.getElementById('text_area') as ITextArea);
+		if (cours && modifier) {
+			editData.title = cours.title;
+			editData.littleSummary = cours.littleSummary ?? '';
+			editData.difficulty = cours.difficulty;
 		}
 	});
 
@@ -122,14 +127,54 @@
 		cours = response.data;
 	}
 
+	async function saveCours() {
+		const data = {
+			title: editData.title,
+			slug: editData.title.replaceAll(' ', '-'),
+			littleSummary: editData.littleSummary,
+			difficulty: editData.difficulty,
+			summary: cours?.summary ?? '',
+			visibility: cours?.visibility ?? false,
+			numberPage: cours?.numberPage ?? 0,
+			authorId: cours?.authorId,
+			categoryId: cours?.categoryId,
+			tools: cours?.tools.map((t) => t.tools.id) ?? [],
+			learningObjectives: cours?.learningObjectives.map((o) => o.objectif.id) ?? [],
+			content: cours?.content.map((c) => c.id) ?? [],
+			enrollments: cours?.enrollments?.map((e: any) => e.id) ?? [],
+			activations: cours?.activations?.map((a: any) => a.id) ?? [],
+			comments: cours?.comments?.map((c: any) => c.id) ?? [],
+			opinions: cours?.opinions?.map((o: any) => o.id) ?? [],
+			notifications: cours?.notifications?.map((n: any) => n.id) ?? []
+		};
+
+		console.log('data envoyée:', data);  
+		const response = await api('api/cours/' + cours?.id, 'PATCH', data);
+		console.log('api/cours/' + cours?.id);
+		
+		if (response.status === 200) {
+			const refresh = await api('api/cours?slug=' + cours?.slug);
+			cours = refresh.data;
+			modifier = false;
+		}
+	}
+
 	function handleModify() {
 		modifier = !modifier;
 	}
 
-	function textAreaAdjust(element: ITextArea) {
-		element.style.height = '1px';
-		element.style.height = element.scrollHeight + 'px';
+
+	function addLearningObjective() {
+		const data = { title: 'Nouvel objectif', coursId: cours?.id };
+		api('api/learning-objectifs', 'POST', data).then((response) => {
+			cours?.learningObjectives.push({ objectif: response.data });
+		});
 	}
+
+	async function updateTool(toolId: number, newName: string) {
+		await api('api/tools/' + toolId, 'PATCH', { name: newName });
+	}
+
 </script>
 
 <div class="back-cours">
@@ -140,7 +185,11 @@
 	<div class="page">
 		<!-- HEADER -->
 		<div class="header">
-			<h1>{cours.title}</h1>
+			{#if modifier}
+				<input class="edit-input" bind:value={editData.title} />
+			{:else}
+				<h1>{cours.title}</h1>
+			{/if}
 			<Category
 				category={cours.category}
 				--border_color={cours.category.borderColor}
@@ -154,12 +203,15 @@
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
 				>
-				<button class="button" onclick={() => { 
-					handleModify();
-						}}>{textButton}</button>
-
-
-
+				<button
+					class="button"
+					onclick={() => {
+						handleModify();
+					}}>{textButton}</button
+				>
+				{#if modifier}
+					<button class="button" onclick={saveCours}>Enregistrer les modifications</button>
+				{/if}
 
 				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 			</div>
@@ -175,7 +227,11 @@
 			<div class="left">
 				<div class="card">
 					<div class="card-title">Résumé</div>
-					<p>{cours.littleSummary}</p>
+					{#if modifier}
+						<textarea class="edit-textarea" bind:value={editData.littleSummary}></textarea>
+					{:else}
+						<p>{cours.littleSummary}</p>
+					{/if}
 				</div>
 
 				<!-- MOBILE OBJECTIFS -->
@@ -233,25 +289,57 @@
 				<div class="card side desktop-only">
 					<div class="section">
 						<p class="label">Difficulté</p>
-						<LevelBar class="difficulty-bar" level={cours.difficulty} />
+						{#if modifier}
+							<div class="section">
+								<input type="range" min="0" max="5" bind:value={editData.difficulty} />
+								<span class="difficulty-value">{editData.difficulty}</span>
+							</div>
+						{:else}
+							<LevelBar class="difficulty-bar" level={cours.difficulty} />
+						{/if}
 					</div>
 
 					<div class="section desktop-only">
 						<p class="label">OBJECTIFS PÉDAGOGIQUES</p>
-						<ul class="list">
-							{#each cours.learningObjectives as obj}
-								<li>{obj.objectif.title}</li>
-							{/each}
-						</ul>
+						{#if modifier}
+							<ul class="list">
+								{#each cours.learningObjectives as obj}
+									<li>
+										<input class="edit-input" value={obj.objectif.title} />
+									</li>
+								{/each}
+							</ul>
+							<button class="btn-add" onclick={addLearningObjective}>Ajouter un objectif</button>
+						{:else}
+							<ul class="list">
+								{#each cours.learningObjectives as obj}
+									<li>{obj.objectif.title}</li>
+								{/each}
+							</ul>
+						{/if}
 					</div>
 					<div class="tool-mobile">
 						<div class="section">
 							<p class="label">OUTILS NÉCESSAIRES</p>
-							<ul class="list">
-								{#each cours.tools as tool}
-									<li>{tool.tools.name}</li>
-								{/each}
-							</ul>
+							{#if modifier}
+								<ul class="list">
+									{#each cours.tools as tool}
+										<li>
+											<input
+												class="edit-input"
+												value={tool.tools.name}
+												onblur={(e) => updateTool(tool.tools.id, e.currentTarget.value)}
+											/>
+										</li>
+									{/each}
+								</ul>
+							{:else}
+								<ul class="list">
+									{#each cours.tools as tool}
+										<li>{tool.tools.name}</li>
+									{/each}
+								</ul>
+							{/if}
 						</div>
 					</div>
 				</div>
