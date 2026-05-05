@@ -360,7 +360,7 @@
 	/>
 	<ModalValidator
 		id="modalDeleteCategory"
-		message="Êtes-vous sûr de vouloir supprimer cette catégorie ?"
+		message="Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous la supprimez, vous supprimerez tous les cours liés à celle-ci..."
 		cancel={cancelDeleteCategory}
 		confirm={confirmDeleteCategory}
 	/>
