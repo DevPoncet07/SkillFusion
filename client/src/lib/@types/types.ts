@@ -172,11 +172,11 @@ export interface IOpinion {
   user : IUser  
 }
 
-export interface Notification {
-   id :number
-  contenu :string
+export interface INotification {
+  id :number
+  content :string
   coursId  :number
-  userId  :number
+  authorId  :number
   createdAt :Date
   updatedAt :Date
   cours :ICours
