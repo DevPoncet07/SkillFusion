@@ -8,6 +8,8 @@
     --border-radius:12px;
     --h1-color:#1D4E89;
 
+    --color-notification-not-seen: #ecd7b2;
+
 }
 body{
     min-height: 100vh;

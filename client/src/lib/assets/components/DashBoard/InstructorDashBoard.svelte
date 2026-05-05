@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../../../../app.css';
-	import type { ICours } from '$lib/@types/types';
+	import type { ICours, INotification } from '$lib/@types/types';
 	import { onMount } from 'svelte';
 	import api from '$lib/services/api.service';
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
@@ -8,9 +8,10 @@
 	import ModalNewCours from '../Modal/ModalNewCours.svelte';
 	import type { IModal } from '$lib/@types/html';
 	import type { IPropsComfirmeNewCours } from '$lib/@types/typeUtils';
+	import Notification from './Notification.svelte';
 
 	let cours: ICours[] = $state([]);
-	let notifications = $state([]);
+	let notifications : INotification[]= $state([]);
 
 	onMount(async () => {
 		getAuth();
@@ -36,63 +37,27 @@
 		await api("api/cours","POST",data)
 		cancelModalNewCours()
 	}
-
-	const notificationsss = [
-		{
-			auteur: 'Antoine L.',
-			type: 'question',
-			contenu: "Que faire si l'écrou est rouillé ?",
-			cours: 'Installer un robinet',
-			lu: false,
-			heure: '14h32'
-		},
-		{
-			auteur: 'Sophie M.',
-			type: 'question',
-			contenu: 'Quel type de téflon utiliser ?',
-			cours: 'Installer un robinet',
-			lu: false,
-			heure: '11h15'
-		},
-		{
-			auteur: 'Pierre T.',
-			type: 'avis',
-			contenu: 'Excellent cours, très clair !',
-			cours: 'Poser une prise',
-			lu: true,
-			heure: '09h40'
-		},
-		{
-			auteur: 'Laura K.',
-			type: 'question',
-			contenu: 'Un cours sur les douches est-il prévu ?',
-			cours: 'Installer un robinet',
-			lu: true,
-			heure: 'Hier'
-		},
-		{
-			auteur: 'Thomas B.',
-			type: 'avis',
-			contenu: 'Super contenu, bien détaillé.',
-			cours: 'Assembler un meuble',
-			lu: true,
-			heure: 'Hier'
-		}
-	];
-
+	
 	// ── État ────────────────────────────────────────────────────
 	let searchCours = $state('');
 	let filteredCours = $derived(
 		cours.filter((c) => !searchCours || c.title.toLowerCase().includes(searchCours.toLowerCase()))
 	);
 
-	const nonLues = $derived(notifications.filter((n) => !n.seen).length);
+	 async function seenNotification(id:number){
+        await api("api/notifications/"+id,"PATCH",{seen:true})
+    }
 
-	// ── Config types notifs ──────────────────────────────────────
-	const typeConfig = {
-		question: { label: 'Question', cls: 'notif--question' },
-		avis: { label: 'Avis', cls: 'notif--avis' }
-	};
+    async function deleteNotification(event,id:number){
+		event.preventDefault()
+        await api("api/notifications/"+id,"DELETE")
+		const responseCours = await api('api/cours/instructor/' + authStore?.user?.id);
+		cours = responseCours.data;
+		const responseNotification = await api('api/notifications/instructor/' + authStore?.user?.id);
+		notifications = responseNotification.data;
+    }
+
+
 </script>
 
 <div class="dashboard">
@@ -147,23 +112,15 @@
 		<div class="panel">
 			<div class="panel__head">
 				<h2 class="panel__title">Notifications</h2>
-				{#if nonLues > 0}
-					<span class="notif-badge">{nonLues} nouvelle{nonLues > 1 ? 's' : ''}</span>
-				{/if}
 			</div>
 
 			<div class="panel__list panel__list--notifs">
 				{#each notifications as notification}
-					<a class="notif" href={"/cours/"+notification.cours.slug+"/cours"}>
-						<div class="notif__top">
-							<div class="notif__meta">
-								<span class="notif__auteur">{notification.authorId}</span>
-							</div>
-							<span class="notif__heure">{notification.createdAt}</span>
-						</div>
-						<p class="notif__contenu">{notification.content}</p>
-						<p class="notif__cours">↳ {notification.title}</p>
-					</a>
+					<Notification 
+					notification={notification}
+					seenNotification={seenNotification}
+					deleteNotification={deleteNotification}
+					/>
 				{/each}
 			</div>
 		</div>
@@ -182,7 +139,7 @@
 		--amber: #f5a623;
 		--amber-l: #fef5e7;
 		--amber-m: #fac775;
-		--bg: #f7f4ef;
+		
 		--dark: #2c3e50;
 		--white: #ffffff;
 		--gray: #6b7280;
@@ -353,68 +310,6 @@
 	}
 
 
-
-	/* ── Notifications ───────────────────────────────────────── */
-	.notif-badge {
-		background: var(--amber);
-		color: var(--white);
-		font-size: 11px;
-		font-weight: 600;
-		padding: 2px 8px;
-		border-radius: 100px;
-	}
-
-	.notif {
-		padding: 12px 14px;
-		border-radius: var(--r-md);
-		background: var(--bg);
-		border: 0.5px solid transparent;
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		transition: border-color 0.15s;
-	}
-
-
-	.notif__top {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-	}
-
-	.notif__meta {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-	}
-
-	.notif__auteur {
-		font-size: 12px;
-		font-weight: 600;
-		color: var(--dark);
-	}
-
-
-
-	.notif__heure {
-		font-size: 10px;
-		color: var(--gray);
-		flex-shrink: 0;
-	}
-
-	.notif__contenu {
-		font-size: 12px;
-		color: var(--dark);
-		margin: 0;
-		line-height: 1.5;
-	}
-
-	.notif__cours {
-		font-size: 11px;
-		color: var(--gray);
-		margin: 0;
-	}
 
 
 
