@@ -5,7 +5,7 @@ on:
     branches: [main-dev, main]
 
 jobs:
-  lint-and-fix:
+  lint-api:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,27 +17,70 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install API dependencies
+        working-directory: ./api
         run: npm install
 
-      - name: Run ESLint with fix
+      - name: Run API ESLint with fix
+        working-directory: ./api
         run: npm run lint -- --fix
         continue-on-error: true
 
-      - name: Run Prettier
+      - name: Run API Prettier
+        working-directory: ./api
         run: npm run format
         continue-on-error: true
 
-      - name: Commit changes if any
+      - name: Commit API changes if any
         run: |
           git config user.name "SkillFusion Linter Bot"
           git config user.email "linter@skillfusion.dev"
           
           if ! git diff --quiet; then
-            echo "📝 Format changes detected, committing..."
-            git add -A
-            git commit -m "style: auto-format with eslint & prettier [skip ci]"
+            echo "📝 API format changes detected, committing..."
+            git add api/
+            git commit -m "style: auto-format API with eslint & prettier [skip ci]"
             git push
           else
-            echo "✅ Code already clean!"
+            echo "✅ API code already clean!"
+          fi
+
+  lint-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Client dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Run Client Lint
+        working-directory: ./client
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Run Client Format
+        working-directory: ./client
+        run: npm run format
+        continue-on-error: true
+
+      - name: Commit Client changes if any
+        run: |
+          git config user.name "SkillFusion Linter Bot"
+          git config user.email "linter@skillfusion.dev"
+          
+          if ! git diff --quiet; then
+            echo "📝 Client format changes detected, committing..."
+            git add client/
+            git commit -m "style: auto-format Client with prettier [skip ci]"
+            git push
+          else
+            echo "✅ Client code already clean!"
           fi
