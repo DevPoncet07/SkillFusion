@@ -13,6 +13,8 @@
 <style>
 	.badge_item {
 		display: flex;
+		padding: 10px;
+		padding-left: 0px;
 	}
 
 	.badge_title {
@@ -22,10 +24,11 @@
 	.badge_body{
 		display: flex;
 		flex-direction: column;
+		gap:10px;
 	}
 
 	p{
-		margin: 5px;
+		margin: 0px;
 	}
 
 	.icon-one-star {
@@ -38,6 +41,7 @@
 		mask-image: var(--svg);
 		-webkit-mask-repeat: no-repeat;
 		mask-repeat: no-repeat;
+		margin: auto 10px;
 	}
 	.icon-two-star {
 		display: inline-block;
@@ -49,6 +53,7 @@
 		mask-image: var(--svg);
 		-webkit-mask-repeat: no-repeat;
 		mask-repeat: no-repeat;
+		margin: auto 10px;
 
 	}
 
@@ -62,6 +67,7 @@
 		mask-image: var(--svg);
 		-webkit-mask-repeat: no-repeat;
 		mask-repeat: no-repeat;
+		margin: auto 10px;
 
 	}
 </style>

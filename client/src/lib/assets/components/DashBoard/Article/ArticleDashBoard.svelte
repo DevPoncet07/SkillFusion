@@ -2,13 +2,13 @@
 	import DeleteButton from '../../Button/DeleteButton.svelte';
 	import ModifyButton from '../../Button/ModifyButton.svelte';
 
-	const { children,openDeleteModal } = $props();
+	const { children,openModifyModal,openDeleteModal } = $props();
 </script>
 
 <article class="article_dashboard">
 	{@render children()}
 	<div class="article_dashboard--div_button">
-		<ModifyButton />
+		<ModifyButton onclick={openModifyModal}/>
 		<DeleteButton onclick={openDeleteModal} />
 	</div>
 </article>

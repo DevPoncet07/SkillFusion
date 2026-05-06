@@ -1,6 +1,6 @@
 <script>
 
-    const onclick=$props()
+    const {onclick}=$props()
 </script>
 
 
