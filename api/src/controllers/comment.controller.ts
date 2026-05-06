@@ -27,7 +27,6 @@ export default {
     createComment: async (req: AuthenticatedRequest, res: Response) => {
         const createCommentBodySchema = z.object({
             description: z.string().min(1),
-            authorId: z.number(),
             coursId: z.number(),
         });
         const data = await createCommentBodySchema.parseAsync(req.body);
@@ -47,10 +46,9 @@ export default {
         const commentId = await parseIdFromParams(req.params.id);
         const updateCommentBodySchema = z.object({
             description: z.string().min(1),
-            authorId: z.number(),
-            coursId: z.number(),
+            
         });
-        const { description, coursId } = await updateCommentBodySchema.parseAsync(req.body);
+        const { description } = await updateCommentBodySchema.parseAsync(req.body);
 
         const comment = await prisma.comment.findUnique({ where: { id: commentId } });
         if (!comment) {
@@ -66,8 +64,7 @@ export default {
             where: { id: commentId },
             data: {
                 description: description,
-                authorId: req.user!.userId,
-                coursId: coursId,
+                
             }
         });
         res.json(updatedComment);

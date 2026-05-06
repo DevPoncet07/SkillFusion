@@ -1,10 +1,12 @@
 import type { Request, Response } from "express";
 import { prisma } from "../models/client"
 import { AuthenticatedRequest } from "../@types/express";
-import { NotFoundError, ConflictError } from "../lib/errors";
+import { NotFoundError, ConflictError, ForbiddenError } from "../lib/errors";
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import argon2 from "argon2";
+import { ROLES } from "../middlewares/rbac.middleware";
+
 
 export default {
   getAllUsers: async (req: Request, res: Response) => {
@@ -117,8 +119,13 @@ export default {
   },
 
   // Récupérer un utilisateur par son id
-  getUserById: async (req: Request, res: Response) => {
+  getUserById: async (req: AuthenticatedRequest, res: Response) => {
     const userId = await parseIdFromParams(req.params.id);
+
+    // Seul l'utilisateur lui-même ou un admin peut voir ce profil
+    if (userId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+      throw new ForbiddenError("Vous n'êtes pas autorisé à accéder à ce profil");
+    }
     const user = await prisma.user.findUnique({
       where: { id: userId },
       omit: { password: true },
@@ -126,6 +133,8 @@ export default {
         role: true
       }
     });
+
+    // Si pas trouvé → 404 sinon 200 + user
     if (!user) {
       throw new NotFoundError(`Utilisateur avec l'id ${userId} non trouvé`);
     }
@@ -181,9 +190,13 @@ export default {
   },
 
   // Mettre à jour un utilisateur
-  updateUser: async (req: Request, res: Response) => {
+  updateUser: async (req: AuthenticatedRequest, res: Response) => {
     const userId = await parseIdFromParams(req.params.id);
 
+    // Seul l'utilisateur lui-même ou un admin peut modifier ce profil
+    if (userId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+      throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce profil");
+    }
     // Schéma de validation des données
     const updateUserBodySchema = z.object({
       pseudo: z.string().min(1).optional(),
@@ -229,8 +242,14 @@ export default {
   },
 
   // Supprimer un utilisateur
-  deleteUser: async (req: Request, res: Response) => {
+  deleteUser: async (req: AuthenticatedRequest, res: Response) => {
     const userId = await parseIdFromParams(req.params.id);
+
+        // Seul l'utilisateur lui-même ou un admin peut supprimer ce profil
+    if (userId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+      throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce profil");
+    }
+
     await prisma.user.delete({ where: { id: userId } });
     res.status(204).send();
   }
