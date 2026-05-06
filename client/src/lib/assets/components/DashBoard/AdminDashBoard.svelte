@@ -11,6 +11,8 @@
 	import BodyCours from './Cours/BodyCours.svelte';
 	import { goto } from '$app/navigation';
 	import BodyUser from './User/BodyUser.svelte';
+	import ModalModifyBadge from './Badge/ModalModifyBadge.svelte';
+	import ModalModifyCategory from './Article/ModalModifyCategory.svelte';
 
 	let users: IUser[] = $state([]);
 	let roles: IRole[] = $state([]);
@@ -83,9 +85,12 @@
 	let categoryToDelete = $state<number | null>(null);
 	let badgeToDelete = $state<number | null>(null);
 
-	/* Fonction pour la modification d'un cours */
+	let badgeToUpdate = $state<IBadge | null>(null);
+	let categoryToUpdate = $state<ICategory | null>(null);
+
+	/* Fonction pour la modification d'un utilisateur */
 	function modifyUser(user: IUser) {
-		goto('/profil?id='+ user.id);
+		goto('/profil?id=' + user.id);
 	}
 
 	/* Fonction pour la fenetre modal de confirmation de suppression d'un utilisateur */
@@ -165,12 +170,45 @@
 		cancelDeleteCours();
 	}
 
-	/* Fonction pour la modification d'un cours */
+	/* Fonction pour la modification d'un Badge */
+
+	function openModalModifyBadge(badge: IBadge) {
+		badgeToUpdate = badge;
+		const modal = document.getElementById('modalModifyBadge') as IModal;
+		if (modal) {
+			modal.show();
+		}
+	}
+
+	function cancelModifyBadge() {
+		const modal = document.getElementById('modalModifyBadge') as IModal;
+		if (modal) {
+			modal.close();
+		}
+	}
+
+	async function confirmModifyBadge(data: { name: string; description: string }) {
+		const response = await api(`api/badges/${badgeToUpdate?.id}`, 'PATCH', { ...data });
+
+		if (response.status === 204 || response.status === 200) {
+			successMessage = 'La Badge a été modifier avec succès';
+			errorMessage = '';
+			setTimeout(() => ((successMessage = ''), 5000));
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+		badgeToUpdate = null;
+		let refreshBadges = await api('api/badges');
+		badges = refreshBadges.data;
+		cancelModifyBadge();
+	}
 
 	/* Fonction pour la fenetre modal de confirmation de suppression d'un badge */
 
-	function openModalDeleteBadge(BadgeId: number) {
-		badgeToDelete = BadgeId;
+	function openModalDeleteBadge(badgeId: number) {
+		badgeToDelete = badgeId;
 		const modal = document.getElementById('modalDeleteBadge') as IModal;
 		if (modal) {
 			modal.show();
@@ -199,9 +237,44 @@
 			setTimeout(() => (errorMessage = ''), 5000);
 		}
 		badgeToDelete = null;
-		let refreshCourses = await api('api/cours');
-		courses = refreshCourses.data;
+		let refreshBadges = await api('api/badges');
+		badges = refreshBadges.data;
 		cancelDeleteBadge();
+	}
+
+	/* Fonction pour la modification d'une categories */
+
+	function openModalModifyCategory(category: ICategory) {
+		categoryToUpdate = category;
+		const modal = document.getElementById('modalModifyCategory') as IModal;
+		if (modal) {
+			modal.show();
+		}
+	}
+
+	function cancelModifyCategory() {
+		const modal = document.getElementById('modalModifyCategory') as IModal;
+		if (modal) {
+			modal.close();
+		}
+	}
+
+	async function confirmModifyCategory(data: { name: string; description: string }) {
+		const response = await api(`api/categories/${categoryToUpdate?.id}`, 'PATCH', { ...data });
+
+		if (response.status === 204 || response.status === 200) {
+			successMessage = 'La categorie a été modifier avec succès';
+			errorMessage = '';
+			setTimeout(() => ((successMessage = ''), 5000));
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+		categoryToUpdate = null;
+		let refreshBadges = await api('api/categories');
+		badges = refreshBadges.data;
+		cancelModifyCategory();
 	}
 
 	/* Fonction pour la fenetre modal de confirmation de suppression d'une catégories */
@@ -236,36 +309,9 @@
 			setTimeout(() => (errorMessage = ''), 5000);
 		}
 		categoryToDelete = null;
-		let refreshCourses = await api('api/cours');
-		courses = refreshCourses.data;
+		let refreshCategories = await api('api/categories');
+		categories = refreshCategories.data;
 		cancelDeleteCategory();
-	}
-
-	async function updateRole(userId: number, roleName: string) {
-		const role = roles.find((r) => r.name === roleName);
-		if (!role) return;
-
-		const response = await api(`api/users/${userId}`, 'PATCH', { rolesId: role.id });
-
-		if (response.status === 200) {
-			users = users.map((u) =>
-				u.id === userId
-					? {
-							...u,
-							role: {
-								...u.role,
-								name: roleName,
-								frName: roles.find((r) => r.name === roleName)?.frName ?? ''
-							}
-						}
-					: u
-			);
-			successMessage = 'Rôle mis à jour avec succès';
-			setTimeout(() => (successMessage = ''), 5000);
-		} else {
-			errorMessage = 'Erreur lors de la mise à jour du rôle';
-			setTimeout(() => (errorMessage = ''), 5000);
-		}
 	}
 </script>
 
@@ -369,7 +415,10 @@
 
 			<div class="panel__list">
 				{#each filteredBadges as badge}
-					<ArticleDashBoard openDeleteModal={() => openModalDeleteBadge(badge.id)}>
+					<ArticleDashBoard
+						openDeleteModal={() => openModalDeleteBadge(badge.id)}
+						openModifyModal={() => openModalModifyBadge(badge)}
+					>
 						<Badge {badge} --color={badge.color} />
 					</ArticleDashBoard>
 				{/each}
@@ -395,7 +444,10 @@
 
 			<div class="panel__list">
 				{#each filteredCategories as category}
-					<ArticleDashBoard openDeleteModal={() => openModalDeleteCategory(category.id)}>
+					<ArticleDashBoard
+						openDeleteModal={() => openModalDeleteCategory(category.id)}
+						openModifyModal={() => openModalModifyCategory(category)}
+					>
 						<BodyCategory {category} />
 					</ArticleDashBoard>
 				{/each}
@@ -406,7 +458,12 @@
 			</div>
 		</div>
 	</div>
-
+	<ModalModifyBadge cancel={cancelModifyBadge} confirm={confirmModifyBadge} badge={badgeToUpdate} />
+	<ModalModifyCategory
+		cancel={cancelModifyCategory}
+		confirm={confirmModifyCategory}
+		badge={categoryToUpdate}
+	/>
 	<ModalValidator
 		id="modalDeleteUser"
 		message="Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
@@ -601,9 +658,6 @@
 		letter-spacing: 0.06em;
 	}
 
-
-
-
 	/* ── Boutons action ──────────────────────────────────────── */
 	.btn-add {
 		width: 28px;
@@ -648,7 +702,6 @@
 			min-width: 0;
 			overflow: hidden;
 		}
-
 
 		.input--select {
 			flex: 1;

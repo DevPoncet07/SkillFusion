@@ -7,7 +7,8 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 export default {
     // Requête pour récuperer tous les badges
     getAll: async (req: Request, res: Response) => {
-        const badges = await prisma.badge.findMany();
+        const badges = await prisma.badge.findMany({orderBy:{id:"asc"}}
+        );
         res.json(badges);
     },
 
@@ -25,7 +26,9 @@ export default {
     createBadge: async (req: Request, res: Response) => {
         const createBadgeBodySchema = z.object({
             name: z.string().min(1),
-            description: z.string().optional(),
+            description: z.string(),
+            icon:z.string(),
+            color:z.string()
         });
         const data = await createBadgeBodySchema.parseAsync(req.body);
 
@@ -38,6 +41,8 @@ export default {
             data: {
                 name: data.name,
                 description: data.description,
+                icon:data.icon,
+                color:data.color
             }
         });
         res.status(201).json(createdBadge);
