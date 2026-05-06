@@ -322,6 +322,7 @@
 				{#if filteredUsers.length === 0}
 					<p class="panel__empty">Aucun utilisateur trouvé.</p>
 				{/if}
+				{/each}
 			</div>
 		</div>
 
