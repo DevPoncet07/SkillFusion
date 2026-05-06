@@ -6,7 +6,8 @@
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import CoursCard from '../Cours/CoursCard.svelte';
 	import Category from '../Category/Category.svelte';
-	import Badge from '../Badge/Badge.svelte';
+	import Badge from './Badge/Badge.svelte';
+
 
 	let coursActive: ICours[] = $state([]);
 	let coursTermines: ICours[] = $state([]);
