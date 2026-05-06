@@ -100,6 +100,9 @@
 <Header />
 
 <div class="profil-container">
+	<a class="back" href="/tableau-de-bord"
+		>⬅ Retour au tableau de bord</a
+	>
 	<h1 class="title-page">Mes informations</h1>
 	{#if isAdminViewingOther}
 		<p class="text-sm text-gray-500">Mode lecture admin</p>
@@ -293,6 +296,11 @@
 		display: flex;
 		flex-direction: column;
 		flex: 1;
+	}
+
+	.back {
+		text-decoration: none;
+		color: #1d4e89;
 	}
 
 	.btn-update {
