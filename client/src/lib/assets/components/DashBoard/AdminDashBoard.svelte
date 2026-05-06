@@ -85,7 +85,7 @@
 
 	/* Fonction pour la modification d'un cours */
 	function modifyUser(user: IUser) {
-		goto('/profil/'+user.id);
+		goto('/profil?id='+ user.id);
 	}
 
 	/* Fonction pour la fenetre modal de confirmation de suppression d'un utilisateur */
@@ -267,11 +267,6 @@
 			setTimeout(() => (errorMessage = ''), 5000);
 		}
 	}
-
-	// Navigation vers détail utilisateur
-	function goToUser(id: number) {
-		goto(`/profil?id=${id}`);
-	}
 </script>
 
 <div class="dashboard">
@@ -324,9 +319,9 @@
 						<BodyUser {user} />
 					</ArticleDashBoard>
 
-				{#if filteredUsers.length === 0}
-					<p class="panel__empty">Aucun utilisateur trouvé.</p>
-				{/if}
+					{#if filteredUsers.length === 0}
+						<p class="panel__empty">Aucun utilisateur trouvé.</p>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -426,7 +421,7 @@
 	/>
 	<ModalValidator
 		id="modalDeleteCategory"
-		message="Êtes-vous sûr de vouloir supprimer cette catégorie ? Si vous la supprimez, vous supprimerez tous les cours liés à celle-ci..."
+		message="Êtes-vous sûr de vouloir supprimer cette catégorie ?"
 		cancel={cancelDeleteCategory}
 		confirm={confirmDeleteCategory}
 	/>
@@ -487,18 +482,6 @@
 		font-weight: 400;
 		color: var(--dark);
 		margin: 0;
-	}
-
-	.role-user {
-		background: transparent;
-		border: none;
-		color: var(--pink-d);
-		font-size: 11px;
-		font-weight: 600;
-		padding: 3px 10px;
-		border-radius: 100px;
-		letter-spacing: 0.04em;
-		cursor: pointer;
 	}
 
 	/* ── Grid 2x2 ────────────────────────────────────────────── */
@@ -618,37 +601,8 @@
 		letter-spacing: 0.06em;
 	}
 
-	.table-row {
-		display: grid;
-		grid-template-columns: 1fr 1.5fr 1fr 1fr;
-		gap: 8px;
-		align-items: center;
-		padding: 9px 10px;
-		border-radius: var(--r-md);
-		background: var(--bg);
-		border: 0.5px solid transparent;
-		transition:
-			border-color 0.15s,
-			background 0.15s;
-	}
 
-	.table-row:hover {
-		background: var(--blue-l);
-		border-color: var(--blue-m);
-	}
 
-	.table-row__cell {
-		font-size: 13px;
-		color: var(--dark);
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.table-row__cell--pseudo {
-		color: var(--gray);
-		font-size: 12px;
-	}
 
 	/* ── Boutons action ──────────────────────────────────────── */
 	.btn-add {
@@ -673,19 +627,6 @@
 		color: var(--white);
 	}
 
-	.delete-btn {
-		background: transparent;
-		border: none;
-		color: var(--pink-d);
-		font-size: 12px;
-		cursor: pointer;
-		margin-left: 8px;
-	}
-
-	.delete-btn:hover {
-		color: red;
-	}
-
 	/* ── Responsive ──────────────────────────────────────────── */
 	@media (max-width: 1024px) {
 		.dashboard {
@@ -708,16 +649,6 @@
 			overflow: hidden;
 		}
 
-		.table-head,
-		.table-row {
-			grid-template-columns: 1.2fr 1fr 1fr;
-		}
-
-		/* Masquer prénom sur mobile */
-		.table-head span:nth-child(2),
-		.table-row__cell:nth-child(2) {
-			display: none;
-		}
 
 		.input--select {
 			flex: 1;
