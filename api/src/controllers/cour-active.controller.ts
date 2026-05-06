@@ -2,7 +2,9 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { NotFoundError } from "../lib/errors";
+import { ForbiddenError, NotFoundError } from "../lib/errors";
+import { ROLES } from "../middlewares/rbac.middleware";
+import { AuthenticatedRequest } from "../@types/express";
 
 export default {
     // Requête pour récuperer tous les cours actives
@@ -11,7 +13,19 @@ export default {
         res.json(coursActives);
 
     },
-
+    getEndedCoursByUser: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const coursByUser = await prisma.coursActived.findMany({
+            where: { IsEnd: true, userId: userId, cours: {visibility: true }},
+            include: {
+                cours: { include: { category: true } },
+            }
+        })
+        if (!coursByUser) {
+            throw new NotFoundError(`Cours active with id ${coursByUser} not found`);
+        }
+        res.json(coursByUser);
+    },
     // Requête pour récuperer tous les cours actives d'un étudiant
     getByUser: async (req: AuthenticatedRequest, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
@@ -22,7 +36,7 @@ export default {
         }
 
         const coursByUser = await prisma.coursActived.findMany({
-            where: { userId: userId, cours: {visibility: true }},
+            where: {IsEnd:false, userId: userId, cours: {visibility: true }},
             include: {
                 cours: { include: { category: true } },
             }
@@ -88,17 +102,18 @@ export default {
         }
 
         const updateCoursActiveBodySchema = z.object({
+            coursId: z.number().int(),
+            userId: z.number().int(),
             IsEnd: z.boolean(),
         });
-        const { IsEnd } = await updateCoursActiveBodySchema.parseAsync(req.body);
+        const data = await updateCoursActiveBodySchema.parseAsync(req.body);
 
         const dataCoursActive = await prisma.coursActived.findMany({
              where: { coursId: data.coursId, userId: data.userId  },
         })
-        console.log(dataCoursActive)
         const updatedCoursActive = await prisma.coursActived.update({
-            where: { id: coursActiveId },
-            data: { IsEnd },
+            where: { id: dataCoursActive[0].id },
+            data: { IsEnd: data.IsEnd }
         });
         res.json(updatedCoursActive);
     },

@@ -5,6 +5,9 @@ import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
+// router.get("/cours-active/user/:id/ended", verifyToken, requireSelfOrAdmin, coursActiveController.getEndedCoursByUser)
+router.get("/cours-active/user/:id/ended", verifyToken, checkRoles( [ROLES.STUDENT, ROLES.ADMIN]),coursActiveController.getEndedCoursByUser)
+
 // Route dédiée à l'admin — liste de tous les cours actifs
 router.get("/cours-active", verifyToken, checkRoles([ROLES.ADMIN]), coursActiveController.getAll)
 
