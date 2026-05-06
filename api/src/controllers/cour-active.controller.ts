@@ -3,6 +3,7 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { NotFoundError } from "../lib/errors";
+import { fa } from "zod/locales";
 
 export default {
     // Requête pour récuperer tous les cours actives
@@ -11,11 +12,24 @@ export default {
         res.json(coursActives);
 
     },
+    getEndedCoursByUser: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const coursByUser = await prisma.coursActived.findMany({
+            where: { IsEnd: true, userId: userId, cours: {visibility: true }},
+            include: {
+                cours: { include: { category: true } },
+            }
+        })
+        if (!coursByUser) {
+            throw new NotFoundError(`Cours active with id ${coursByUser} not found`);
+        }
+        res.json(coursByUser);
+    },
     // Requête pour récuperer tous les cours actives d'un étudiant
     getByUser: async (req: Request, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
         const coursByUser = await prisma.coursActived.findMany({
-            where: { userId: userId, cours: {visibility: true }},
+            where: {IsEnd:false, userId: userId, cours: {visibility: true }},
             include: {
                 cours: { include: { category: true } },
             }

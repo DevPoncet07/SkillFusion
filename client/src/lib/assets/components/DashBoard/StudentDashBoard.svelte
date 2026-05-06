@@ -5,30 +5,22 @@
 	import type { ICours } from '$lib/@types/types';
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import CoursCard from '../Cours/CoursCard.svelte';
+	import Category from '../Category/Category.svelte';
 
 	let coursActive: ICours[] = $state([]);
+	let coursTermines: ICours[] = $state([]);
+
+	let props = $props();
 
 	onMount(async () => {
 		getAuth();
 		// Fetch tous les cours en cours
 		const response = await api('api/cours-active/user/' + authStore?.user?.id);
 		coursActive = response.data;
+		const ended = await api('api/cours-active/user/' + authStore?.user?.id + '/ended');
+		coursTermines = ended.data;
+		console.log(coursTermines);
 	});
-
-	const coursTermines = [
-		{
-			titre: 'Réparer un joint de robinet',
-			categorie: 'Plomberie',
-			badge: 'plomb',
-			dateTermine: '02/03/2025'
-		},
-		{
-			titre: 'Peindre une pièce entière',
-			categorie: 'Peinture',
-			badge: 'peint',
-			dateTermine: '14/01/2025'
-		}
-	];
 
 	const mesSucces = [
 		{ nom: 'Première réalisation', icone: '⭐', couleur: 'amber', debloque: true },
@@ -139,10 +131,21 @@
 					<div class="list-row">
 						<div class="list-row__check">✓</div>
 						<div class="list-row__info">
-							<p class="list-row__title">{c.titre}</p>
-							<span class="badge badge--cat badge--{c.badge}">{c.categorie}</span>
+							<p class="list-row__title">{c.cours.title}</p>
+							<Category
+								category={c.cours.category}
+								--border_color={c.cours.category.borderColor}
+								--text_color={c.cours.category.textColor}
+							/>
 						</div>
-						<span class="list-row__date">Terminé le {c.dateTermine}</span>
+						<span class="list-row__date"
+							>Terminé le : <br/> {new Date(c.updatedAt).toLocaleDateString('fr-FR', {
+								weekday: 'long',
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}</span
+						>
 					</div>
 				{/each}
 
@@ -295,6 +298,7 @@
 		display: flex;
 		flex-direction: row;
 		gap: 8px;
+		overflow-x: scroll;
 	}
 	.panel__list:first-child {
 		overflow-y: auto;

@@ -5,10 +5,12 @@ import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middl
 
 const router = express.Router();
 
-
 router.get("/cours-active", verifyToken, checkRoles( [ROLES.ADMIN]), coursActiveController.getAll)
 
 router.get("/cours-active/user/:id", verifyToken, requireSelfOrAdmin, coursActiveController.getByUser)
+
+// router.get("/cours-active/user/:id/ended", verifyToken, requireSelfOrAdmin, coursActiveController.getEndedCoursByUser)
+router.get("/cours-active/user/:id/ended", verifyToken, checkRoles( [ROLES.STUDENT, ROLES.ADMIN]),coursActiveController.getEndedCoursByUser)
 
 router.get("/cours-active/:id", verifyToken, coursActiveController.getOneCoursActive)
 
