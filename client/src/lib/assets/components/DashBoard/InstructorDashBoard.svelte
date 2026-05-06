@@ -19,22 +19,21 @@
 		cours = responseCours.data;
 		const responseNotification = await api('api/notifications/instructor/' + authStore?.user?.id);
 		notifications = responseNotification.data;
-
 	});
 
-	function openModalNewCours(){
-		const modalNewCours=document.getElementById("modalNewCours") as IModal
-		modalNewCours.show()
+	function openModalNewCours() {
+		const modalNewCours = document.getElementById('modalNewCours') as IModal;
+		modalNewCours.show();
 	}
 
-	function cancelModalNewCours(){
-		const modalNewCours=document.getElementById("modalNewCours") as IModal
-		modalNewCours.close()
+	function cancelModalNewCours() {
+		const modalNewCours = document.getElementById('modalNewCours') as IModal;
+		modalNewCours.close();
 	}
 
-	async function comfirmModalNewCours(data:IPropsComfirmeNewCours){
-		await api("api/cours","POST",data)
-		cancelModalNewCours()
+	async function comfirmModalNewCours(data: IPropsComfirmeNewCours) {
+		await api('api/cours', 'POST', data);
+		cancelModalNewCours();
 	}
 
 	const notificationsss = [
@@ -109,7 +108,9 @@
 				<h2 class="panel__title">Mes cours</h2>
 				<div class="panel__head-actions">
 					<span class="panel__count">{filteredCours.length}</span>
-					<button class="btn-add" title="Nouveau cours" onclick={openModalNewCours}>+ Nouveau cours</button>
+					<button class="btn-add" title="Nouveau cours" onclick={openModalNewCours}
+						>+ Nouveau cours</button
+					>
 				</div>
 			</div>
 
@@ -124,7 +125,7 @@
 
 			<div class="panel__list panel__list--cours">
 				{#each filteredCours as c}
-				<CoursCard
+					<CoursCard
 						class="coursCardDashboard"
 						isDashboard={true}
 						cours={c}
@@ -154,7 +155,7 @@
 
 			<div class="panel__list panel__list--notifs">
 				{#each notifications as notification}
-					<a class="notif" href={"/cours/"+notification.cours.slug+"/cours"}>
+					<a class="notif" href={'/cours/' + notification.cours.slug + '/cours'}>
 						<div class="notif__top">
 							<div class="notif__meta">
 								<span class="notif__auteur">{notification.authorId}</span>
@@ -168,9 +169,7 @@
 			</div>
 		</div>
 	</div>
-	<ModalNewCours
-	cancel={cancelModalNewCours}
-	confirm={comfirmModalNewCours}/>
+	<ModalNewCours cancel={cancelModalNewCours} confirm={comfirmModalNewCours} />
 </div>
 
 <style>
@@ -332,8 +331,6 @@
 		background: var(--white);
 	}
 
-
-
 	/* ── Boutons ─────────────────────────────────────────────── */
 	.btn-add {
 		font-family: 'DM Sans', sans-serif;
@@ -351,8 +348,6 @@
 		background: var(--amber);
 		color: var(--white);
 	}
-
-
 
 	/* ── Notifications ───────────────────────────────────────── */
 	.notif-badge {
@@ -375,7 +370,6 @@
 		transition: border-color 0.15s;
 	}
 
-
 	.notif__top {
 		display: flex;
 		align-items: center;
@@ -395,8 +389,6 @@
 		color: var(--dark);
 	}
 
-
-
 	.notif__heure {
 		font-size: 10px;
 		color: var(--gray);
@@ -415,8 +407,6 @@
 		color: var(--gray);
 		margin: 0;
 	}
-
-
 
 	/* ── Responsive ──────────────────────────────────────────── */
 	@media (max-width: 1024px) {
@@ -440,11 +430,8 @@
 			overflow: hidden;
 		}
 
-
-
 		.panel__list--notifs {
 			max-height: 320px;
 		}
-
 	}
 </style>

@@ -13,14 +13,12 @@
 	import type { IModal, ITextArea } from '$lib/@types/html';
 	import { marked } from 'marked';
 
-
 	let cours: ICours | null = $state(null);
 	let user: IUserLocalStorage | null = $state(null);
 	let visibility = $derived(cours?.visibility);
 	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0, id: 0 } });
 	let modifier = $state(false);
 	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
-
 
 	$effect(() => {
 		if (modifier) {
@@ -154,12 +152,12 @@
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
 				>
-				<button class="button" onclick={() => { 
-					handleModify();
-						}}>{textButton}</button>
-
-
-
+				<button
+					class="button"
+					onclick={() => {
+						handleModify();
+					}}>{textButton}</button
+				>
 
 				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 			</div>

@@ -19,9 +19,8 @@
 	import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
 	import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
-	
-	
-let user: IUserLocalStorage | null = $state(null);
+
+	let user: IUserLocalStorage | null = $state(null);
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
@@ -61,11 +60,10 @@ let user: IUserLocalStorage | null = $state(null);
 		cours = refresh.data;
 		commentContentElement.value = '';
 	}
-	async function DeleteComment(data:number){
-	 await api('api/comments/' + data, 'DELETE');
-	const refresh = await api('api/cours?slug=' + page.params.slug);
+	async function DeleteComment(data: number) {
+		await api('api/comments/' + data, 'DELETE');
+		const refresh = await api('api/cours?slug=' + page.params.slug);
 		cours = refresh.data;
-
 	}
 
 	function handleModify() {
@@ -243,8 +241,8 @@ let user: IUserLocalStorage | null = $state(null);
 											})}
 										</span>
 									</div>
-									{#if user?.id == c.authorId || user?.role === "admin"}
-									<button onclick={()=>DeleteComment(c.id)}>X</button>
+									{#if user?.id == c.authorId || user?.role === 'admin'}
+										<button onclick={() => DeleteComment(c.id)}>X</button>
 									{/if}
 								</div>
 								<p class="comment__content">{c.description}</p>

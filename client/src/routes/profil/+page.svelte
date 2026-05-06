@@ -139,7 +139,6 @@
 					<button class="btn-cancel" type="submit">Annuler</button>
 					<BtnExportRGPD />
 
-					
 					<BtnDeleteAccount />
 				</div>
 				{#if succesMessage}
