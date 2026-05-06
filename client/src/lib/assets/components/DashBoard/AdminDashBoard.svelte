@@ -1,20 +1,19 @@
 <script lang="ts">
-
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
 	import type { IBadge, ICategory, ICours, IRole, IUser } from '$lib/@types/types';
 	import '../../../../app.css';
 	import ModalValidator from '../Modal/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
-	import Badge from '../Badge/Badge.svelte';
+	import Badge from './Badge/BodyBadge.svelte';
 	import ArticleDashBoard from './Article/ArticleDashBoard.svelte';
-
+	import BodyCategory from './Category/BodyCategory.svelte';
 
 	let users: IUser[] = $state([]);
 	let roles: IRole[] = $state([]);
 	let cours: ICours[] = $state([]);
 	let categories: ICategory[] = $state([]);
-	let badges : IBadge[]=$state([])
+	let badges: IBadge[] = $state([]);
 
 	onMount(async () => {
 		// Fetch tous les roles
@@ -33,10 +32,9 @@
 		const responseCategories = await api('api/categories');
 		categories = responseCategories.data;
 
-		const responseBagde=await api("api/badges")
-		badges=responseBagde.data
+		const responseBagde = await api('api/badges');
+		badges = responseBagde.data;
 	});
-
 
 	// ── Filtres ─────────────────────────────────────────────────
 	let searchUsers = $state('');
@@ -62,39 +60,35 @@
 	);
 
 	const filteredBadges = $derived(
-		badges.filter((b) => !searchBadges || b.nom.toLowerCase().includes(searchBadges.toLowerCase()))
+		badges.filter(
+			(badge) => !searchBadges || badge.name.toLowerCase().includes(searchBadges.toLowerCase())
+		)
 	);
-
-	const filteredCats = $derived(
-		categories.filter((c) => !searchCats || c.name.toLowerCase().includes(searchCats.toLowerCase()))
+	const filteredCategories = $derived(
+		categories.filter((category) => !searchCats || category.name.toLowerCase().includes(searchCats.toLowerCase()))
 	);
-
 
 	let errorMessage = $state('');
 	let successMessage = $state('');
 
 	let userToDelete = $state<number | null>(null);
-	let categoryToDelete =$state<number | null>(null);
+	let categoryToDelete = $state<number | null>(null);
+	let badgeToDelete = $state<number | null>(null)
 
-	async function confirmDeleteCategory() {
-	if(!categoryToDelete)return;
-		const response = await api(`api/categories/${categoryToDelete}`, "DELETE");
-		
-		if (response.status === 204 || response.status ===200){
-			categories = categories.filter((c) => c.id !== categoryToDelete);
-			successMessage = 'La catégorie a été supprimé avec succès';
-			errorMessage='';
-			setTimeout(()=>(successMessage='', 5000))
-		}else {
-			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
-			successMessage = '';
-			setTimeout(() => (errorMessage = ''), 5000);
+	/* Fonction pour la fenetre modal de confirmation de suppression d'un utilisateur */
+
+	function openModalDeleteUser(userId: number) {
+		userToDelete = userId;
+		const modal = document.getElementById('modalDeleteUser') as IModal;
+		if (modal) {
+			modal.show();
 		}
-		categoryToDelete = null;
-		let refreshCourses =  await api('api/cours')
-		cours = refreshCourses.data
-		cancelDeleteCategory();
-
+	}
+	function cancelDeleteUser() {
+		const modal = document.getElementById('modalDeleteUser') as IModal;
+		if (modal) {
+			modal.close();
+		}
 	}
 
 	async function confirmDeleteUser() {
@@ -116,16 +110,49 @@
 		cancelDeleteUser();
 	}
 
-	function cancelDeleteUser() {
-		const modal = document.getElementById('modalDeleteUser') as IModal;
+	/* Fonction pour la fenetre modal de confirmation de suppression d'un badge */
+
+	function openModalDeleteBadge(BadgeId: number) {
+		badgeToDelete = BadgeId;
+		const modal = document.getElementById('modalDeleteBadge') as IModal;
+		if (modal) {
+			modal.show();
+		}
+	}
+
+	function cancelDeleteBadge() {
+		const modal = document.getElementById('modalDeleteBadge') as IModal;
 		if (modal) {
 			modal.close();
 		}
 	}
 
-	function openModalDeleteUser(userId: number) {
-		userToDelete = userId;
-		const modal = document.getElementById('modalDeleteUser') as IModal;
+	async function confirmDeleteBadge() {
+		if (!badgeToDelete) return;
+		const response = await api(`api/badges/${badgeToDelete}`, 'DELETE');
+
+		if (response.status === 204 || response.status === 200) {
+			badges = badges.filter((badge) => badge.id !== badgeToDelete);
+			successMessage = 'La Badge a été supprimé avec succès';
+			errorMessage = '';
+			setTimeout(() => ((successMessage = ''), 5000));
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+		badgeToDelete = null;
+		let refreshCourses = await api('api/cours');
+		cours = refreshCourses.data;
+		cancelDeleteCategory();
+	}
+
+
+	/* Fonction pour la fenetre modal de confirmation de suppression d'une catégories */
+
+	function openModalDeleteCategory(CategoryId: number) {
+		categoryToDelete = CategoryId;
+		const modal = document.getElementById('modalDeleteCategory') as IModal;
 		if (modal) {
 			modal.show();
 		}
@@ -138,12 +165,24 @@
 		}
 	}
 
-	function openModalDeleteCategory(CategoryId: number) {
-		categoryToDelete = CategoryId;
-		const modal = document.getElementById('modalDeleteCategory') as IModal;
-		if (modal) {
-			modal.show();
+	async function confirmDeleteCategory() {
+		if (!categoryToDelete) return;
+		const response = await api(`api/categories/${categoryToDelete}`, 'DELETE');
+
+		if (response.status === 204 || response.status === 200) {
+			categories = categories.filter((c) => c.id !== categoryToDelete);
+			successMessage = 'La catégorie a été supprimé avec succès';
+			errorMessage = '';
+			setTimeout(() => ((successMessage = ''), 5000));
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
 		}
+		categoryToDelete = null;
+		let refreshCourses = await api('api/cours');
+		cours = refreshCourses.data;
+		cancelDeleteCategory();
 	}
 
 	async function updateRole(userId: number, roleName: string) {
@@ -231,7 +270,10 @@
 									<option value={r.name}>{r.frName}</option>
 								{/each}
 							</select>
-							<button class="delete-btn delete-btn--edit" onclick={() => openModalDeleteUser(user.id)}>
+							<button
+								class="delete-btn delete-btn--edit"
+								onclick={() => openModalDeleteUser(user.id)}
+							>
 								x</button
 							>
 						</span>
@@ -287,7 +329,6 @@
 		<div class="panel">
 			<div class="panel__head">
 				<h2 class="panel__title">Gestion des badges</h2>
-				<button class="btn-add" title="Ajouter un badge">+</button>
 			</div>
 
 			<div class="panel__filters">
@@ -296,9 +337,10 @@
 
 			<div class="panel__list">
 				{#each filteredBadges as badge}
-				<ArticleDashBoard>
-					<Badge badge={badge} --color={badge.color}/>
-				</ArticleDashBoard>
+					<ArticleDashBoard
+					 openDeleteModal={() => openModalDeleteBadge(badge.id)}>
+						<Badge {badge} --color={badge.color} />
+					</ArticleDashBoard>
 				{/each}
 
 				{#if filteredBadges.length === 0}
@@ -321,17 +363,13 @@
 			</div>
 
 			<div class="panel__list">
-				{#each filteredCats as cat}
-					<div class="list-row">
-						<span class="badge badge--cat" style="color:{cat.textColor}">{cat.name}</span>
-						<div class="list-row__actions">
-							<button class="action-btn action-btn--edit">Modifier</button>
-							<button class="action-btn action-btn--delete" onclick={() => openModalDeleteCategory(cat.id)}>Supprimer</button>
-						</div>
-					</div>
+				{#each filteredCategories as category}
+					<ArticleDashBoard openDeleteModal={() => openModalDeleteCategory(category.id)}>
+						<BodyCategory {category} />
+					</ArticleDashBoard>
 				{/each}
 
-				{#if filteredCats.length === 0}
+				{#if filteredCategories.length === 0}
 					<p class="panel__empty">Aucune catégorie trouvée.</p>
 				{/if}
 			</div>
@@ -348,6 +386,12 @@
 		message="Êtes-vous sûr de vouloir supprimer cette catégorie ?"
 		cancel={cancelDeleteCategory}
 		confirm={confirmDeleteCategory}
+	/>
+	<ModalValidator
+		id="modalDeleteBadge"
+		message="Êtes-vous sûr de vouloir supprimer cette badge ?"
+		cancel={cancelDeleteBadge}
+		confirm={confirmDeleteBadge}
 	/>
 </div>
 
@@ -413,7 +457,6 @@
 		letter-spacing: 0.04em;
 		cursor: pointer;
 	}
-
 
 	/* ── Grid 2x2 ────────────────────────────────────────────── */
 	.dashboard__grid {

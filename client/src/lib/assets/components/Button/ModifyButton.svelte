@@ -26,8 +26,8 @@
 	}
 
     .modifyButton:hover {
-		background: var(--pink-d);
-		color: var(--white);
+		background: var(--color-font-background-modify-button);
+		color: var(--color-font-hover-modify-button);
 	}
 
 </style>
