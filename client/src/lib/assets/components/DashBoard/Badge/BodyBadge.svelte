@@ -1,6 +1,5 @@
 <script>
 	const { badge } = $props();
-
 </script>
 
 <div class="badge_item">

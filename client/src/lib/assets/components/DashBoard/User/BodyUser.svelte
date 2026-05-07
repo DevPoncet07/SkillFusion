@@ -18,7 +18,7 @@
 		width: 100%;
 	}
 
-	.cell{
-		min-width:33%;
+	.cell {
+		min-width: 33%;
 	}
 </style>
