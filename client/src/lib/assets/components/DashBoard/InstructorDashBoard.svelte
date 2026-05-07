@@ -36,7 +36,7 @@
 	async function comfirmModalNewCours(data: IPropsComfirmeNewCours) {
 		const cours = await api('api/cours', 'POST', data);
 		cancelModalNewCours();
-		goto("/cours/"+cours.data.slug)
+		goto('/cours/' + cours.data.slug);
 	}
 
 	// ── État ────────────────────────────────────────────────────
@@ -49,7 +49,7 @@
 		await api('api/notifications/' + id, 'PATCH', { seen: true });
 	}
 
-	async function deleteNotification(event:SubmitEvent, id: number) {
+	async function deleteNotification(event: SubmitEvent, id: number) {
 		event.preventDefault();
 		await api('api/notifications/' + id, 'DELETE');
 		const responseCours = await api('api/cours/instructor/' + authStore?.user?.id);
