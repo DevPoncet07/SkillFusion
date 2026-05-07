@@ -13,14 +13,14 @@
 	let userBadges: IUserHasBadge[] = $state([]);
 
 	onMount(async () => {
-		getAuth();
-		// Fetch tous les cours en cours
-		const response = await api('api/cours-active/user/' + authStore?.user?.id);
-		coursActive = response.data;
-		const ended = await api('api/cours-active/user/' + authStore?.user?.id + '/ended');
-		coursTermines = ended.data;
-		const badges = await api('api/badges/user/' + authStore?.user?.id);
-		userBadges = badges.data;
+	    getAuth();
+	    // Fetch tous les cours en cours
+	    const response = await api('api/cours-active/user/' + authStore?.user?.id);
+	    coursActive = response.data;
+	    const ended = await api('api/cours-active/user/' + authStore?.user?.id + '/ended');
+	    coursTermines = ended.data;
+	    const badges = await api('api/badges/user/' + authStore?.user?.id);
+	    userBadges = badges.data;
 	});
 </script>
 
@@ -115,10 +115,10 @@
 						<span class="list-row__date"
 							>Terminé le : <br />
 							{new Date(c.updatedAt).toLocaleDateString('fr-FR', {
-								weekday: 'long',
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
+							    weekday: 'long',
+							    year: 'numeric',
+							    month: 'long',
+							    day: 'numeric'
 							})}</span
 						>
 					</div>
@@ -294,7 +294,6 @@
 		gap: 10px;
 	}
 
-
 	/* ── List rows (cours terminés) ─────────────────────────── */
 	.list-row {
 		display: flex;
@@ -353,7 +352,6 @@
 		flex-shrink: 0;
 	}
 
-
 	/* ── Responsive ──────────────────────────────────────────── */
 	@media (max-width: 1024px) {
 		.dashboard {
@@ -395,7 +393,5 @@
 		.badges-grid {
 			grid-template-columns: repeat(4, 1fr);
 		}
-
-
 	}
 </style>
