@@ -249,7 +249,7 @@
 	function openModalCreateCategory() {
 		const modal = document.getElementById('modalCreateCategory') as IModal;
 		if (modal) {
-			console.log("ca ne amrche pas .....")
+			console.log('ca ne amrche pas .....');
 			modal.show();
 		}
 	}
@@ -477,7 +477,11 @@
 		<div class="panel">
 			<div class="panel__head">
 				<h2 class="panel__title">Gestion des catégories</h2>
-				<button class="btn-add" title="Ajouter une catégorie" onclick={()=>openModalCreateCategory()}>+</button>
+				<button
+					class="btn-add"
+					title="Ajouter une catégorie"
+					onclick={() => openModalCreateCategory()}>+</button
+				>
 			</div>
 
 			<div class="panel__filters">
@@ -501,16 +505,13 @@
 		</div>
 	</div>
 	<ModalModifyBadge cancel={cancelModifyBadge} confirm={confirmModifyBadge} badge={badgeToUpdate} />
-	
+
 	<ModalModifyCategory
 		cancel={cancelModifyCategory}
 		confirm={confirmModifyCategory}
 		badge={categoryToUpdate}
 	/>
-	<ModalCreateCategory
-		cancel={cancelCreateCategory}
-		confirm={confirmCreateCategory}
-	/>
+	<ModalCreateCategory cancel={cancelCreateCategory} confirm={confirmCreateCategory} />
 	<ModalValidator
 		id="modalDeleteUser"
 		message="Êtes-vous sûr de vouloir supprimer cet utilisateur ?"

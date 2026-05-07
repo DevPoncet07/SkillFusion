@@ -19,7 +19,6 @@
 		textColor = '#000000';
 		borderColor = '#000000';
 		backgroundColor = '#FFFFFF';
-		
 	}
 
 	function cancel() {
