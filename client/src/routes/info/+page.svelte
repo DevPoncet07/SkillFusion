@@ -141,7 +141,7 @@
 			</div>
 			<div class="team__member">
 				<div class="team__avatar">
-					<img src="{photoLoic}" alt="Membre 3" />
+					<img src={photoLoic} alt="Membre 3" />
 				</div>
 				<h3 class="team__name">Loïc LEGER</h3>
 				<p class="team__role">Développeur Full Stack</p>
