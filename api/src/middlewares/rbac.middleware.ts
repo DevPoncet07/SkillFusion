@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { Response, NextFunction } from 'express';
 import { ForbiddenError } from '../lib/errors';
 import type { AuthenticatedRequest } from '../@types/express';
 import { extractAccessToken, verifyAndDecodeJWT } from './auth.middleware';

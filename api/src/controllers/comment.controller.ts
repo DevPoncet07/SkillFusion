@@ -43,7 +43,7 @@ export default {
             },
         });
 
-        const createdNotification = await prisma.notification.create({
+        await prisma.notification.create({
             data: {
                 content: data.description,
                 coursId: data.coursId,
@@ -104,10 +104,10 @@ export default {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
         }
 
-        const deletedComment = await prisma.comment.delete({
+        await prisma.comment.delete({
             where: { id: commentId },
         });
-        const deletedNotification = await prisma.notification.delete({
+        await prisma.notification.delete({
             where: { targetId: comment.id },
         });
         res.status(204).send();

@@ -10,6 +10,8 @@ async function seed() {
         return;
     }
 
+    console.log('Start seeding ->');
+
     const roles = await prisma.role.createMany({
         data: [
             { name: 'student', frName: 'Etudiant' },
@@ -18,7 +20,7 @@ async function seed() {
         ],
     });
 
-    console.log('Start seeding ->');
+    console.log('Users :', roles.count);
     const users = await prisma.user.createMany({
         data: [
             {

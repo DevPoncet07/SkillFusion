@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { prisma } from '../models/client';
-import { buildAuthedRequester, generateFakeUser } from '../../test/index';
+import { buildAuthedRequester } from '../../test/index';
 import axios from 'axios';
 import { apiBaseUrl } from '../../test/index';
 

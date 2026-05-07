@@ -8,7 +8,6 @@ import { ROLES } from '../middlewares/rbac.middleware';
 
 export default {
     getAll: async (req: Request, res: Response) => {
-        let data = null;
         if (req.query.slug) {
             const cours = await prisma.cours.findMany({
                 where: { slug: { contains: req.query.slug as string } },
@@ -38,7 +37,7 @@ export default {
                     },
                 },
             });
-            data = cours[0];
+            return res.json(cours[0]);
         } else if (req.query.visibility) {
             const cours = await prisma.cours.findMany({
                 where: { visibility: true },
@@ -63,7 +62,7 @@ export default {
                     },
                 },
             });
-            data = cours;
+            return res.json(cours);
         } else {
             const cours = await prisma.cours.findMany({
                 include: {
@@ -86,9 +85,8 @@ export default {
                     },
                 },
             });
-            data = cours;
+            return res.json(cours);
         }
-        res.json(data);
     },
     // Requête pour récuperer les cours d'un utilisateur (instructeur) ---------------
     getCoursByInstructor: async (req: Request, res: Response) => {
@@ -145,7 +143,7 @@ export default {
             },
         });
 
-        const courContent = await prisma.coursContent.create({
+        await prisma.coursContent.create({
             data: {
                 coursId: createdCours.id,
                 content: '# Page 1 \n\nEntrez votre contenu',
