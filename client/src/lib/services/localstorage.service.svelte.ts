@@ -26,13 +26,8 @@ export const clearAuth = () => {
 export const getAuth = () => {
 	const token = localStorage.getItem('token');
 	const user = JSON.parse(localStorage.getItem('user'));
-	if (token && user) {
-		authStore.user = user;
-		authStore.token = token;
-	} else {
-		authStore.user = null;
-		authStore.token = null;
-	}
+	authStore.user = user ?? null;
+	authStore.token = token ?? null;
 };
 
 export const isAuthenticated = () => {

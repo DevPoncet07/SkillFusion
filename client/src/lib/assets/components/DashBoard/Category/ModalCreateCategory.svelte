@@ -3,30 +3,42 @@
 
 	const props = $props();
 
-	let name = $derived(props.badge?.name);
-	let description = $derived(props.badge?.description);
+	let name = $state('');
+	let description = $state('');
 
-	let textColor = $derived(props.badge?.textColor);
-	let borderColor = $derived(props.badge?.borderColor);
-	let backgroundColor = $derived(props.badge?.backgroundColor);
+	let textColor = $state('#000000');
+	let borderColor = $state('#000000');
+	let backgroundColor = $state('#FFFFFF');
 
 	function onSumbit(event: SubmitEvent) {
-		event.preventDefault();
 		props.confirm({ name, description, textColor, borderColor, backgroundColor });
+		event.preventDefault();
+		name = '';
+		description = '';
+
+		textColor = '#000000';
+		borderColor = '#000000';
+		backgroundColor = '#FFFFFF';
 	}
 
 	function cancel() {
+		name = '';
+		description = '';
+
+		textColor = '#000000';
+		borderColor = '#000000';
+		backgroundColor = '#FFFFFF';
 		props.cancel();
 	}
 </script>
 
-<dialog class="overlay" id="modalModifyCategory">
+<dialog class="overlay" id="modalCreateCategory">
 	<div class="dialog">
 		<h2>Modification d'une categorie</h2>
 		<form onsubmit={onSumbit}>
 			<div class="input">
 				<label for="name">Nom</label>
-				<input id="name" placeholder="Nom du badge" bind:value={name} />
+				<input id="name" placeholder="Nom de la catégorie" bind:value={name} />
 			</div>
 			<div class="input">
 				<label for="description">Description</label>

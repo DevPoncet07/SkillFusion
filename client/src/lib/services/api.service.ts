@@ -22,9 +22,20 @@ export default async function api(endpoint:string, method = "GET", body?:{}) {
 }
 */
 
+import { setAuth } from './localstorage.service.svelte';
+
+interface IUser {
+	id: number;
+	pseudo: string;
+	role: string;
+}
+
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-async function refreshAccessToken(): Promise<string | null> {
+async function refreshAccessToken(): Promise<{
+	user: IUser;
+	accessToken: { token: string; expiresIn: number };
+} | null> {
 	const response = await fetch(`${BASE_URL}/auth/refresh`, {
 		method: 'POST',
 		credentials: 'include',
@@ -36,8 +47,8 @@ async function refreshAccessToken(): Promise<string | null> {
 	if (!response.ok) return null;
 
 	const data = await response.json();
-	localStorage.setItem('token', data.accessToken);
-	return data.accessToken;
+	localStorage.setItem('token', data.accessToken.token);
+	return data;
 }
 
 export default async function api(endpoint: string, method = 'GET', body?: {}) {
@@ -55,13 +66,17 @@ export default async function api(endpoint: string, method = 'GET', body?: {}) {
 	if (response.status === 401) {
 		const newToken = await refreshAccessToken();
 
+		if (newToken?.user) {
+			setAuth(newToken.user, newToken?.accessToken.token);
+		}
+
 		if (newToken) {
 			const retry = await fetch(`${BASE_URL}/${endpoint}`, {
 				method,
 				credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${newToken}`
+					Authorization: `Bearer ${newToken.accessToken.token}`
 				},
 				body: body ? JSON.stringify(body) : undefined
 			});
