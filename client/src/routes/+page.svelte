@@ -58,7 +58,7 @@
                     <a class="main__link" href="/cours">Voir tout ➔</a>
                 </div>
                 <div class="courses-grid">
-                    {#each courses as cours}
+                    {#each courses as cours (cours.id)}
                         <CoursCard
                             {cours}
                             --card__image__color={cours.category.textColor}

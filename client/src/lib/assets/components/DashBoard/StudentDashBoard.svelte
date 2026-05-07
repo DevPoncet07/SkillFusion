@@ -57,7 +57,7 @@
             </div>
 
             <div class="panel__list">
-                {#each coursActive as c}
+                {#each coursActive as c (c.id)}
                     <CoursCard
                         class="coursCardDashboard"
                         isDashboard={true}
@@ -85,7 +85,7 @@
             </div>
 
             <div class="badges-grid">
-                {#each userBadges as b}
+                {#each userBadges as b (b.id)}
                     <Badge badge={b.badge} --color={b.badge.color} />
                 {/each}
             </div>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="panel__list">
-                {#each coursTermines as c}
+                {#each coursTermines as c (c.id)}
                     <div class="list-row">
                         <div class="list-row__check">✓</div>
                         <div class="list-row__info">

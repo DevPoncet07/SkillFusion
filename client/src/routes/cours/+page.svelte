@@ -105,7 +105,7 @@
             <div class="dropdown-wrapper">
                 <select id="categorie-select" class="category-btn" bind:value={selectedCategory}>
                     <option value="Toutes les catégories"> Toutes les catégories </option>
-                    {#each categories as category}
+                    {#each categories as category (category.id)}
                         <option value={category.name}>
                             {category.name}
                         </option>
