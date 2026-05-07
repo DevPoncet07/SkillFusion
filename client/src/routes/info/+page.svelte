@@ -6,7 +6,7 @@
 	import App from '$lib/assets/components/App.svelte';
 	import Main from '$lib/assets/components/Main.svelte';
 
-	import photo_ad from "$lib/assets/img/photo_ad.png"
+	import photo_ad from '$lib/assets/img/photo_ad.png';
 </script>
 
 <App>
