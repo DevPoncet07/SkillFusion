@@ -5,6 +5,7 @@
 	import Header from '$lib/assets/components/Header.svelte';
 	import App from '$lib/assets/components/App.svelte';
 	import Main from '$lib/assets/components/Main.svelte';
+	import photoLoic from '$lib/assets/img/photo1.jpeg';
 </script>
 
 <App>
@@ -137,7 +138,7 @@
 			</div>
 			<div class="team__member">
 				<div class="team__avatar">
-					<img src="/images/membre3.jpg" alt="Membre 3" />
+					<img src="{photoLoic}" alt="Membre 3" />
 				</div>
 				<h3 class="team__name">Loïc LEGER</h3>
 				<p class="team__role">Développeur Full Stack</p>
