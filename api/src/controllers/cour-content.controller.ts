@@ -99,7 +99,7 @@ export default {
             throw new NotFoundError(`CourContent with id ${courContentId} not found`);
         }
 
-        const cours = await prisma.cours.findFirst({ where: { id: courContent.coursId } });
+        const cours = await prisma.cours.findFirst({ where: { id: coursId } });
         if (cours && cours.authorId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce contenu");
         }
