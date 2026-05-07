@@ -390,7 +390,7 @@
                 />
                 <select class="input input--select" bind:value={filterRole}>
                     <option value="">Tous les rôles</option>
-                    {#each roles as r}
+                    {#each roles as r (r.id)}
                         <option value={r.name}>{r.frName}</option>
                     {/each}
                 </select>
@@ -405,7 +405,7 @@
             </div>
 
             <div class="panel__list">
-                {#each filteredUsers as user}
+                {#each filteredUsers as user (user.id)}
                     <ArticleDashBoard
                         openDeleteModal={() => openModalDeleteUser(user.id)}
                         openModifyModal={() => modifyUser(user)}
@@ -439,7 +439,7 @@
             </div>
 
             <div class="panel__list">
-                {#each filteredCours as cours}
+                {#each filteredCours as cours (cours.id)}
                     <ArticleDashBoard
                         openDeleteModal={() => openModalDeleteCours(cours.id)}
                         openModifyModal={() => modifyCours(cours)}
@@ -472,7 +472,7 @@
             </div>
 
             <div class="panel__list">
-                {#each filteredBadges as badge}
+                {#each filteredBadges as badge (badge.id)}
                     <ArticleDashBoard
                         openDeleteModal={() => openModalDeleteBadge(badge.id)}
                         openModifyModal={() => openModalModifyBadge(badge)}
@@ -510,7 +510,7 @@
             </div>
 
             <div class="panel__list">
-                {#each filteredCategories as category}
+                {#each filteredCategories as category (category.id)}
                     <ArticleDashBoard
                         openDeleteModal={() => openModalDeleteCategory(category.id)}
                         openModifyModal={() => openModalModifyCategory(category)}

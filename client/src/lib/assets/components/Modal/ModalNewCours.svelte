@@ -55,7 +55,7 @@
                 <label for="categoryId">Catégorie</label>
                 <select id="categoryId">
                     <option value="">Selectionner une categorie</option>
-                    {#each categories as category}
+                    {#each categories as category (category.id)}
                         <option value={category.id}>{category.name}</option>
                     {/each}
                 </select>
@@ -64,7 +64,7 @@
                 <label for="difficulty">Difficulté</label>
                 <select id="difficulty">
                     <option value="">Selectionner une difficulté</option>
-                    {#each [1, 2, 3, 4, 5] as difficulty}
+                    {#each [1, 2, 3, 4, 5] as difficulty (difficulty)}
                         <option value={difficulty}>{difficulty}</option>
                     {/each}
                 </select>

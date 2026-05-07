@@ -20,7 +20,7 @@
             <div class="input">
                 <label for="title">Choisir un badge</label>
                 <div class="div_choice">
-                    {#each badges as badge}
+                    {#each badges as badge (badge.id)}
                         <div>
                             <Badge {badge} --color={badge.color} />
                             <button type="button" onclick={() => props.confirm(badge.id)}

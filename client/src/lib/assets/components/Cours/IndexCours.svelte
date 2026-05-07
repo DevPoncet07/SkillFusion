@@ -131,13 +131,13 @@
     }
 
     async function deleteOpinion() {
-        const response = await api('api/opinions/' + alreadyOpinion.opinion?.id, 'DELETE');
+        await api('api/opinions/' + alreadyOpinion.opinion?.id, 'DELETE');
         await getCours();
         await AlreadyHaveNoted();
         closeDeleteOpinion();
     }
     async function deleteCours() {
-        const response = await api('api/cours/' + cours?.id, 'DELETE');
+        await api('api/cours/' + cours?.id, 'DELETE');
         closeDeleteCoursModale();
         goto('/tableau-de-bord');
     }
@@ -247,7 +247,7 @@
                 <div class="card mobile-only">
                     <div class="card-title">Objectifs</div>
                     <ul class="list">
-                        {#each cours.learningObjectives as obj}
+                        {#each cours.learningObjectives as obj (obj.id)}
                             <li>{obj.objectif.title}</li>
                         {/each}
                     </ul>
@@ -319,7 +319,7 @@
                         <p class="label">OBJECTIFS PÉDAGOGIQUES</p>
                         {#if modifier}
                             <ul class="list">
-                                {#each cours.learningObjectives as obj}
+                                {#each cours.learningObjectives as obj (obj.id)}
                                     <li>
                                         <input class="edit-input" value={obj.objectif.title} />
                                     </li>
@@ -330,7 +330,7 @@
                             >
                         {:else}
                             <ul class="list">
-                                {#each cours.learningObjectives as obj}
+                                {#each cours.learningObjectives as obj (obj.id)}
                                     <li>{obj.objectif.title}</li>
                                 {/each}
                             </ul>
@@ -341,7 +341,7 @@
                             <p class="label">OUTILS NÉCESSAIRES</p>
                             {#if modifier}
                                 <ul class="list">
-                                    {#each cours.tools as tool}
+                                    {#each cours.tools as tool (tool.id)}
                                         <li>
                                             <input
                                                 class="edit-input"
@@ -357,7 +357,7 @@
                                 </ul>
                             {:else}
                                 <ul class="list">
-                                    {#each cours.tools as tool}
+                                    {#each cours.tools as tool (tool.id)}
                                         <li>{tool.tools.name}</li>
                                     {/each}
                                 </ul>

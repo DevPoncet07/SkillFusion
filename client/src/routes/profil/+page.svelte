@@ -27,7 +27,6 @@
     let userId = $derived(page.url.searchParams.get('id'));
 
     let isSelf = $derived(!userId || userId === String(authStore.user?.id));
-    let isAdmin = $derived(authStore.user?.role === 'admin');
     let isAdminViewingOther = $derived(!isSelf && authStore.user?.role === 'admin');
 
     let badges: IUserHasBadge[] = $state([]);
@@ -105,18 +104,13 @@
     }
 
     async function getBadge() {
-        let response = null;
         if (userLocal?.role === 'admin' && userId) {
-            response = await api('api/badges/user/' + userId);
+            let response = await api('api/badges/user/' + userId);
+            badges = response.data;
         } else {
-            response = await api('api/badges/user/' + userLocal?.id);
+            let response = await api('api/badges/user/' + userLocal?.id);
+            badges = response.data;
         }
-        badges = response.data;
-    }
-
-    async function deleteBadge(id: number) {
-        await api('api/userHAsBadge/' + id, 'DELETE');
-        getBadge();
     }
 
     function openModalDeleteBadge(id: number) {
@@ -263,7 +257,7 @@
                     <button onclick={() => openModalAssignBadge()}>Ajouter un badge</button>
                 {/if}
                 <div class="badges-list">
-                    {#each badges as badge}
+                    {#each badges as badge (badge.id)}
                         <div>
                             <Badge badge={badge.badge} --color={badge.badge.color} />
                             {#if userLocal?.role === 'admin'}

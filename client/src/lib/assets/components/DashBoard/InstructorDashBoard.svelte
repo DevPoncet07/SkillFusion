@@ -95,7 +95,7 @@
             </div>
 
             <div class="panel__list panel__list--cours">
-                {#each filteredCours as c}
+                {#each filteredCours as c (c.id)}
                     <CoursCard
                         class="coursCardDashboard"
                         isDashboard={true}
@@ -122,7 +122,7 @@
             </div>
 
             <div class="panel__list panel__list--notifs">
-                {#each notifications as notification}
+                {#each notifications as notification (notification.id)}
                     <Notification {notification} {seenNotification} {deleteNotification} />
                 {/each}
             </div>

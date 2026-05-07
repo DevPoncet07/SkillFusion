@@ -56,7 +56,7 @@
         Vous avez {coursBloquants.length} cours créé(s). Que souhaitez-vous faire ?
     </p>
     <ul class="cours-list">
-        {#each coursBloquants as c}
+        {#each coursBloquants as c (c.id)}
             <li>{c.title}</li>
         {/each}
     </ul>

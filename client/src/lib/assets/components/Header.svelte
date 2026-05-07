@@ -15,7 +15,7 @@
     });
 
     async function logout() {
-        const response = await api('auth/logout', 'POST');
+        await api('auth/logout', 'POST');
         clearAuth();
         user = null;
         goto('/');

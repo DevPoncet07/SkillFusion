@@ -23,7 +23,6 @@
     import { goto } from '$app/navigation';
 
     let user: IUserLocalStorage | null = $state(null);
-    let isLoading = $state(false);
     let cours: ICours | null = $state(null);
     let currentPage: number = $state(1);
     let coursContent: ICoursContent | null = $state(null);
@@ -40,13 +39,11 @@
     });
 
     onMount(async () => {
-        isLoading = true;
         user = authStore.user;
         const response = await api('api/cours?slug=' + page.params.slug, 'GET');
         cours = response.data;
         if (cours) {
             getCours();
-            isLoading = false;
         }
         getAuth();
     });
@@ -77,7 +74,6 @@
     }
 
     async function getCours() {
-        isLoading = true;
         const response = await api('api/cours?slug=' + page.params.slug, 'GET');
         cours = response.data;
         if (cours) {
@@ -87,7 +83,6 @@
                 coursContent = response.data as ICoursContent;
                 if (coursContent) {
                     coursContent.content = DOMPurify.sanitize(coursContent.content);
-                    isLoading = false;
                 }
             }
         }
@@ -109,7 +104,7 @@
 
     async function valider() {
         const textArea: ITextArea = document.getElementById('text_area') as ITextArea;
-        const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
+        await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
             content: textArea.value
         });
         handleModify();
@@ -122,7 +117,7 @@
     }
 
     async function createPage() {
-        const response = await api('api/cours-contents', 'POST', {
+        await api('api/cours-contents', 'POST', {
             content: `Nouvelle page n°${currentPage + 1}`,
             numberPage: currentPage + 1,
             coursId: cours?.id
@@ -146,7 +141,7 @@
         modal.close();
     }
     async function deletePage() {
-        const response = await api('api/cours-contents/' + currentPageId?.id, 'DELETE');
+        await api('api/cours-contents/' + currentPageId?.id, 'DELETE');
         closeDeletePageModale();
         if (currentPage != 1) {
             currentPage--;
@@ -258,7 +253,7 @@
                     </p>
                 {:else}
                     <div class="comments-list">
-                        {#each cours.comments as c}
+                        {#each cours.comments as c (c.id)}
                             <div class="comment">
                                 <div class="comment__header">
                                     <div class="comment__meta">
