@@ -342,7 +342,7 @@
 		padding: 20px;
 		text-align: center;
 		transition: 0.2s;
-        text-decoration: none;
+		text-decoration: none;
 	}
 
 	.team__member:hover {
