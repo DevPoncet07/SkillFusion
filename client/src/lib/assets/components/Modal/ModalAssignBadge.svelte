@@ -104,8 +104,4 @@
 		background: #ddd;
 	}
 
-	.confirm {
-		background: #e53935;
-		color: white;
-	}
 </style>

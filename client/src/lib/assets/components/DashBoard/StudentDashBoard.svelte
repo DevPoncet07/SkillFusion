@@ -286,130 +286,6 @@
 		padding: 20px 0;
 	}
 
-	/* ── Course row ─────────────────────────────────────────── */
-	.course-row {
-		display: flex;
-		align-items: center;
-		gap: 14px;
-		padding: 12px;
-		background: var(--bg);
-		border-radius: var(--r-md);
-		border: 0.5px solid transparent;
-		transition:
-			border-color 0.15s,
-			background 0.15s;
-	}
-
-	.course-row:hover {
-		background: var(--blue-l);
-		border-color: var(--blue-m);
-	}
-
-	.course-row__thumb {
-		width: 44px;
-		height: 44px;
-		border-radius: 8px;
-		flex-shrink: 0;
-	}
-
-	.course-row__thumb--plomb {
-		background: var(--blue);
-	}
-	.course-row__thumb--elec {
-		background: #ba7517;
-	}
-	.course-row__thumb--menu {
-		background: var(--green-d);
-	}
-	.course-row__thumb--chauf {
-		background: var(--pur-d);
-	}
-	.course-row__thumb--carr {
-		background: var(--pink-d);
-	}
-	.course-row__thumb--peint {
-		background: #57534e;
-	}
-
-	.course-row__body {
-		flex: 1;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-	}
-
-	.course-row__top {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 8px;
-	}
-
-	.course-row__title {
-		font-size: 13px;
-		font-weight: 500;
-		color: var(--dark);
-		margin: 0;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.course-row__btn {
-		font-size: 11px;
-		font-weight: 500;
-		color: var(--blue);
-		text-decoration: none;
-		padding: 5px 10px;
-		border-radius: var(--r-md);
-		background: var(--blue-l);
-		border: 0.5px solid var(--blue-m);
-		flex-shrink: 0;
-		transition:
-			background 0.15s,
-			color 0.15s;
-	}
-
-	.course-row__btn:hover {
-		background: var(--blue);
-		color: var(--white);
-	}
-
-	/* ── Progress bar ───────────────────────────────────────── */
-	.progress-bar {
-		flex: 1;
-		height: 5px;
-		background: var(--border);
-		border-radius: 5px;
-		overflow: hidden;
-	}
-
-	.progress-bar__fill {
-		height: 100%;
-		background: var(--blue);
-		border-radius: 5px;
-		transition: width 0.4s ease;
-	}
-
-	.progress-bar__label {
-		font-size: 11px;
-		color: var(--gray);
-		flex-shrink: 0;
-	}
-
-	.course-row__progress {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.badge-progress {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-	}
-
 	/* ── Badges grid ─────────────────────────────────────────── */
 	.badges-grid {
 		display: flex;
@@ -418,52 +294,6 @@
 		gap: 10px;
 	}
 
-	.badge-item {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 6px;
-		text-align: center;
-	}
-
-	.badge-item--locked {
-		opacity: 0.4;
-	}
-
-	.badge-item__name {
-		font-size: 11px;
-		color: var(--gray);
-		margin: 0;
-		line-height: 1.3;
-	}
-
-	.badge-icon {
-		width: 44px;
-		height: 44px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 18px;
-		flex-shrink: 0;
-	}
-
-	.badge-icon--amber {
-		background: var(--amber-l);
-		border: 2px solid var(--amber);
-	}
-	.badge-icon--green {
-		background: var(--green-l);
-		border: 2px solid var(--green);
-	}
-	.badge-icon--blue {
-		background: var(--blue-l);
-		border: 2px solid var(--blue);
-	}
-	.badge-icon--locked {
-		background: #f5f5f4;
-		border: 2px solid #d6d3d1;
-	}
 
 	/* ── List rows (cours terminés) ─────────────────────────── */
 	.list-row {
@@ -523,47 +353,6 @@
 		flex-shrink: 0;
 	}
 
-	/* ── Badges catégories ───────────────────────────────────── */
-	.badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 3px 10px;
-		border-radius: 100px;
-		font-size: 11px;
-		font-weight: 600;
-		white-space: nowrap;
-	}
-
-	.badge--plomb {
-		background: var(--blue-l);
-		color: var(--blue);
-		border: 0.5px solid var(--blue-m);
-	}
-	.badge--elec {
-		background: var(--amber-l);
-		color: #ba7517;
-		border: 0.5px solid var(--amber-m);
-	}
-	.badge--menu {
-		background: var(--green-l);
-		color: var(--green-d);
-		border: 0.5px solid var(--green-m);
-	}
-	.badge--chauf {
-		background: var(--pur-l);
-		color: var(--pur-d);
-		border: 0.5px solid #d7bde2;
-	}
-	.badge--carr {
-		background: var(--pink-l);
-		color: var(--pink-d);
-		border: 0.5px solid var(--pink-m);
-	}
-	.badge--peint {
-		background: #f5f5f4;
-		color: #57534e;
-		border: 0.5px solid #d6d3d1;
-	}
 
 	/* ── Responsive ──────────────────────────────────────────── */
 	@media (max-width: 1024px) {
@@ -607,8 +396,6 @@
 			grid-template-columns: repeat(4, 1fr);
 		}
 
-		.course-row__btn {
-			display: none;
-		}
+
 	}
 </style>
