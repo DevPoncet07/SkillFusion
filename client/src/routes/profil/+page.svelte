@@ -342,12 +342,6 @@
         color: #1d4e89;
         margin-bottom: 20px;
     }
-
-    .profil-container {
-        max-width: 80%;
-        margin: 2rem auto;
-        padding: 0 1.5rem;
-    }
     .form-fields {
         display: flex;
         flex-direction: column;
