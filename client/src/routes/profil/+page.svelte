@@ -181,7 +181,7 @@
         const responseRole = await api('api/roles');
         roles = responseRole.data;
         userRole = user?.role.id;
-                cancelModifyRole();
+        cancelModifyRole();
     }
 </script>
 
