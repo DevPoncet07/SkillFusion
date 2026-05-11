@@ -4,7 +4,6 @@ import { verifyToken } from '../middlewares/auth.middleware';
 import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 import { uploadAvatar } from '../middlewares/upload.middleware';
 
-
 export const router = Router();
 
 // GET all — ADMIN only (liste de tous les utilisateurs)
@@ -21,7 +20,12 @@ router.post('/users', verifyToken, checkRoles([ROLES.ADMIN]), usersController.cr
 
 // PATCH — ownership vérifié dans le controller
 router.patch('/users/:id', verifyToken, usersController.updateUser);
-router.patch('/users/:id/avatar', verifyToken, uploadAvatar.single('avatar'), usersController.uploadAvatar);
+router.patch(
+    '/users/:id/avatar',
+    verifyToken,
+    uploadAvatar.single('avatar'),
+    usersController.uploadAvatar
+);
 
 // Routes - Delete
 router.delete('/users/me', verifyToken, usersController.deleteMyAccount);

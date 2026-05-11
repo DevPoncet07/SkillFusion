@@ -284,5 +284,5 @@ export default {
             include: { role: true },
         });
         res.status(200).json(updatedUser);
-    }
+    },
 };
