@@ -254,5 +254,5 @@ export default {
 
         await prisma.user.delete({ where: { id: userId } });
         res.status(204).send();
-    }
+    },
 };
