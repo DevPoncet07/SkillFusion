@@ -28,6 +28,10 @@
     };
 </script>
 
+<svelte:head>
+    <title>Contactez-nous</title>
+</svelte:head>
+
 <Header />
 
 <main class="contact">

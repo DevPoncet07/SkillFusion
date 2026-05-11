@@ -19,6 +19,10 @@
     });
 </script>
 
+<svelte:head>
+    <title>Acceuil</title>
+</svelte:head>
+
 <App>
     <Header />
     <Main>

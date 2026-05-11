@@ -3,6 +3,10 @@
     import Header from '$lib/assets/components/Header.svelte';
 </script>
 
+<svelte:head>
+    <title>Conditions générales d'utilisation</title>
+</svelte:head>
+
 <Header />
 
 <main class="conditions">
