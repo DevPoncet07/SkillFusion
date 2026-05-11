@@ -1,13 +1,13 @@
-import type { Request, Response } from "express"
-import { prisma } from "../models/client"
-import z from "zod";
-import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import type { Request, Response } from 'express';
+import { prisma } from '../models/client';
+import z from 'zod';
+import { parseIdFromParams } from './utils';
+import { ConflictError, NotFoundError } from '../lib/errors';
 
 export default {
     // Requête pour récuperer tous les badges
     getAll: async (req: Request, res: Response) => {
-        const badges = await prisma.badge.findMany();
+        const badges = await prisma.badge.findMany({ orderBy: { id: 'asc' } });
         res.json(badges);
     },
 
@@ -20,12 +20,25 @@ export default {
         }
         res.json(badge);
     },
-
+    getBadgesByUser: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const badgesByUser = await prisma.userHasBadge.findMany({
+            where: { userId: userId },
+            include: { badge: true },
+            orderBy: { id: 'asc' },
+        });
+        if (!badgesByUser) {
+            throw new NotFoundError(`Badges with id ${badgesByUser} not found`);
+        }
+        res.json(badgesByUser);
+    },
     // Requête pour créer un badge
     createBadge: async (req: Request, res: Response) => {
         const createBadgeBodySchema = z.object({
             name: z.string().min(1),
-            description: z.string().optional(),
+            description: z.string(),
+            icon: z.string(),
+            color: z.string(),
         });
         const data = await createBadgeBodySchema.parseAsync(req.body);
 
@@ -38,7 +51,9 @@ export default {
             data: {
                 name: data.name,
                 description: data.description,
-            }
+                icon: data.icon,
+                color: data.color,
+            },
         });
         res.status(201).json(createdBadge);
     },
@@ -56,7 +71,9 @@ export default {
             throw new NotFoundError(`Badge with id ${badgeId} not found`);
         }
         if (name) {
-            const alreadyExistingBadge = await prisma.badge.findFirst({ where: { name, id: { not: badgeId } } });
+            const alreadyExistingBadge = await prisma.badge.findFirst({
+                where: { name, id: { not: badgeId } },
+            });
             if (alreadyExistingBadge) {
                 throw new ConflictError(`Badge name already taken : ${name}`);
             }
@@ -66,7 +83,7 @@ export default {
             data: {
                 name,
                 description,
-            }
+            },
         });
         res.json(updatedBadge);
     },
@@ -81,4 +98,4 @@ export default {
         await prisma.badge.delete({ where: { id: badgeId } });
         res.status(204).send();
     },
-}
+};

@@ -1,482 +1,591 @@
 <script lang="ts">
-	import Footer from '$lib/assets/components/Footer.svelte';
-	import Header from '$lib/assets/components/Header.svelte';
-	import BtnExportRGPD from '$lib/assets/components/BtnExportRGPD.svelte';
+    import Footer from '$lib/assets/components/Footer.svelte';
+    import Header from '$lib/assets/components/Header.svelte';
+    import BtnExportRGPD from '$lib/assets/components/BtnExportRGPD.svelte';
+    import '../../app.css';
 
-	import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
-	import { onMount } from 'svelte';
-	import api from '$lib/services/api.service';
-	import { writable } from 'svelte/store';
-	import { authStore } from '$lib/services/localstorage.service.svelte';
+    import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
+    import { onMount } from 'svelte';
+    import api from '$lib/services/api.service';
+    import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
+    import { page } from '$app/state';
+    import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
+    import type { IRole, IUser, IUserHasBadge } from '$lib/@types/types';
+    import Badge from '$lib/assets/components/Badge/Badge.svelte';
+    import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
+    import type { IModal } from '$lib/@types/html';
+    import ModalAssignBadge from '$lib/assets/components/Modal/ModalAssignBadge.svelte';
+    import App from '$lib/assets/components/App.svelte';
+    import Main from '$lib/assets/components/Main.svelte';
 
-	let user = writable({ firstname: '', lastname: '', email: '', password: '' });
+    let user: IUser | null = $state(null);
+    let userLocal: IUserLocalStorage | null = $state(null);
 
-	let errorEmail = $state(false);
-	let succesMessage: string | null = $state(null);
+    let errorEmail = $state(false);
+    let succesMessage: string | null = $state(null);
 
-	onMount(async () => {
-		try {
-			const response = await api('auth/me', 'GET');
-			user.set(response.data);
-			errorEmail = false;
-		} catch (error) {
-			console.error('Erreur lors de la récupération des informations utilisateur :', error);
-		}
-	});
+    let userId = $derived(page.url.searchParams.get('id'));
 
-	async function handleSubmit(event: SubmitEvent) {
-		event.preventDefault();
-		const formData = new FormData(event.target);
-		const updatedUser = {
-			lastname: formData.get('name'),
-			firstname: formData.get('firstname'),
-			email: formData.get('email'),
-			password: formData.get('password')
-		};
+    let isSelf = $derived(!userId || userId === String(authStore.user?.id));
+    let isAdminViewingOther = $derived(!isSelf && authStore.user?.role === 'admin');
 
-		// Supprimer les champs vides pour éviter de les envoyer à l'API
-		if (!updatedUser.password) {
-			delete updatedUser.password; // Ne pas inclure le champ password si il est vide
-		}
+    let badges: IUserHasBadge[] = $state([]);
+    let badgeToDelete: number | null = $state(null);
 
-		if (updatedUser.email === String($user.email)) {
-			delete updatedUser.email;
-		}
+    let roles: IRole[] = $state([]);
+    let userRole = $state();
+    onMount(async () => {
+        getAuth();
+        userLocal = authStore.user;
+        try {
+            if (userId) {
+                const res = await api(`api/users/${userId}`, 'GET');
+                user = res.data;
+                const responseRole = await api('api/roles');
+                roles = responseRole.data;
+                userRole = user?.role.id;
+            } else {
+                const res = await api('auth/me', 'GET');
+                user = res.data;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        getBadge();
+    });
 
-		if (!updatedUser.firstname) {
-			delete updatedUser.firstname;
-		}
+    async function handleSubmit(event: SubmitEvent) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const updatedUser = {
+            lastname: formData.get('name'),
+            firstname: formData.get('firstname'),
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
 
-		if (!updatedUser.lastname) {
-			delete updatedUser.lastname;
-		}
+        // Supprimer les champs vides pour éviter de les envoyer à l'API
+        const currentUser = user;
 
-		errorEmail = false;
+        if (!updatedUser.password) {
+            delete updatedUser.password; // Ne pas inclure le champ password si il est vide
+        }
 
-		try {
-			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
-			// Vérification du statut de la réponse
-			if (response.status !== 200) {
-				if (response.data.error === 'Email déjà utilisé') {
-					errorEmail = true;
-					setTimeout(() => (errorEmail = false), 5000); // Message effacé après 5 secondes
-				}
-			} else {
-				errorEmail = false;
-				succesMessage = 'Informations mises à jour avec succès !'; // Message de succès
-				// Réinitialiser le message après quelques secondes
-				setTimeout(() => (succesMessage = null), 5000); // Message effacé après 5 secondes
-			}
-		} catch (error) {
-			console.error('Erreur lors de la mise à jour des informations utilisateur :', error);
-			// Gestion d'une erreur générique
-			succesMessage = 'Une erreur est survenue. Veuillez réessayer.';
-		}
-	}
+        if (updatedUser.email === currentUser.email) {
+            delete updatedUser.email;
+        }
 
-	async function handleCancel(event) {
-		event?.preventDefault();
-		const currentUser = $user;
-		user.set({ ...currentUser });
-	}
+        if (!updatedUser.firstname) {
+            delete updatedUser.firstname;
+        }
+
+        if (!updatedUser.lastname) {
+            delete updatedUser.lastname;
+        }
+
+        errorEmail = false;
+
+        try {
+            const targetId = userId ?? authStore?.user?.id;
+
+            const response = await api(`api/users/${targetId}`, 'PATCH', updatedUser);
+            // Vérification du statut de la réponse
+            if (response.status !== 200) {
+                if (response.data.error === 'Email déjà utilisé') {
+                    errorEmail = true;
+                    setTimeout(() => (errorEmail = false), 5000); // Message effacé après 5 secondes
+                }
+            } else {
+                errorEmail = false;
+                succesMessage = 'Informations mises à jour avec succès !'; // Message de succès
+                // Réinitialiser le message après quelques secondes
+                setTimeout(() => (succesMessage = null), 5000); // Message effacé après 5 secondes
+            }
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour des informations utilisateur :', error);
+            // Gestion d'une erreur générique
+            succesMessage = 'Une erreur est survenue. Veuillez réessayer.';
+        }
+    }
+
+    async function getBadge() {
+        if (userLocal?.role === 'admin' && userId) {
+            let response = await api('api/badges/user/' + userId);
+            badges = response.data;
+        } else {
+            let response = await api('api/badges/user/' + userLocal?.id);
+            badges = response.data;
+        }
+    }
+
+    function openModalDeleteBadge(id: number) {
+        badgeToDelete = id;
+        const modal = document.getElementById('modalDeleteBadge') as IModal;
+        if (modal) {
+            modal.show();
+        }
+    }
+
+    function cancelDeleteBadge() {
+        const modal = document.getElementById('modalDeleteBadge') as IModal;
+        if (modal) {
+            modal.close();
+        }
+    }
+
+    async function confirmDeleteBadge() {
+        await api('api/userHAsBadge/' + badgeToDelete, 'DELETE');
+        badgeToDelete = null;
+        cancelDeleteBadge();
+        getBadge();
+    }
+
+    function openModalAssignBadge() {
+        const modal = document.getElementById('modalAssignBadge') as IModal;
+        if (modal) {
+            modal.show();
+        }
+    }
+
+    function cancelAssignBadge() {
+        const modal = document.getElementById('modalAssignBadge') as IModal;
+        if (modal) {
+            modal.close();
+        }
+    }
+
+    async function confirmAssignBadge(id: number) {
+        await api('api/userHAsBadge', 'POST', { userId: Number(userId), badgeId: id });
+        cancelAssignBadge();
+        getBadge();
+    }
+
+    function openModalModifyRole() {
+        const modal = document.getElementById('modalModifyRole') as IModal;
+        if (modal) {
+            modal.show();
+        }
+    }
+
+    function cancelModifyRole() {
+        const modal = document.getElementById('modalModifyRole') as IModal;
+        if (modal) {
+            modal.close();
+        }
+    }
+
+    async function confirmModifyRole() {
+        await api('api/users/' + userId, 'PATCH', { roleId: userRole });
+        const res = await api(`api/users/${userId}`, 'GET');
+        user = res.data;
+        const responseRole = await api('api/roles');
+        roles = responseRole.data;
+        userRole = user?.role.id;
+        cancelModifyRole();
+    }
 </script>
 
-<Header />
+<svelte:head>
+    <title>Profil</title>
+</svelte:head>
+<App>
+    <Header />
+    <Main>
+        <a class="back" href="/tableau-de-bord">⬅ Retour au tableau de bord</a>
+        <h1 class="title-page">Mes informations</h1>
+        {#if isAdminViewingOther}
+            <p class="text-sm text-gray-500">Mode lecture admin</p>
+        {/if}
+        <div class="profil-wrapper">
+            <form class="profil-form" onsubmit={handleSubmit}>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <span class="form-name">
+                            <label for="name">Nom </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={user?.firstname}
+                                disabled={!isSelf}
+                                placeholder="Dupont"
+                            />
+                        </span>
+                        <span class="form-firstname">
+                            <label for="firstname">Prénom </label>
+                            <input
+                                type="text"
+                                id="firstname"
+                                name="firstname"
+                                value={user?.firstname}
+                                disabled={!isSelf}
+                                placeholder="Jean"
+                            />
+                        </span>
+                    </div>
+                    <div class="form-groups">
+                        <span class="form-email">
+                            <label for="email">E-mail</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={user?.email}
+                                disabled={!isSelf}
+                                placeholder="jean.dupont@email.com"
+                            />
+                            {#if errorEmail}
+                                <p style="color:red;">Email déjà utilisé</p>
+                            {/if}
+                        </span>
+                        <span class="form-password">
+                            <label for="password">Mot de passe</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Modifier mon mot de passe"
+                                disabled={!isSelf}
+                            />
+                        </span>
+                    </div>
+                    {#if isSelf}
+                        <div class="btn-modify">
+                            <button class="btn-update" type="submit"
+                                >Enregistrer les modifications</button
+                            >
+                            <button class="btn-cancel" type="submit">Annuler</button>
+                            <BtnExportRGPD />
+                            <BtnDeleteAccount />
+                        </div>
+                    {/if}
+                    {#if succesMessage}
+                        <p style="color:green; font-weight: bold; margin-top: 20px;">
+                            {succesMessage}
+                        </p>
+                    {/if}
+                </div>
 
-<div class="profil-container">
-	<h1 class="title-page">Mes informations</h1>
-	<div class="profil-wrapper">
-		<form class="profil-form" onsubmit={handleSubmit}>
-			<div class="form-fields">
-				<div class="form-group">
-					<span class="form-name">
-						<label for="name">Nom </label>
-						<input
-							type="text"
-							id="name"
-							name="name"
-							bind:value={$user.lastname}
-							placeholder="Dupont"
-						/>
-					</span>
-					<span class="form-firstname">
-						<label for="firstname">Prénom </label>
-						<input
-							type="text"
-							id="firstname"
-							name="firstname"
-							bind:value={$user.firstname}
-							placeholder="Jean"
-						/>
-					</span>
-				</div>
-				<div class="form-groups">
-					<span class="form-email">
-						<label for="email">E-mail</label>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							value={$user?.email}
-							placeholder="jean.dupont@email.com"
-						/>
-						{#if errorEmail}
-							<p style="color:red;">Email déjà utilisé</p>
-						{/if}
-					</span>
-					<span class="form-password">
-						<label for="password">Mot de passe</label>
-						<input
-							type="password"
-							id="password"
-							name="password"
-							placeholder="Modifier mon mot de passe"
-						/>
-					</span>
-				</div>
-				<div class="btn-modify">
-					<button class="btn-update" type="submit">Enregistrer les modifications</button>
-					<button class="btn-cancel" type="submit">Annuler</button>
-					<BtnExportRGPD />
+                <div class="avatar-box">
+                    <button class="avatar-edit" type="button">✎</button>
+                    <div class="avatar-icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#1d4e89"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                </div>
+            </form>
+            {#if userLocal?.role == 'admin' && page.url.searchParams.get('id')}
+                <div class="div-role">
+                    <label for="role">Role de l'utilisateur</label>
+                    <select bind:value={userRole} onchange={openModalModifyRole}>
+                        {#each roles as role (role.id)}
+                            <option value={role.id}>{role.frName}</option>
+                        {/each}
+                    </select>
+                </div>
+            {/if}
 
-					<BtnDeleteAccount />
-				</div>
-				{#if succesMessage}
-					<p style="color:green; font-weight: bold; margin-top: 20px;">{succesMessage}</p>
-				{/if}
-			</div>
-
-			<div class="avatar-box">
-				<button class="avatar-edit" type="button">✎</button>
-				<div class="avatar-icon">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="#1d4e89"
-						stroke-width="1.5"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-						<circle cx="12" cy="7" r="4" />
-					</svg>
-				</div>
-			</div>
-		</form>
-		<div class="badges-card">
-			<h2 class="badges-title">Mes badges</h2>
-			<div class="badges-list">
-				<div class="badge-item">
-					<div class="badge-icon badge-icon--gold">☆</div>
-					<span class="badge-label">Première réalisation</span>
-				</div>
-				<div class="badge-item">
-					<div class="badge-icon badge-icon--green">✓</div>
-					<span class="badge-label">Cours terminé</span>
-				</div>
-				<div class="badge-item">
-					<div class="badge-icon badge-icon--blue">↝</div>
-					<span class="badge-label">En progression</span>
-				</div>
-				<div class="badge-item">
-					<div class="badge-icon badge-icon--gray">☆</div>
-					<span class="badge-label">À débloquer</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<Footer />
+            {#if userLocal?.role != 'instructor' && page.url.searchParams.get('id')}
+                <div class="badges-card">
+                    <h2 class="badges-title">Mes badges</h2>
+                    {#if userLocal?.role === 'admin'}
+                        <button onclick={() => openModalAssignBadge()}>Ajouter un badge</button>
+                    {/if}
+                    <div class="badges-list">
+                        {#each badges as badge (badge.id)}
+                            <div>
+                                <Badge badge={badge.badge} --color={badge.badge.color} />
+                                {#if userLocal?.role === 'admin'}
+                                    <button onclick={() => openModalDeleteBadge(badge.id)}>X</button
+                                    >
+                                {/if}
+                            </div>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+        </div>
+        <ModalValidator
+            id="modalDeleteBadge"
+            message="Êtes-vous sûr de vouloir supprimer ce badge ?"
+            cancel={cancelDeleteBadge}
+            confirm={confirmDeleteBadge}
+        />
+        <ModalAssignBadge cancel={cancelAssignBadge} confirm={confirmAssignBadge} />
+        <ModalValidator
+            id="modalModifyRole"
+            message="Vous allez changer le role de l'utilisateur"
+            cancel={cancelModifyRole}
+            confirm={confirmModifyRole}
+        />
+    </Main>
+    <Footer />
+</App>
 
 <style>
-	:global(body) {
-		background-color: #f3f0eaff;
-	}
+    :global(body) {
+        background-color: #f3f0eaff;
+    }
 
-	.title-page {
-		text-align: center;
-		color: #1d4e89;
-		margin-bottom: 20px;
-	}
+    .title-page {
+        text-align: center;
+        color: #1d4e89;
+        margin-bottom: 20px;
+    }
 
-	.profil-container {
-		max-width: 80%;
-		margin: 2rem auto;
-		padding: 0 1.5rem;
-	}
-	.form-fields {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-	}
-	.profil-form {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 20px;
-		background-color: white;
-		padding: 40px;
-		border-radius: 20px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
+    .profil-container {
+        max-width: 80%;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+    .form-fields {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+    .profil-form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        background-color: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-	.profil-wrapper {
-		display: block;
-	}
+    .profil-wrapper {
+        display: block;
+    }
 
-	.form-name input,
-	.form-firstname input,
-	.form-email input,
-	.form-password input {
-		border-radius: 10px;
-		padding: 10px;
-		margin-bottom: 20px;
-		border: 1px solid lightgray;
-	}
+    .form-name input,
+    .form-firstname input,
+    .form-email input,
+    .form-password input {
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid lightgray;
+    }
 
-	.form-name label,
-	.form-firstname label {
-		margin-bottom: 10px;
-	}
+    .form-name label,
+    .form-firstname label {
+        margin-bottom: 10px;
+    }
 
-	.form-firstname,
-	.form-name {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-	}
+    .form-firstname,
+    .form-name {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
 
-	.form-group {
-		display: flex;
-		gap: 20px;
-	}
+    .form-group {
+        display: flex;
+        gap: 20px;
+    }
 
-	.form-groups {
-		display: flex;
-		gap: 20px;
-	}
+    .form-groups {
+        display: flex;
+        gap: 20px;
+    }
 
-	.form-email label,
-	.form-password label {
-		margin-bottom: 10px;
-	}
+    .form-email label,
+    .form-password label {
+        margin-bottom: 10px;
+    }
 
-	.form-email,
-	.form-password {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-	}
+    .form-email,
+    .form-password {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
 
-	.btn-update {
-		text-align: center;
-		padding: 15px;
-		cursor: pointer;
-		background-color: #1d4e89;
-		border-radius: 10px;
-		border: none;
-		color: white;
-		font-weight: bold;
-		margin-top: 10px;
-	}
+    .back {
+        text-decoration: none;
+        color: #1d4e89;
+    }
 
-	.btn-update:hover {
-		background-color: rgb(29, 78, 137, 0.8);
-	}
+    .btn-update {
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        background-color: #1d4e89;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        margin-top: 10px;
+    }
 
-	.btn-cancel {
-		text-align: center;
-		padding: 15px;
-		cursor: pointer;
-		background-color: white;
-		border-radius: 10px;
-		border: 1px solid rgb(245, 240, 240);
-		color: black;
-		margin-top: 10px;
-		margin-left: 10px;
-	}
+    .btn-update:hover {
+        background-color: rgb(29, 78, 137, 0.8);
+    }
 
-	.btn-cancel:hover {
-		background-color: rgb(245, 240, 240);
-	}
+    .btn-cancel {
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid rgb(245, 240, 240);
+        color: black;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
 
-	.avatar-box {
-		position: relative;
-		width: 110px;
-		height: 110px;
-		flex-shrink: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+    .btn-cancel:hover {
+        background-color: rgb(245, 240, 240);
+    }
 
-	.avatar-icon {
-		width: 100%;
-		height: 100%;
-		background: #e8edf5;
-		border-radius: 12px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 1.2rem;
-		background-color: #dbeafe;
-	}
+    .avatar-box {
+        position: relative;
+        width: 110px;
+        height: 110px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-	.avatar-icon svg {
-		width: 100%;
-		height: 100%;
-	}
+    .avatar-icon {
+        width: 100%;
+        height: 100%;
+        background: #e8edf5;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.2rem;
+        background-color: #dbeafe;
+    }
 
-	.avatar-edit {
-		position: absolute;
-		top: -15px;
-		right: 0;
-		border-radius: 10px;
-		background: #fff;
-		border: 1px solid #e5e7eb;
-		font-size: 0.7rem;
-		cursor: pointer;
-		padding: 5px;
-	}
+    .avatar-icon svg {
+        width: 100%;
+        height: 100%;
+    }
 
-	.avatar-edit:hover {
-		background-color: #f3f4f6;
-	}
+    .avatar-edit {
+        position: absolute;
+        top: -15px;
+        right: 0;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        font-size: 0.7rem;
+        cursor: pointer;
+        padding: 5px;
+    }
 
-	.badges-card {
-		background: white;
-		border-radius: 20px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		padding: 30px 40px;
-		margin-top: 20px;
-	}
+    .avatar-edit:hover {
+        background-color: #f3f4f6;
+    }
 
-	.badges-title {
-		color: #1d4e89;
-		font-size: 1rem;
-		font-weight: 700;
-		margin-bottom: 20px;
-	}
+    .div-role {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        background-color: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
 
-	.badges-list {
-		display: flex;
-		gap: 24px;
-	}
+    .badges-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 30px 40px;
+        margin-top: 20px;
+    }
 
-	.badge-item {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 8px;
-	}
+    .badges-title {
+        color: #1d4e89;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 
-	.badge-icon {
-		width: 52px;
-		height: 52px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1.3rem;
-		border: 2px solid;
-	}
+    .badges-list {
+        display: flex;
+        gap: 24px;
+    }
 
-	.badge-icon--gold {
-		border-color: #f59e0b;
-		color: #f59e0b;
-		background: #fffbeb;
-	}
-	.badge-icon--green {
-		border-color: #22c55e;
-		color: #22c55e;
-		background: #f0fdf4;
-	}
-	.badge-icon--blue {
-		border-color: #1d4e89;
-		color: #1d4e89;
-		background: #eff6ff;
-	}
-	.badge-icon--gray {
-		border-color: #d1d5db;
-		color: #d1d5db;
-		background: #f9fafb;
-	}
+    @media screen and (max-width: 768px) {
+        .profil-form {
+            flex-direction: column;
+            padding: 20px;
+        }
 
-	.badge-label {
-		font-size: 0.72rem;
-		color: #6b7280;
-		text-align: center;
-		max-width: 60px;
-		line-height: 1.3;
-	}
+        .form-group,
+        .form-groups {
+            flex-direction: column;
+            gap: 10px;
+        }
 
-	@media screen and (max-width: 768px) {
-		.profil-form {
-			flex-direction: column;
-			padding: 20px;
-		}
+        .form-name,
+        .form-firstname,
+        .form-email,
+        .form-password {
+            width: 100%;
+        }
 
-		.form-group,
-		.form-groups {
-			flex-direction: column;
-			gap: 10px;
-		}
+        .btn-modify {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-		.form-name,
-		.form-firstname,
-		.form-email,
-		.form-password {
-			width: 100%;
-		}
+        .btn-cancel {
+            margin-left: 0;
+        }
 
-		.btn-modify {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-		}
+        .avatar-box {
+            align-self: center;
+            margin-top: 10px;
+        }
 
-		.btn-cancel {
-			margin-left: 0;
-		}
+        .badges-list {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
 
-		.avatar-box {
-			align-self: center;
-			margin-top: 10px;
-		}
+        .badges-card {
+            padding: 20px;
+        }
 
-		.badges-list {
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 16px;
-		}
+        .title-page {
+            font-size: 1.4rem;
+        }
 
-		.badge-item {
-			width: 70px;
-		}
+        .profil-form {
+            flex-direction: column;
+        }
 
-		.badges-card {
-			padding: 20px;
-		}
+        .avatar-box {
+            order: -1;
+            align-self: center;
+            margin-bottom: 20px;
+        }
 
-		.title-page {
-			font-size: 1.4rem;
-		}
-
-		.profil-form {
-			flex-direction: column;
-		}
-
-		.avatar-box {
-			order: -1;
-			align-self: center;
-			margin-bottom: 20px;
-		}
-
-		.form-fields {
-			order: 1;
-		}
-	}
+        .form-fields {
+            order: 1;
+        }
+    }
 </style>

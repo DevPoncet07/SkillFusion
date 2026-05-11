@@ -102,6 +102,8 @@ CREATE TABLE "badge" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
+    "icon" TEXT NOT NULL,
+    "color" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -194,6 +196,7 @@ CREATE TABLE "notifications" (
     "id" SERIAL NOT NULL,
     "content" TEXT NOT NULL,
     "seen" BOOLEAN NOT NULL DEFAULT false,
+    "target_id" INTEGER NOT NULL,
     "cours_id" INTEGER NOT NULL,
     "user_id" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -244,6 +247,9 @@ CREATE UNIQUE INDEX "cours_has_learning_objective_cours_id_lerning_objective_key
 CREATE UNIQUE INDEX "opinions_user_id_cours_id_key" ON "opinions"("user_id", "cours_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "notifications_target_id_key" ON "notifications"("target_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "refresh_tokens_token_key" ON "refresh_tokens"("token");
 
 -- CreateIndex
@@ -256,7 +262,7 @@ ALTER TABLE "users" ADD CONSTRAINT "users_role_id_fkey" FOREIGN KEY ("role_id") 
 ALTER TABLE "courses" ADD CONSTRAINT "courses_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "courses" ADD CONSTRAINT "courses_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "courses" ADD CONSTRAINT "courses_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "cours_content" ADD CONSTRAINT "cours_content_cours_id_fkey" FOREIGN KEY ("cours_id") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE;

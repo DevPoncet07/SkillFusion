@@ -1,25 +1,25 @@
-import type { Request, Response } from "express"
-import argon2 from "argon2";
-import { z } from "zod";
-import { prisma, User } from "../models/client";
-import { config } from "../config";
-import type { Token } from "../@types/index.d.ts";
-import { BadRequestError, ConflictError, UnauthorizedError } from "../lib/errors";
-import { generateAuthTokens } from "../lib/token";
-import jwt from "jsonwebtoken";
-import type { AuthenticatedRequest } from "../@types/express";
-import crypto from "crypto";
-import { sendVerificationEmail, sendResetPasswordEmail } from "../lib/mailer";
+import type { Request, Response } from 'express';
+import argon2 from 'argon2';
+import { z } from 'zod';
+import { prisma, User } from '../models/client';
+import { config } from '../config';
+import type { Token } from '../@types/index.d.ts';
+import { BadRequestError, ConflictError, UnauthorizedError } from '../lib/errors';
+import { generateAuthTokens } from '../lib/token';
+import jwt from 'jsonwebtoken';
+import type { AuthenticatedRequest } from '../@types/express';
+import crypto from 'crypto';
+import { sendVerificationEmail, sendResetPasswordEmail } from '../lib/mailer';
 
 // Token management functions --------------------------------------------------------------------
 
 function setRefreshTokenCookie(res: Response, refreshToken: Token) {
-    res.cookie("refreshToken", refreshToken.token, {
+    res.cookie('refreshToken', refreshToken.token, {
         httpOnly: true,
         secure: config.isProd,
-        sameSite: config.isProd ? "none" : "lax",
+        sameSite: config.isProd ? 'none' : 'lax',
         maxAge: refreshToken.expiresIn,
-        path: "/api/auth/refresh",
+        path: '/auth/refresh',
     });
 }
 
@@ -48,24 +48,23 @@ export async function registerUser(req: Request, res: Response) {
     });
 
     // Vérifier le typage d'entrée
-    const { pseudo, email, password, confirmPassword } =
-        await registerUserBodySchema.parseAsync(req.body);
+    const { pseudo, email, password, confirmPassword } = await registerUserBodySchema.parseAsync(
+        req.body
+    );
 
     // verifier pwd/confirmation
     if (password !== confirmPassword) {
-        throw new BadRequestError(
-            "Mot de passe et confirmation ne correspondent pas",
-        );
+        throw new BadRequestError('Mot de passe et confirmation ne correspondent pas');
     }
     // vérifier que l'email est unique
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-        throw new ConflictError("Email déjà utilisé");
+        throw new ConflictError('Email déjà utilisé');
     }
 
     const existingUserPseudo = await prisma.user.findUnique({ where: { pseudo: pseudo } });
     if (existingUserPseudo) {
-        throw new ConflictError("Pseudo déjà utilisé");
+        throw new ConflictError('Pseudo déjà utilisé');
     }
 
     // Hasher le password
@@ -77,11 +76,11 @@ export async function registerUser(req: Request, res: Response) {
             pseudo,
             email,
             password: hashedPassword,
-            roleId: 1
+            roleId: 1,
         },
     });
 
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = crypto.randomBytes(32).toString('hex');
     await prisma.user.update({
         where: { id: user.id },
         data: { verifyToken: token },
@@ -96,16 +95,13 @@ export async function registerUser(req: Request, res: Response) {
         email: user.email,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
-        message: "Inscription réussie ! Vérifie ton email pour activer ton compte.",
-
+        message: 'Inscription réussie ! Vérifie ton email pour activer ton compte.',
     });
 }
-
 
 // Login Controller --------------------------------------------------------------------
 
 export async function loginUser(req: Request, res: Response) {
-
     // valider le payload de la requete (nature des valeurs)
     const loginUserSchema = z.object({
         email: z.string(),
@@ -116,25 +112,19 @@ export async function loginUser(req: Request, res: Response) {
     // récupérer l'utilisateur ds la db
     const user = await prisma.user.findUnique({
         where: { email },
-        include: { role: true }
+        include: { role: true },
     });
     if (!user) {
-        throw new UnauthorizedError(
-            "Le login et le mot de passe ne correspondent pas",
-        );
+        throw new UnauthorizedError('Le login et le mot de passe ne correspondent pas');
     }
 
     if (!user.verified) {
-        throw new UnauthorizedError(
-            "Confirme ton email avant de te connecter.",
-        );
+        throw new UnauthorizedError('Confirme ton email avant de te connecter.');
     }
     // vérifier que le mot de passe et le hash correspondent
     const isMatching = await argon2.verify(user.password, password);
     if (!isMatching) {
-        throw new UnauthorizedError(
-            "Le login et le mot de passe ne correspondent pas",
-        );
+        throw new UnauthorizedError('Le login et le mot de passe ne correspondent pas');
     }
 
     // générer les 2 token (access/refresh)
@@ -154,9 +144,7 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
     // req.user est garanti par le middleware checkRoles en amont
     const user = await prisma.user.findUnique({ where: { id: req.user!.userId } });
     if (!user) {
-        throw new UnauthorizedError(
-            "Vous n'êtes pas autorisé à accéder à cette resource",
-        );
+        throw new UnauthorizedError("Vous n'êtes pas autorisé à accéder à cette resource");
     }
     res.json({
         id: user.id,
@@ -164,6 +152,7 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
         firstname: user.firstname,
         lastname: user.lastname,
         role: user.roleId,
+        urlProfilImage: user.urlProfilImage,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
     });
@@ -172,7 +161,7 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
 // logoutUser controller --------------------------------------------------------------------
 
 export async function logoutUser(req: AuthenticatedRequest, res: Response) {
-    res.clearCookie("refreshToken", { path: "/api/auth/refresh" });
+    res.clearCookie('refreshToken', { path: '/auth/refresh' });
     if (req.user) {
         await prisma.refreshToken.deleteMany({ where: { userId: req.user.userId } });
     }
@@ -180,44 +169,41 @@ export async function logoutUser(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function refreshAccessToken(req: Request, res: Response) {
-    const receivedRefreshToken =
-        req.body?.refreshToken ?? req.cookies.refreshToken;
-
+    const receivedRefreshToken = req.cookies.refreshToken;
     if (!receivedRefreshToken) {
-        throw new UnauthorizedError(
-            "Vous n'êtes pas autorisé à accéder à cette resource",
-        );
+        throw new UnauthorizedError("Vous n'êtes pas autorisé à accéder à cette resource");
     }
 
     // Vérifier la signature JWT avant d'interroger la base de données
     try {
-        jwt.verify(receivedRefreshToken, config.jwtSecret, { audience: "refresh" });
+        jwt.verify(receivedRefreshToken, config.jwtSecret, { audience: 'refresh' });
     } catch {
-        throw new UnauthorizedError(
-            "Vous n'êtes pas autorisé à accéder à cette resource",
-        );
+        throw new UnauthorizedError("Vous n'êtes pas autorisé à accéder à cette resource");
     }
 
     const existingRefreshToken = await prisma.refreshToken.findUnique({
         where: { token: receivedRefreshToken },
-        include: { user: true },
+        include: { user: { include: { role: true } } },
     });
 
     if (!existingRefreshToken) {
-        throw new UnauthorizedError(
-            "Vous n'êtes pas autorisé à accéder à cette resource",
-        );
+        throw new UnauthorizedError("Vous n'êtes pas autorisé à accéder à cette resource");
     }
 
-    const { accessToken, refreshToken } = generateAuthTokens(
-        existingRefreshToken.user,
-    );
+    const { accessToken, refreshToken } = generateAuthTokens(existingRefreshToken.user);
 
     await replaceRefreshTokenInDatabase(refreshToken, existingRefreshToken.user);
 
     setRefreshTokenCookie(res, refreshToken);
 
-    res.json({ accessToken });
+    res.json({
+        accessToken,
+        user: {
+            id: existingRefreshToken.user.id,
+            pseudo: existingRefreshToken.user.pseudo,
+            role: existingRefreshToken.user.role.name,
+        },
+    });
 }
 
 export async function verifyEmail(req: Request, res: Response) {
@@ -228,7 +214,7 @@ export async function verifyEmail(req: Request, res: Response) {
     });
 
     if (!user) {
-        throw new BadRequestError("Token invalide ou expiré");
+        throw new BadRequestError('Token invalide ou expiré');
     }
 
     await prisma.user.update({
@@ -236,7 +222,7 @@ export async function verifyEmail(req: Request, res: Response) {
         data: { verified: true, verifyToken: null },
     });
 
-    res.json({ message: "Compte vérifié ! Tu peux maintenant te connecter." });
+    res.json({ message: 'Compte vérifié ! Tu peux maintenant te connecter.' });
 }
 
 // Demande de réinitialisation
@@ -247,10 +233,10 @@ export async function forgotPassword(req: Request, res: Response) {
 
     // On répond toujours OK pour ne pas révéler si l'email existe
     if (!user) {
-        return res.json({ message: "Si cet email existe, un lien a été envoyé." });
+        return res.json({ message: 'Si cet email existe, un lien a été envoyé.' });
     }
 
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = crypto.randomBytes(32).toString('hex');
     const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 heure
 
     await prisma.user.update({
@@ -260,13 +246,26 @@ export async function forgotPassword(req: Request, res: Response) {
 
     await sendResetPasswordEmail(email, token);
 
-    res.json({ message: "Si cet email existe, un lien a été envoyé." });
+    res.json({ message: 'Si cet email existe, un lien a été envoyé.' });
 }
 
 // Réinitialisation du mot de passe
 export async function resetPassword(req: Request, res: Response) {
-    const { token, password } = req.body;
+    // Schema de validation Zod
+    const resetPasswordSchema = z.object({
+        token: z.string().min(1),
+        password: z
+            .string()
+            .min(2)
+            .max(100)
+            .regex(/[a-z]/) // au moins une minuscule
+            .regex(/[A-Z]/) // au moins une majuscule
+            .regex(/[!@#$%&*-+{}?]/), // au moins un caractère spécial
+    });
 
+    const { token, password } = await resetPasswordSchema.parseAsync(req.body);
+
+    // Vérifie que le token existe en BDD et qu'il n'est pas expiré
     const user = await prisma.user.findFirst({
         where: {
             resetToken: token,
@@ -274,10 +273,12 @@ export async function resetPassword(req: Request, res: Response) {
         },
     });
 
+    // Si aucun utilisateur n'est trouvé, le token est invalide ou expiré
     if (!user) {
-        throw new BadRequestError("Token invalide ou expiré.");
+        throw new BadRequestError('Token invalide ou expiré.');
     }
 
+    // Hasher le nouveau mot de passe
     const hashedPassword = await argon2.hash(password);
 
     await prisma.user.update({
@@ -289,5 +290,5 @@ export async function resetPassword(req: Request, res: Response) {
         },
     });
 
-    res.json({ message: "Mot de passe réinitialisé avec succès !" });
+    res.json({ message: 'Mot de passe réinitialisé avec succès !' });
 }
