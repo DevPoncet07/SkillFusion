@@ -13,7 +13,12 @@
 </script>
 
 <div class="badge_item">
-    <div class="tooltip-trigger" role="button" onmouseenter={show} onmouseleave={() => (visible = false)}>
+    <div
+        class="tooltip-trigger"
+        role="button"
+        onmouseenter={show}
+        onmouseleave={() => (visible = false)}
+    >
         <span class={`icon-${badge.icon}`}></span>
     </div>
 </div>
