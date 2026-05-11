@@ -7,7 +7,7 @@
     import { goto } from '$app/navigation';
     import api from '$lib/services/api.service';
     import DarkMode from './Dark/DarkMode.svelte';
-    import "../../../app.css";
+    import '../../../app.css';
 
     let user: IUserLocalStorage | null = $state(null);
 

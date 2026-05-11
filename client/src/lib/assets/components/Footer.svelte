@@ -1,5 +1,5 @@
 <script>
-    import "../../../app.css";
+    import '../../../app.css';
 
     const currentYear = new Date().getFullYear();
 
