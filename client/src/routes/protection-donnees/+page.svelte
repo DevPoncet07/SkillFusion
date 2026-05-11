@@ -3,6 +3,10 @@
     import Header from '$lib/assets/components/Header.svelte';
 </script>
 
+<svelte:head>
+    <title>Protection des données</title>
+</svelte:head>
+
 <Header />
 
 <main class="protection-donnees">

@@ -4,6 +4,9 @@
     import '../../app.css';
 </script>
 
+<svelte:head>
+    <title>Déclaration d'accessibilité</title>
+</svelte:head>
 <Header />
 
 <main class="accessibilite">
