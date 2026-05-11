@@ -51,7 +51,6 @@ app.use(helmet());
     })
 ); */
 
-
 app.use(cookieParser());
 app.use(express.json({ limit: '5mb' })); // Limite à 5mb pour la photo
 app.use(xss());
