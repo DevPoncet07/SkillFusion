@@ -39,6 +39,7 @@
     onkeydown={(e) => e.key === 'Escape' && close()}
 >
     <div
+        tabindex="1"
         class="modal"
         role="dialog"
         aria-modal="true"
