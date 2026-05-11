@@ -3,7 +3,6 @@
     import Header from '$lib/assets/components/Header.svelte';
     import BtnExportRGPD from '$lib/assets/components/BtnExportRGPD.svelte';
     import '../../app.css';
-
     import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
     import { onMount } from 'svelte';
     import api from '$lib/services/api.service';
