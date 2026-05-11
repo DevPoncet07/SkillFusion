@@ -3,7 +3,6 @@ import usersController from '../controllers/users.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
 import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 
-
 export const router = Router();
 
 // GET all — ADMIN only (liste de tous les utilisateurs)

@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
         cb(null, `avatar-${Date.now()}${ext}`);
-    }
+    },
 });
 
 export const uploadAvatar = multer({
@@ -16,5 +16,5 @@ export const uploadAvatar = multer({
         const allowed = ['image/jpeg', 'image/png', 'image/webp'];
         if (allowed.includes(file.mimetype)) cb(null, true);
         else cb(new Error('Format non supporté'));
-    }
+    },
 });
