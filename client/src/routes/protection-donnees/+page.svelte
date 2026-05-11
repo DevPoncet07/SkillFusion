@@ -17,9 +17,9 @@
     <h2>1. Responsable du traitement</h2>
     <p>
         <strong>SkillFusion</strong><br />
-            123 Avenue Aurélie F0F<br />
-            23754642672 MaxiLearn<br />
-            Planète Mars (pas loin après la lune)
+        123 Avenue Aurélie F0F<br />
+        23754642672 MaxiLearn<br />
+        Planète Mars (pas loin après la lune)
     </p>
 
     <h2>2. Données collectées</h2>

@@ -72,10 +72,12 @@
             >
         </li>
         <li>Par téléphone : 01 02 03 04 05</li>
-        <li>Par courrier : SkillFusion<br />
+        <li>
+            Par courrier : SkillFusion<br />
             123 Avenue Aurélie F0F<br />
             23754642672 MaxiLearn<br />
-            Planète Mars (pas loin après la lune)</li>
+            Planète Mars (pas loin après la lune)
+        </li>
     </ul>
 
     <h2>Défenseur des droits</h2>
