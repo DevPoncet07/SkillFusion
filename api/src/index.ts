@@ -25,6 +25,8 @@ import userHasBadge from './routers/userHasBadge.router';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 1000,
