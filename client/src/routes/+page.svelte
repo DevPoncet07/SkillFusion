@@ -1,5 +1,4 @@
 <script lang="ts">
-   
     import api from '$lib/services/api.service';
     import Header from '$lib/assets/components/Header.svelte';
     import Footer from '$lib/assets/components/Footer.svelte';
@@ -9,7 +8,7 @@
     import App from '$lib/assets/components/App.svelte';
     import Main from '$lib/assets/components/Main.svelte';
     import type { ICours } from '$lib/@types/types';
-     import '../normalize.css';
+    import '../normalize.css';
     import '../app.css';
 
     let courses: ICours[] = $state([]);
