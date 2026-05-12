@@ -102,7 +102,7 @@
             </div>
 
             <div class="panel__list--ended">
-                {#each coursTermines as c (c.id)}
+                {#each coursEnded as c (c.id)}
                     <a class="list-row" href="/cours/{c.cours.slug}">
                         <div class="list-row__check">✓</div>
                         <div class="list-row__info">
