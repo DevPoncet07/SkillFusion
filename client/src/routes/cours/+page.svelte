@@ -135,6 +135,7 @@
                     --card__image__color={cours.category.textColor}
                     --border_color={cours.category.borderColor}
                     --text_color={cours.category.textColor}
+                    --background-color={cours.category.backgroundColor}
                     {coursEnded}
                 />
             {/each}
