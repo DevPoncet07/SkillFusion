@@ -10,13 +10,13 @@
     import App from '$lib/assets/components/App.svelte';
     import Main from '$lib/assets/components/Main.svelte';
     import type { ICours, ICoursActived } from '$lib/@types/types';
-      import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
-      import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
+    import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
+    import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
     let courses: ICours[] = $state([]);
     let user: IUserLocalStorage | null = $state(null);
     let coursEnded: number[] = $state([]);
-    
+
     onMount(async () => {
         getAuth();
         user = authStore.user;
@@ -27,7 +27,7 @@
             const ended = await api('api/cours-active/user/' + user.id + '/ended');
             coursEnded = ended.data.map((ended: ICoursActived) => ended.coursId);
         }
-        console.log(coursEnded)
+        console.log(coursEnded);
     });
 </script>
 
@@ -81,7 +81,7 @@
                             --border_color={cours.category.borderColor}
                             --text_color={cours.category.textColor}
                             --background-color={cours.category.backgroundColor}
-                            coursEnded = {coursEnded}
+                            {coursEnded}
                         />
                     {/each}
                 </div>

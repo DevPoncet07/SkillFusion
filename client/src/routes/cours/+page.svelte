@@ -6,9 +6,9 @@
     import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
     import api from '$lib/services/api.service';
     import { onMount } from 'svelte';
-    import type { ICours, ICategory , ICoursActived} from '$lib/@types/types';
-     import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
-     import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
+    import type { ICours, ICategory, ICoursActived } from '$lib/@types/types';
+    import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
+    import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
     let courses: ICours[] = $state([]);
     let categories: ICategory[] = $state([]);
@@ -18,15 +18,15 @@
     let sortBy = $state('');
 
     onMount(async () => {
-         getAuth();
+        getAuth();
         const categoriesResponse = await api('api/categories');
         categories = categoriesResponse.data;
         const coursesResponse = await api('api/cours?visibility=true');
         courses = coursesResponse.data;
         user = authStore.user;
-        if(user){
-        const ended = await api('api/cours-active/user/' + user?.id + '/ended');
-        coursEnded = ended.data.map((ended: ICoursActived )=>ended.id);
+        if (user) {
+            const ended = await api('api/cours-active/user/' + user?.id + '/ended');
+            coursEnded = ended.data.map((ended: ICoursActived) => ended.id);
         }
     });
     let searchQuery = $state('');
@@ -135,7 +135,7 @@
                     --card__image__color={cours.category.textColor}
                     --border_color={cours.category.borderColor}
                     --text_color={cours.category.textColor}
-                    coursEnded = {coursEnded}
+                    {coursEnded}
                 />
             {/each}
         </div>

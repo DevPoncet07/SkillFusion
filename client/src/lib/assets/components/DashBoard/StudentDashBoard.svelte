@@ -66,7 +66,7 @@
                         --border_color={c.cours.category.borderColor}
                         --text_color={c.cours.category.textColor}
                         --background-color={c.cours.category.backgroundColor}
-                        coursEnded = false
+                        coursEnded="false"
                     />
                 {/each}
 
