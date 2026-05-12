@@ -9,7 +9,7 @@ import { generateAuthTokens } from '../lib/token';
 import jwt from 'jsonwebtoken';
 import type { AuthenticatedRequest } from '../@types/express';
 import crypto from 'crypto';
-import { sendVerificationEmail ,sendResetPasswordEmail } from '../lib/mailer';
+import { sendVerificationEmail, sendResetPasswordEmail } from '../lib/mailer';
 
 // Token management functions --------------------------------------------------------------------
 
