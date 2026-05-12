@@ -76,6 +76,17 @@ export default {
             return res.status(204).end();
         }
 
+        const enrollment = await prisma.userHasCours.findUnique({
+            where: {
+                userId_coursId: {
+                    userId,
+                    coursId: data.coursId,
+                },
+            },
+        });
+        if (enrollment) {
+            return;
+        }
         const createdCoursActive = await prisma.coursActived.create({
             data: {
                 coursId: data.coursId,

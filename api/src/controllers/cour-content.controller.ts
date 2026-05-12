@@ -87,11 +87,8 @@ export default {
         const updateCourContentBodySchema = z.object({
             content: z.string().min(1).optional(),
             numberPage: z.number().min(1).int().optional(),
-            coursId: z.number().int().optional(),
         });
-        const { content, numberPage, coursId } = await updateCourContentBodySchema.parseAsync(
-            req.body
-        );
+        const { content, numberPage } = await updateCourContentBodySchema.parseAsync(req.body);
 
         // Vérification que le contenu existe et que le cours appartient à l'instructeur connecté
         const courContent = await prisma.coursContent.findUnique({ where: { id: courContentId } });
@@ -99,8 +96,8 @@ export default {
             throw new NotFoundError(`CourContent with id ${courContentId} not found`);
         }
 
-        const cours = await prisma.cours.findFirst({ where: { id: coursId } });
-        if (cours && cours.authorId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+        const cours = await prisma.cours.findFirst({ where: { id: courContent.coursId } });
+        if (cours?.authorId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce contenu");
         }
 

@@ -9,7 +9,7 @@
     import Badge from '../Badge/Badge.svelte';
 
     let coursActive: ICours[] = $state([]);
-    let coursTermines: ICours[] = $state([]);
+    let coursEnded: ICours[] = $state([]);
     let userBadges: IUserHasBadge[] = $state([]);
 
     onMount(async () => {
@@ -18,7 +18,7 @@
         const response = await api('api/cours-active/user/' + authStore?.user?.id);
         coursActive = response.data;
         const ended = await api('api/cours-active/user/' + authStore?.user?.id + '/ended');
-        coursTermines = ended.data;
+        coursEnded = ended.data;
         const badges = await api('api/badges/user/' + authStore?.user?.id);
         userBadges = badges.data;
     });
@@ -37,7 +37,7 @@
             <p class="stat-card__label">Cours en cours</p>
         </div>
         <div class="stat-card">
-            <p class="stat-card__value">{coursTermines.length}</p>
+            <p class="stat-card__value">{coursEnded.length}</p>
             <p class="stat-card__label">Cours terminés</p>
         </div>
         <div class="stat-card">
@@ -56,7 +56,7 @@
                 <span class="panel__count">{coursActive.length}</span>
             </div>
 
-            <div class="panel__list">
+            <div class="panel__list panel__list--scroll">
                 {#each coursActive as c (c.id)}
                     <CoursCard
                         class="coursCardDashboard"
@@ -66,6 +66,7 @@
                         --border_color={c.cours.category.borderColor}
                         --text_color={c.cours.category.textColor}
                         --background-color={c.cours.category.backgroundColor}
+                        coursEnded="false"
                     />
                 {/each}
 
@@ -97,12 +98,12 @@
         <div class="panel panel--wide">
             <div class="panel__head">
                 <h2 class="panel__title">Mes cours terminés</h2>
-                <span class="panel__count">{coursTermines.length}</span>
+                <span class="panel__count">{coursEnded.length}</span>
             </div>
 
-            <div class="panel__list">
-                {#each coursTermines as c (c.id)}
-                    <div class="list-row">
+            <div class="panel__list--ended">
+                {#each coursEnded as c (c.id)}
+                    <a class="list-row" href="/cours/{c.cours.slug}">
                         <div class="list-row__check">✓</div>
                         <div class="list-row__info">
                             <p class="list-row__title">{c.cours.title}</p>
@@ -121,10 +122,10 @@
                                 day: 'numeric'
                             })}</span
                         >
-                    </div>
+                    </a>
                 {/each}
 
-                {#if coursTermines.length === 0}
+                {#if coursEnded.length === 0}
                     <p class="panel__empty">Aucun cours terminé pour l'instant.</p>
                 {/if}
             </div>
@@ -240,7 +241,7 @@
         gap: 14px;
         min-width: 0;
         overflow: hidden;
-        overflow-x: auto;
+        overflow-y: auto;
     }
 
     .panel--wide {
@@ -271,10 +272,35 @@
 
     .panel__list {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         gap: 8px;
-        overflow-x: scroll;
+        max-height: 400px;
+        overflow-y: auto;
     }
+
+    .panel__list--scroll {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .panel__list--ended {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        padding-right: 4px;
+    }
+
+    .list-row {
+        width: 100%;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+
     .panel__list:first-child {
         overflow-y: auto;
     }
@@ -289,9 +315,13 @@
     /* ── Badges grid ─────────────────────────────────────────── */
     .badges-grid {
         display: flex;
-        padding: 10px;
-        overflow-x: scroll;
-        gap: 10px;
+        flex-wrap: wrap;
+        gap: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 4px;
+        align-content: flex-start;
     }
 
     /* ── List rows (cours terminés) ─────────────────────────── */
@@ -392,6 +422,19 @@
 
         .badges-grid {
             grid-template-columns: repeat(4, 1fr);
+        }
+
+        .panel__list--scroll {
+            display: flex;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .panel__list--scroll :global(.coursCardDashboard) {
+            flex: 1 1 250px;
+            min-width: 250px;
         }
     }
 </style>

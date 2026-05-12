@@ -5,7 +5,7 @@ import { parseIdFromParams } from './utils';
 import type { AuthenticatedRequest } from '../@types/express';
 import { ForbiddenError, NotFoundError } from '../lib/errors';
 import { ROLES } from '../middlewares/rbac.middleware';
-import { sendReportEmail } from '../lib/mailer';
+import {} from /* sendReportEmail */ '../lib/mailer';
 
 export default {
     // Requête pour récuperer tous les commentaires
@@ -34,6 +34,16 @@ export default {
             coursId: z.number(),
         });
         const data = await createCommentBodySchema.parseAsync(req.body);
+
+        const enrollment = await prisma.coursActived.findFirst({
+            where: {
+                userId: req.user!.userId,
+                coursId: data.coursId,
+            },
+        });
+        if (!enrollment && req.user!.role !== ROLES.ADMIN) {
+            throw new ForbiddenError('Vous devez être inscrit à ce cours pour commenter');
+        }
 
         const createdComment = await prisma.comment.create({
             data: {

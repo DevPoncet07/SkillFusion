@@ -9,7 +9,7 @@
     let { isDashboard = false, ...props } = $props();
     let user: IUserLocalStorage | null = $state(null);
 
-    onMount(() => {
+    onMount(async () => {
         getAuth();
         user = authStore.user;
     });
@@ -34,14 +34,29 @@
                             🔴
                         {/if}
                     {/if}
+
                     <LevelBar {isDashboard} level={props.cours.difficulty} />
                 </div>
             </div>
         </div></a
     >
+    {#if user?.role == 'student' && props.coursEnded.includes(props.cours.id) == true}
+        <div class="coursCheck">🏆</div>
+    {/if}
 </article>
 
 <style>
+    .coursCheck {
+        position: absolute;
+        align-items: center;
+        display: flex;
+        top: 10px;
+        right: 10px;
+        background: green;
+        border: 1px darkgreen solid;
+        border-radius: 50%;
+        aspect-ratio: 1;
+    }
     .cours-card {
         display: flex;
         flex-direction: row;
@@ -86,7 +101,7 @@
         height: 100px;
         display: flex;
         flex-direction: column;
-        width: 100%;
+        background-color: var(--background-color);
     }
 
     .card__title {
@@ -142,7 +157,7 @@
         }
     }
     .coursCardDashboard {
-        max-width: 15%;
+        max-width: 23%;
         min-width: 15%;
     }
 </style>
