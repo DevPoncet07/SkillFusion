@@ -338,42 +338,38 @@
                         style="display:none"
                     />
                 </div>
-
-                
             </form>
         </div>
 
         {#if userLocal?.role == 'admin' && page.url.searchParams.get('id')}
-                    <div class="div-role">
-                        <label for="role">Role de l'utilisateur</label>
-                        <select bind:value={userRole} onchange={openModalModifyRole}>
-                            {#each roles as role (role.id)}
-                                <option value={role.id}>{role.frName}</option>
-                            {/each}
-                        </select>
-                    </div>
-                {/if}
+            <div class="div-role">
+                <label for="role">Role de l'utilisateur</label>
+                <select bind:value={userRole} onchange={openModalModifyRole}>
+                    {#each roles as role (role.id)}
+                        <option value={role.id}>{role.frName}</option>
+                    {/each}
+                </select>
+            </div>
+        {/if}
 
-                {#if userLocal?.role != 'instructor' && page.url.searchParams.get('id')}
-                    <div class="badges-card">
-                        <h2 class="badges-title">Mes badges</h2>
-                        {#if userLocal?.role === 'admin'}
-                            <button onclick={() => openModalAssignBadge()}>Ajouter un badge</button>
-                        {/if}
-                        <div class="badges-list">
-                            {#each badges as badge (badge.id)}
-                                <div>
-                                    <Badge badge={badge.badge} --color={badge.badge.color} />
-                                    {#if userLocal?.role === 'admin'}
-                                        <button onclick={() => openModalDeleteBadge(badge.id)}
-                                            >X</button
-                                        >
-                                    {/if}
-                                </div>
-                            {/each}
-                        </div>
-                    </div>
+        {#if userLocal?.role != 'instructor' && page.url.searchParams.get('id')}
+            <div class="badges-card">
+                <h2 class="badges-title">Mes badges</h2>
+                {#if userLocal?.role === 'admin'}
+                    <button onclick={() => openModalAssignBadge()}>Ajouter un badge</button>
                 {/if}
+                <div class="badges-list">
+                    {#each badges as badge (badge.id)}
+                        <div>
+                            <Badge badge={badge.badge} --color={badge.badge.color} />
+                            {#if userLocal?.role === 'admin'}
+                                <button onclick={() => openModalDeleteBadge(badge.id)}>X</button>
+                            {/if}
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        {/if}
         <ModalValidator
             id="modalDeleteBadge"
             message="Êtes-vous sûr de vouloir supprimer ce badge ?"
