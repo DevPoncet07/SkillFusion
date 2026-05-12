@@ -86,7 +86,7 @@
         height: 100px;
         display: flex;
         flex-direction: column;
-        width: 100%;
+        background-color: var(--background-color);
     }
 
     .card__title {
@@ -142,7 +142,7 @@
         }
     }
     .coursCardDashboard {
-        max-width: 15%;
+        max-width: 23%;
         min-width: 15%;
     }
 </style>
