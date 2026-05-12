@@ -100,7 +100,7 @@ export default {
         }
 
         const cours = await prisma.cours.findFirst({ where: { id: courContent.coursId } });
-        if ( cours?.authorId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+        if (cours?.authorId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce contenu");
         }
 
