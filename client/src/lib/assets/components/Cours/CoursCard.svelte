@@ -86,7 +86,7 @@
         height: 100px;
         display: flex;
         flex-direction: column;
-        width: 100%;
+        background-color: var(--background-color);
     }
 
     .card__title {
@@ -108,6 +108,7 @@
         .card__title {
             align-self: flex-start;
         }
+        
     }
     @media (min-width: 1024px) {
         .cours-card {
@@ -142,7 +143,7 @@
         }
     }
     .coursCardDashboard {
-        max-width: 15%;
+        max-width: 23%;
         min-width: 15%;
     }
 </style>

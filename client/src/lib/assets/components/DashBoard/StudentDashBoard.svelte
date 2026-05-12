@@ -56,7 +56,7 @@
                 <span class="panel__count">{coursActive.length}</span>
             </div>
 
-            <div class="panel__list">
+            <div class="panel__list panel__list--scroll">
                 {#each coursActive as c (c.id)}
                     <CoursCard
                         class="coursCardDashboard"
@@ -100,9 +100,9 @@
                 <span class="panel__count">{coursTermines.length}</span>
             </div>
 
-            <div class="panel__list">
+            <div class="panel__list--ended">
                 {#each coursTermines as c (c.id)}
-                    <div class="list-row">
+                    <a class="list-row" href="/cours/{c.cours.slug}">
                         <div class="list-row__check">✓</div>
                         <div class="list-row__info">
                             <p class="list-row__title">{c.cours.title}</p>
@@ -121,7 +121,7 @@
                                 day: 'numeric'
                             })}</span
                         >
-                    </div>
+                    </a>
                 {/each}
 
                 {#if coursTermines.length === 0}
@@ -240,7 +240,7 @@
         gap: 14px;
         min-width: 0;
         overflow: hidden;
-        overflow-x: auto;
+        overflow-y: auto;
     }
 
     .panel--wide {
@@ -271,10 +271,35 @@
 
     .panel__list {
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         gap: 8px;
-        overflow-x: scroll;
+        max-height: 400px;
+        overflow-y: auto;
     }
+
+    .panel__list--scroll {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .panel__list--ended {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        padding-right: 4px;
+    }
+
+    .list-row {
+        width: 100%;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+
     .panel__list:first-child {
         overflow-y: auto;
     }
@@ -289,9 +314,13 @@
     /* ── Badges grid ─────────────────────────────────────────── */
     .badges-grid {
         display: flex;
-        padding: 10px;
-        overflow-x: scroll;
-        gap: 10px;
+        flex-wrap: wrap;
+        gap: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 4px;
+        align-content: flex-start;
     }
 
     /* ── List rows (cours terminés) ─────────────────────────── */
@@ -392,6 +421,19 @@
 
         .badges-grid {
             grid-template-columns: repeat(4, 1fr);
+        }
+
+        .panel__list--scroll {
+            display: flex;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .panel__list--scroll :global(.coursCardDashboard) {
+            flex: 1 1 250px;
+            min-width: 250px;
         }
     }
 </style>
