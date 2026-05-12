@@ -95,7 +95,7 @@ export default {
         if (!notification) {
             throw new NotFoundError(`Notification with id ${notificationId} not found`);
         }
-        
+
         await prisma.notification.delete({ where: { id: notificationId } });
         res.status(204).send();
     },
