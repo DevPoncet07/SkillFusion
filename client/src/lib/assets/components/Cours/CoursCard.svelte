@@ -158,6 +158,6 @@
     }
     .coursCardDashboard {
         max-width: 23%;
-        min-width: 15%;
+        min-width: 30%;
     }
 </style>
