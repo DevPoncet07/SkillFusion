@@ -75,7 +75,7 @@
          PANEL 1 — Mes cours
     ══════════════════════════════ -->
         <div class="panel panel--large">
-            <div class="panel__head">
+            <div class="panel__head panel__list--scroll">
                 <h2 class="panel__title">Mes cours</h2>
                 <div class="panel__head-actions">
                     <span class="panel__count">{filteredCours.length}</span>
@@ -205,13 +205,17 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
     }
 
     .panel__head-actions {
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+
+    .panel__list--scroll {
+        max-height: 400px;
+        overflow-y: auto;
     }
 
     .panel__title {
@@ -241,8 +245,13 @@
         gap: 8px;
     }
     .panel__list--cours {
-        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
+        gap: 8px;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .panel__list--notifs {
@@ -332,6 +341,19 @@
 
         .panel__list--notifs {
             max-height: 320px;
+        }
+
+        .panel__list--cours {
+            display: flex;
+            gap: 12px;
+            max-height: 350px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .panel__list--cours :global(.coursCardDashboard) {
+            flex: 1 1 250px;
+            min-width: 250px;
         }
     }
 </style>
