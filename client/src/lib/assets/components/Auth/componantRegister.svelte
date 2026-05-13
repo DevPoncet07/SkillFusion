@@ -212,7 +212,7 @@
         align-items: center;
         gap: 8px;
         font-size: 12px;
-        color: #9ca3af; 
+        color: #9ca3af;
         transition: color 0.2s;
     }
 
