@@ -6,6 +6,7 @@
     let errorMessage = $state('');
 
     const onSubmitForm = async (event: SubmitEvent): Promise<void> => {
+        event.preventDefault();
         errorMessage = '';
         const formData = new FormData(event.target as HTMLFormElement);
         const email = String(formData.get('email') ?? '');
