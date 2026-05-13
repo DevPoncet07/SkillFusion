@@ -208,15 +208,15 @@ export async function refreshAccessToken(req: Request, res: Response) {
 
 export async function verifyEmail(req: Request, res: Response) {
     const { token } = req.query as { token: string };
+    console.log(token)
 
     const user = await prisma.user.findFirst({
         where: { verifyToken: token },
     });
-
+    console.log(user)
     if (!user) {
         // Rediriger vers le frontend avec un message d'erreur
-        const frontendUrl = config.corsOriginUrl || 'http://localhost:5173';
-        return res.redirect(`${frontendUrl}/verify?error=invalid_token`);
+        return res.status(403).end()
     }
 
     await prisma.user.update({
@@ -225,8 +225,7 @@ export async function verifyEmail(req: Request, res: Response) {
     });
 
     // Rediriger vers le frontend avec un message de succès
-    const frontendUrl = config.corsOriginUrl || 'http://localhost:5173';
-    res.redirect(`${frontendUrl}/verify?success=true`);
+    res.status(200).end();
 }
 
 // Demande de réinitialisation
