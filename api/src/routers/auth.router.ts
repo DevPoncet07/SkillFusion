@@ -23,14 +23,6 @@ const authLimiter = rateLimit({
     message: { message: 'Trop de requêtes, veuillez réessayer plus tard.' },
 });
 
-// CORS public pour les routes accessibles depuis les emails
-const publicCors = cors({
-    origin: true,
-    credentials: false,
-    allowedHeaders: ['Content-Type'],
-    methods: ['GET', 'OPTIONS'],
-});
-
 router.post('/register', authLimiter, registerUser);
 router.post('/login', authLimiter, loginUser);
 router.post('/logout', verifyToken, logoutUser);
@@ -38,5 +30,5 @@ router.post('/refresh', refreshAccessToken);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password', resetPassword);
 router.get('/me', verifyToken, getAuthenticatedUser);
-router.get('/verify-email', publicCors, verifyEmail);
+router.get('/verify-email', verifyEmail);
 export default router;
