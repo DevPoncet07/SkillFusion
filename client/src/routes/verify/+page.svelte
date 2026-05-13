@@ -13,23 +13,20 @@
             loading = false;
             return;
         }
-
         try {
             // Appel API pour vérifier le token avec la base de données
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/auth/verify-email?token=${token}`
             );
-
-            const data = await response.json();
-
+            console.log(response)
+            
             if (response.ok) {
                 success = true;
                 message =
-                    data.message ||
                     'Ton compte a été vérifié avec succès ! Tu peux maintenant te connecter.';
             } else {
                 success = false;
-                message = data.error || data.message || 'Lien invalide ou expiré.';
+                message ='Lien invalide ou expiré.';
             }
         } catch (error) {
             console.error('Erreur lors de la vérification:', error);
