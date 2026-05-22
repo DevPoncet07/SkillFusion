@@ -13,10 +13,7 @@ CMD ["npm", "run", "dev", "--", "--host"]
 FROM base AS production
 RUN npm ci
 COPY . .
-# VITE_API_URL doit être déclarée ici car Vite intègre les variables d'env
-# dans le bundle au moment du build, pas au runtime.
-# Railway doit donc la fournir comme "Build Variable", pas "Runtime Variable"
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
+
 RUN npm run build
-CMD ["node", "build"]
+
+CMD ["npm", "run", "start"]

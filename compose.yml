@@ -3,6 +3,9 @@ volumes:
 
 networks:
   skillfusion_network:
+  proxy-network:
+    external: true
+
 
 services:
 
@@ -37,10 +40,11 @@ services:
     volumes:
       - ./api:/app
       - /app/node_modules
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     networks:
       - skillfusion_network
+      - proxy-network
     command: sh -c "npm install && npm run dev"
 
   client:
@@ -49,8 +53,8 @@ services:
 # Permet de dire a Docker de s'arreter a l'étape Développement du DockerFile 
       target: development
     container_name: skillfusion_client
-    ports:
-      - "5173:5173"
+    expose:
+      - "5173"
     depends_on:
       - api
       - db
@@ -61,4 +65,5 @@ services:
       - /app/node_modules
     networks:
       - skillfusion_network
+      - proxy-network
     command: sh -c "npm install && npm run dev -- --host"
