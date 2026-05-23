@@ -26,6 +26,7 @@ export default {
 
         'connect-src': [
           'self',
+          'http://api:3000',
           ...(isDev ? ['http://localhost:3000'] : []),
           'https://formspree.io'
         ]
