@@ -12,8 +12,13 @@ CMD ["npm", "run", "dev", "--", "--host"]
 
 # Consignes de build
 FROM base AS build
-RUN npm ci
+ARG VITE_API_URL
 COPY . .
+
+ENV VITE_API_URL=$VITE_API_URL
+
+RUN echo "VITE_API_URL=$VITE_API_URL"
+RUN npm ci
 RUN npm run build
 
 FROM node:24-alpine AS production
