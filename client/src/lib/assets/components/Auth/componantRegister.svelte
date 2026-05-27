@@ -57,13 +57,13 @@
 
     <form class="register-form" onsubmit={onSubmitForm}>
         <label for="pseudo">Pseudo</label>
-        <input type="text" id="pseudo" name="pseudo" placeholder="Jeannot#336" required />
+        <input type="text" id="pseudo" name="pseudo" placeholder="JeanJean" required />
         {#if errorPseudo}
             <p class="error-message">Pseudo déjà utilisé</p>
         {/if}
 
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="JeanPaul@nanana.com" required />
+        <input type="email" id="email" name="email" placeholder="JeanDupont@mail.fr" required />
         {#if errorEmail}
             <p class="error-message">Email déjà utilisé</p>
         {/if}
@@ -73,7 +73,7 @@
             type="password"
             id="password"
             name="password"
-            placeholder="••••••••"
+            placeholder="Mot de passe"
             required
             bind:value={passwordValue}
         />
@@ -107,7 +107,7 @@
             type="password"
             id="confirm-password"
             name="confirm-password"
-            placeholder="••••••••"
+            placeholder="Confirmation"
             required
         />
 

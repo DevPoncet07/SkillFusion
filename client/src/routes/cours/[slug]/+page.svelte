@@ -45,8 +45,10 @@
         getAuth();
         user = authStore.user;
         await getCours();
+        if(user){
         AlreadyHaveNoted();
         AlreadyHaveStarted();
+        }
     });
     async function getCours() {
         const response = await api('api/cours?slug=' + page.params.slug);
