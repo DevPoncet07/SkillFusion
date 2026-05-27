@@ -1,5 +1,6 @@
 import express from 'express';
 import coursActiveController from '../controllers/cour-active.controller';
+import coursStarted from '../controllers/courStarted.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
 import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 
