@@ -27,7 +27,7 @@ export default async function api(endpoint: string, method = 'GET', body: object
 }
 
 async function apiWithoutToken(endpoint: string, method = 'GET', body: object) {
-    const response = await fetch(`${BASE_URL}/api/${endpoint}`, {
+    const response = await fetch(`${BASE_URL}/${endpoint}`, {
         method,
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ async function refreshAccessToken(): Promise<{
 }
 
 async function apiWithToken(endpoint: string, method = 'GET', body: object) {
-    const response = await fetch(`${BASE_URL}/api/${endpoint}`, {
+    const response = await fetch(`${BASE_URL}/${endpoint}`, {
         method,
         credentials: 'include',
         headers: {
@@ -85,7 +85,7 @@ async function apiWithToken(endpoint: string, method = 'GET', body: object) {
         }
 
         if (newToken) {
-            const retry = await fetch(`${BASE_URL}/api/${endpoint}`, {
+            const retry = await fetch(`${BASE_URL}/${endpoint}`, {
                 method,
                 credentials: 'include',
                 headers: {
