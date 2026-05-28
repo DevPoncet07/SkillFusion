@@ -59,10 +59,10 @@ export type Badge = $Result.DefaultSelection<Prisma.$BadgePayload>
  */
 export type UserHasCours = $Result.DefaultSelection<Prisma.$UserHasCoursPayload>
 /**
- * Model CoursActived
+ * Model CoursStarted
  * 
  */
-export type CoursActived = $Result.DefaultSelection<Prisma.$CoursActivedPayload>
+export type CoursStarted = $Result.DefaultSelection<Prisma.$CoursStartedPayload>
 /**
  * Model UserHasBadge
  * 
@@ -311,14 +311,14 @@ export class PrismaClient<
   get userHasCours(): Prisma.UserHasCoursDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.coursActived`: Exposes CRUD operations for the **CoursActived** model.
+   * `prisma.coursStarted`: Exposes CRUD operations for the **CoursStarted** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more CoursActiveds
-    * const coursActiveds = await prisma.coursActived.findMany()
+    * // Fetch zero or more CoursStarteds
+    * const coursStarteds = await prisma.coursStarted.findMany()
     * ```
     */
-  get coursActived(): Prisma.CoursActivedDelegate<ExtArgs, ClientOptions>;
+  get coursStarted(): Prisma.CoursStartedDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.userHasBadge`: Exposes CRUD operations for the **UserHasBadge** model.
@@ -832,7 +832,7 @@ export namespace Prisma {
     Tool: 'Tool',
     Badge: 'Badge',
     UserHasCours: 'UserHasCours',
-    CoursActived: 'CoursActived',
+    CoursStarted: 'CoursStarted',
     UserHasBadge: 'UserHasBadge',
     CoursHasTool: 'CoursHasTool',
     CoursHasLearningObjective: 'CoursHasLearningObjective',
@@ -855,7 +855,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "role" | "user" | "cours" | "coursContent" | "category" | "learningObjective" | "tool" | "badge" | "userHasCours" | "coursActived" | "userHasBadge" | "coursHasTool" | "coursHasLearningObjective" | "comment" | "opinion" | "notification" | "refreshToken"
+      modelProps: "role" | "user" | "cours" | "coursContent" | "category" | "learningObjective" | "tool" | "badge" | "userHasCours" | "coursStarted" | "userHasBadge" | "coursHasTool" | "coursHasLearningObjective" | "comment" | "opinion" | "notification" | "refreshToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1525,77 +1525,77 @@ export namespace Prisma {
           }
         }
       }
-      CoursActived: {
-        payload: Prisma.$CoursActivedPayload<ExtArgs>
-        fields: Prisma.CoursActivedFieldRefs
+      CoursStarted: {
+        payload: Prisma.$CoursStartedPayload<ExtArgs>
+        fields: Prisma.CoursStartedFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.CoursActivedFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload> | null
+            args: Prisma.CoursStartedFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.CoursActivedFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           findFirst: {
-            args: Prisma.CoursActivedFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload> | null
+            args: Prisma.CoursStartedFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.CoursActivedFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           findMany: {
-            args: Prisma.CoursActivedFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>[]
+            args: Prisma.CoursStartedFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>[]
           }
           create: {
-            args: Prisma.CoursActivedCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           createMany: {
-            args: Prisma.CoursActivedCreateManyArgs<ExtArgs>
+            args: Prisma.CoursStartedCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.CoursActivedCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>[]
+            args: Prisma.CoursStartedCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>[]
           }
           delete: {
-            args: Prisma.CoursActivedDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           update: {
-            args: Prisma.CoursActivedUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           deleteMany: {
-            args: Prisma.CoursActivedDeleteManyArgs<ExtArgs>
+            args: Prisma.CoursStartedDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.CoursActivedUpdateManyArgs<ExtArgs>
+            args: Prisma.CoursStartedUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.CoursActivedUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>[]
+            args: Prisma.CoursStartedUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>[]
           }
           upsert: {
-            args: Prisma.CoursActivedUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CoursActivedPayload>
+            args: Prisma.CoursStartedUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursStartedPayload>
           }
           aggregate: {
-            args: Prisma.CoursActivedAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCoursActived>
+            args: Prisma.CoursStartedAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCoursStarted>
           }
           groupBy: {
-            args: Prisma.CoursActivedGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CoursActivedGroupByOutputType>[]
+            args: Prisma.CoursStartedGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CoursStartedGroupByOutputType>[]
           }
           count: {
-            args: Prisma.CoursActivedCountArgs<ExtArgs>
-            result: $Utils.Optional<CoursActivedCountAggregateOutputType> | number
+            args: Prisma.CoursStartedCountArgs<ExtArgs>
+            result: $Utils.Optional<CoursStartedCountAggregateOutputType> | number
           }
         }
       }
@@ -2234,7 +2234,7 @@ export namespace Prisma {
     tool?: ToolOmit
     badge?: BadgeOmit
     userHasCours?: UserHasCoursOmit
-    coursActived?: CoursActivedOmit
+    coursStarted?: CoursStartedOmit
     userHasBadge?: UserHasBadgeOmit
     coursHasTool?: CoursHasToolOmit
     coursHasLearningObjective?: CoursHasLearningObjectiveOmit
@@ -2410,7 +2410,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
   }
 
   /**
@@ -2511,7 +2511,7 @@ export namespace Prisma {
    * CoursCountOutputType without action
    */
   export type CoursCountOutputTypeCountActivationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
   }
 
   /**
@@ -4139,7 +4139,7 @@ export namespace Prisma {
       createdCours: Prisma.$CoursPayload<ExtArgs>[]
       badges: Prisma.$UserHasBadgePayload<ExtArgs>[]
       enrollments: Prisma.$UserHasCoursPayload<ExtArgs>[]
-      activations: Prisma.$CoursActivedPayload<ExtArgs>[]
+      activations: Prisma.$CoursStartedPayload<ExtArgs>[]
       commentaires: Prisma.$CommentPayload<ExtArgs>[]
       opinions: Prisma.$OpinionPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
@@ -4558,7 +4558,7 @@ export namespace Prisma {
     createdCours<T extends User$createdCoursArgs<ExtArgs> = {}>(args?: Subset<T, User$createdCoursArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     badges<T extends User$badgesArgs<ExtArgs> = {}>(args?: Subset<T, User$badgesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserHasBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends User$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserHasCoursPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    activations<T extends User$activationsArgs<ExtArgs> = {}>(args?: Subset<T, User$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activations<T extends User$activationsArgs<ExtArgs> = {}>(args?: Subset<T, User$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commentaires<T extends User$commentairesArgs<ExtArgs> = {}>(args?: Subset<T, User$commentairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     opinions<T extends User$opinionsArgs<ExtArgs> = {}>(args?: Subset<T, User$opinionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5083,23 +5083,23 @@ export namespace Prisma {
    */
   export type User$activationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
-    where?: CoursActivedWhereInput
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
-    cursor?: CoursActivedWhereUniqueInput
+    include?: CoursStartedInclude<ExtArgs> | null
+    where?: CoursStartedWhereInput
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
+    cursor?: CoursStartedWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: CoursActivedScalarFieldEnum | CoursActivedScalarFieldEnum[]
+    distinct?: CoursStartedScalarFieldEnum | CoursStartedScalarFieldEnum[]
   }
 
   /**
@@ -5607,7 +5607,7 @@ export namespace Prisma {
       learningObjectives: Prisma.$CoursHasLearningObjectivePayload<ExtArgs>[]
       content: Prisma.$CoursContentPayload<ExtArgs>[]
       enrollments: Prisma.$UserHasCoursPayload<ExtArgs>[]
-      activations: Prisma.$CoursActivedPayload<ExtArgs>[]
+      activations: Prisma.$CoursStartedPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       opinions: Prisma.$OpinionPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
@@ -6027,7 +6027,7 @@ export namespace Prisma {
     learningObjectives<T extends Cours$learningObjectivesArgs<ExtArgs> = {}>(args?: Subset<T, Cours$learningObjectivesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursHasLearningObjectivePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     content<T extends Cours$contentArgs<ExtArgs> = {}>(args?: Subset<T, Cours$contentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enrollments<T extends Cours$enrollmentsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserHasCoursPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    activations<T extends Cours$activationsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activations<T extends Cours$activationsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$activationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Cours$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     opinions<T extends Cours$opinionsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$opinionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends Cours$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Cours$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6575,23 +6575,23 @@ export namespace Prisma {
    */
   export type Cours$activationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
-    where?: CoursActivedWhereInput
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
-    cursor?: CoursActivedWhereUniqueInput
+    include?: CoursStartedInclude<ExtArgs> | null
+    where?: CoursStartedWhereInput
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
+    cursor?: CoursStartedWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: CoursActivedScalarFieldEnum | CoursActivedScalarFieldEnum[]
+    distinct?: CoursStartedScalarFieldEnum | CoursStartedScalarFieldEnum[]
   }
 
   /**
@@ -13418,39 +13418,30 @@ export namespace Prisma {
 
 
   /**
-   * Model CoursActived
+   * Model CoursStarted
    */
 
-  export type AggregateCoursActived = {
-    _count: CoursActivedCountAggregateOutputType | null
-    _avg: CoursActivedAvgAggregateOutputType | null
-    _sum: CoursActivedSumAggregateOutputType | null
-    _min: CoursActivedMinAggregateOutputType | null
-    _max: CoursActivedMaxAggregateOutputType | null
+  export type AggregateCoursStarted = {
+    _count: CoursStartedCountAggregateOutputType | null
+    _avg: CoursStartedAvgAggregateOutputType | null
+    _sum: CoursStartedSumAggregateOutputType | null
+    _min: CoursStartedMinAggregateOutputType | null
+    _max: CoursStartedMaxAggregateOutputType | null
   }
 
-  export type CoursActivedAvgAggregateOutputType = {
+  export type CoursStartedAvgAggregateOutputType = {
     id: number | null
     userId: number | null
     coursId: number | null
   }
 
-  export type CoursActivedSumAggregateOutputType = {
+  export type CoursStartedSumAggregateOutputType = {
     id: number | null
     userId: number | null
     coursId: number | null
   }
 
-  export type CoursActivedMinAggregateOutputType = {
-    id: number | null
-    userId: number | null
-    coursId: number | null
-    IsEnd: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type CoursActivedMaxAggregateOutputType = {
+  export type CoursStartedMinAggregateOutputType = {
     id: number | null
     userId: number | null
     coursId: number | null
@@ -13459,7 +13450,16 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type CoursActivedCountAggregateOutputType = {
+  export type CoursStartedMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    coursId: number | null
+    IsEnd: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CoursStartedCountAggregateOutputType = {
     id: number
     userId: number
     coursId: number
@@ -13470,28 +13470,19 @@ export namespace Prisma {
   }
 
 
-  export type CoursActivedAvgAggregateInputType = {
+  export type CoursStartedAvgAggregateInputType = {
     id?: true
     userId?: true
     coursId?: true
   }
 
-  export type CoursActivedSumAggregateInputType = {
+  export type CoursStartedSumAggregateInputType = {
     id?: true
     userId?: true
     coursId?: true
   }
 
-  export type CoursActivedMinAggregateInputType = {
-    id?: true
-    userId?: true
-    coursId?: true
-    IsEnd?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type CoursActivedMaxAggregateInputType = {
+  export type CoursStartedMinAggregateInputType = {
     id?: true
     userId?: true
     coursId?: true
@@ -13500,7 +13491,16 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type CoursActivedCountAggregateInputType = {
+  export type CoursStartedMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    coursId?: true
+    IsEnd?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CoursStartedCountAggregateInputType = {
     id?: true
     userId?: true
     coursId?: true
@@ -13510,121 +13510,121 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type CoursActivedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which CoursActived to aggregate.
+     * Filter which CoursStarted to aggregate.
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CoursActiveds to fetch.
+     * Determine the order of CoursStarteds to fetch.
      */
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: CoursActivedWhereUniqueInput
+    cursor?: CoursStartedWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CoursActiveds from the position of the cursor.
+     * Take `±n` CoursStarteds from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CoursActiveds.
+     * Skip the first `n` CoursStarteds.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned CoursActiveds
+     * Count returned CoursStarteds
     **/
-    _count?: true | CoursActivedCountAggregateInputType
+    _count?: true | CoursStartedCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: CoursActivedAvgAggregateInputType
+    _avg?: CoursStartedAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: CoursActivedSumAggregateInputType
+    _sum?: CoursStartedSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: CoursActivedMinAggregateInputType
+    _min?: CoursStartedMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: CoursActivedMaxAggregateInputType
+    _max?: CoursStartedMaxAggregateInputType
   }
 
-  export type GetCoursActivedAggregateType<T extends CoursActivedAggregateArgs> = {
-        [P in keyof T & keyof AggregateCoursActived]: P extends '_count' | 'count'
+  export type GetCoursStartedAggregateType<T extends CoursStartedAggregateArgs> = {
+        [P in keyof T & keyof AggregateCoursStarted]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateCoursActived[P]>
-      : GetScalarType<T[P], AggregateCoursActived[P]>
+        : GetScalarType<T[P], AggregateCoursStarted[P]>
+      : GetScalarType<T[P], AggregateCoursStarted[P]>
   }
 
 
 
 
-  export type CoursActivedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CoursActivedWhereInput
-    orderBy?: CoursActivedOrderByWithAggregationInput | CoursActivedOrderByWithAggregationInput[]
-    by: CoursActivedScalarFieldEnum[] | CoursActivedScalarFieldEnum
-    having?: CoursActivedScalarWhereWithAggregatesInput
+  export type CoursStartedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CoursStartedWhereInput
+    orderBy?: CoursStartedOrderByWithAggregationInput | CoursStartedOrderByWithAggregationInput[]
+    by: CoursStartedScalarFieldEnum[] | CoursStartedScalarFieldEnum
+    having?: CoursStartedScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: CoursActivedCountAggregateInputType | true
-    _avg?: CoursActivedAvgAggregateInputType
-    _sum?: CoursActivedSumAggregateInputType
-    _min?: CoursActivedMinAggregateInputType
-    _max?: CoursActivedMaxAggregateInputType
+    _count?: CoursStartedCountAggregateInputType | true
+    _avg?: CoursStartedAvgAggregateInputType
+    _sum?: CoursStartedSumAggregateInputType
+    _min?: CoursStartedMinAggregateInputType
+    _max?: CoursStartedMaxAggregateInputType
   }
 
-  export type CoursActivedGroupByOutputType = {
+  export type CoursStartedGroupByOutputType = {
     id: number
     userId: number
     coursId: number
     IsEnd: boolean
     createdAt: Date
     updatedAt: Date
-    _count: CoursActivedCountAggregateOutputType | null
-    _avg: CoursActivedAvgAggregateOutputType | null
-    _sum: CoursActivedSumAggregateOutputType | null
-    _min: CoursActivedMinAggregateOutputType | null
-    _max: CoursActivedMaxAggregateOutputType | null
+    _count: CoursStartedCountAggregateOutputType | null
+    _avg: CoursStartedAvgAggregateOutputType | null
+    _sum: CoursStartedSumAggregateOutputType | null
+    _min: CoursStartedMinAggregateOutputType | null
+    _max: CoursStartedMaxAggregateOutputType | null
   }
 
-  type GetCoursActivedGroupByPayload<T extends CoursActivedGroupByArgs> = Prisma.PrismaPromise<
+  type GetCoursStartedGroupByPayload<T extends CoursStartedGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CoursActivedGroupByOutputType, T['by']> &
+      PickEnumerable<CoursStartedGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CoursActivedGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof CoursStartedGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], CoursActivedGroupByOutputType[P]>
-            : GetScalarType<T[P], CoursActivedGroupByOutputType[P]>
+              : GetScalarType<T[P], CoursStartedGroupByOutputType[P]>
+            : GetScalarType<T[P], CoursStartedGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type CoursActivedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CoursStartedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     coursId?: boolean
@@ -13633,9 +13633,9 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["coursActived"]>
+  }, ExtArgs["result"]["coursStarted"]>
 
-  export type CoursActivedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CoursStartedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     coursId?: boolean
@@ -13644,9 +13644,9 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["coursActived"]>
+  }, ExtArgs["result"]["coursStarted"]>
 
-  export type CoursActivedSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CoursStartedSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     coursId?: boolean
@@ -13655,9 +13655,9 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["coursActived"]>
+  }, ExtArgs["result"]["coursStarted"]>
 
-  export type CoursActivedSelectScalar = {
+  export type CoursStartedSelectScalar = {
     id?: boolean
     userId?: boolean
     coursId?: boolean
@@ -13666,22 +13666,22 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CoursActivedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coursId" | "IsEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["coursActived"]>
-  export type CoursActivedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "coursId" | "IsEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["coursStarted"]>
+  export type CoursStartedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
   }
-  export type CoursActivedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
   }
-  export type CoursActivedIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     cours?: boolean | CoursDefaultArgs<ExtArgs>
   }
 
-  export type $CoursActivedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "CoursActived"
+  export type $CoursStartedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CoursStarted"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       cours: Prisma.$CoursPayload<ExtArgs>
@@ -13693,136 +13693,136 @@ export namespace Prisma {
       IsEnd: boolean
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["coursActived"]>
+    }, ExtArgs["result"]["coursStarted"]>
     composites: {}
   }
 
-  type CoursActivedGetPayload<S extends boolean | null | undefined | CoursActivedDefaultArgs> = $Result.GetResult<Prisma.$CoursActivedPayload, S>
+  type CoursStartedGetPayload<S extends boolean | null | undefined | CoursStartedDefaultArgs> = $Result.GetResult<Prisma.$CoursStartedPayload, S>
 
-  type CoursActivedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CoursActivedFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CoursActivedCountAggregateInputType | true
+  type CoursStartedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CoursStartedFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CoursStartedCountAggregateInputType | true
     }
 
-  export interface CoursActivedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CoursActived'], meta: { name: 'CoursActived' } }
+  export interface CoursStartedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CoursStarted'], meta: { name: 'CoursStarted' } }
     /**
-     * Find zero or one CoursActived that matches the filter.
-     * @param {CoursActivedFindUniqueArgs} args - Arguments to find a CoursActived
+     * Find zero or one CoursStarted that matches the filter.
+     * @param {CoursStartedFindUniqueArgs} args - Arguments to find a CoursStarted
      * @example
-     * // Get one CoursActived
-     * const coursActived = await prisma.coursActived.findUnique({
+     * // Get one CoursStarted
+     * const coursStarted = await prisma.coursStarted.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends CoursActivedFindUniqueArgs>(args: SelectSubset<T, CoursActivedFindUniqueArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CoursStartedFindUniqueArgs>(args: SelectSubset<T, CoursStartedFindUniqueArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one CoursActived that matches the filter or throw an error with `error.code='P2025'`
+     * Find one CoursStarted that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {CoursActivedFindUniqueOrThrowArgs} args - Arguments to find a CoursActived
+     * @param {CoursStartedFindUniqueOrThrowArgs} args - Arguments to find a CoursStarted
      * @example
-     * // Get one CoursActived
-     * const coursActived = await prisma.coursActived.findUniqueOrThrow({
+     * // Get one CoursStarted
+     * const coursStarted = await prisma.coursStarted.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CoursActivedFindUniqueOrThrowArgs>(args: SelectSubset<T, CoursActivedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CoursStartedFindUniqueOrThrowArgs>(args: SelectSubset<T, CoursStartedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first CoursActived that matches the filter.
+     * Find the first CoursStarted that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedFindFirstArgs} args - Arguments to find a CoursActived
+     * @param {CoursStartedFindFirstArgs} args - Arguments to find a CoursStarted
      * @example
-     * // Get one CoursActived
-     * const coursActived = await prisma.coursActived.findFirst({
+     * // Get one CoursStarted
+     * const coursStarted = await prisma.coursStarted.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends CoursActivedFindFirstArgs>(args?: SelectSubset<T, CoursActivedFindFirstArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CoursStartedFindFirstArgs>(args?: SelectSubset<T, CoursStartedFindFirstArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first CoursActived that matches the filter or
+     * Find the first CoursStarted that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedFindFirstOrThrowArgs} args - Arguments to find a CoursActived
+     * @param {CoursStartedFindFirstOrThrowArgs} args - Arguments to find a CoursStarted
      * @example
-     * // Get one CoursActived
-     * const coursActived = await prisma.coursActived.findFirstOrThrow({
+     * // Get one CoursStarted
+     * const coursStarted = await prisma.coursStarted.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends CoursActivedFindFirstOrThrowArgs>(args?: SelectSubset<T, CoursActivedFindFirstOrThrowArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CoursStartedFindFirstOrThrowArgs>(args?: SelectSubset<T, CoursStartedFindFirstOrThrowArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more CoursActiveds that matches the filter.
+     * Find zero or more CoursStarteds that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CoursStartedFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all CoursActiveds
-     * const coursActiveds = await prisma.coursActived.findMany()
+     * // Get all CoursStarteds
+     * const coursStarteds = await prisma.coursStarted.findMany()
      * 
-     * // Get first 10 CoursActiveds
-     * const coursActiveds = await prisma.coursActived.findMany({ take: 10 })
+     * // Get first 10 CoursStarteds
+     * const coursStarteds = await prisma.coursStarted.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const coursActivedWithIdOnly = await prisma.coursActived.findMany({ select: { id: true } })
+     * const coursStartedWithIdOnly = await prisma.coursStarted.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CoursActivedFindManyArgs>(args?: SelectSubset<T, CoursActivedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CoursStartedFindManyArgs>(args?: SelectSubset<T, CoursStartedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a CoursActived.
-     * @param {CoursActivedCreateArgs} args - Arguments to create a CoursActived.
+     * Create a CoursStarted.
+     * @param {CoursStartedCreateArgs} args - Arguments to create a CoursStarted.
      * @example
-     * // Create one CoursActived
-     * const CoursActived = await prisma.coursActived.create({
+     * // Create one CoursStarted
+     * const CoursStarted = await prisma.coursStarted.create({
      *   data: {
-     *     // ... data to create a CoursActived
+     *     // ... data to create a CoursStarted
      *   }
      * })
      * 
      */
-    create<T extends CoursActivedCreateArgs>(args: SelectSubset<T, CoursActivedCreateArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CoursStartedCreateArgs>(args: SelectSubset<T, CoursStartedCreateArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many CoursActiveds.
-     * @param {CoursActivedCreateManyArgs} args - Arguments to create many CoursActiveds.
+     * Create many CoursStarteds.
+     * @param {CoursStartedCreateManyArgs} args - Arguments to create many CoursStarteds.
      * @example
-     * // Create many CoursActiveds
-     * const coursActived = await prisma.coursActived.createMany({
+     * // Create many CoursStarteds
+     * const coursStarted = await prisma.coursStarted.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends CoursActivedCreateManyArgs>(args?: SelectSubset<T, CoursActivedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CoursStartedCreateManyArgs>(args?: SelectSubset<T, CoursStartedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many CoursActiveds and returns the data saved in the database.
-     * @param {CoursActivedCreateManyAndReturnArgs} args - Arguments to create many CoursActiveds.
+     * Create many CoursStarteds and returns the data saved in the database.
+     * @param {CoursStartedCreateManyAndReturnArgs} args - Arguments to create many CoursStarteds.
      * @example
-     * // Create many CoursActiveds
-     * const coursActived = await prisma.coursActived.createManyAndReturn({
+     * // Create many CoursStarteds
+     * const coursStarted = await prisma.coursStarted.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many CoursActiveds and only return the `id`
-     * const coursActivedWithIdOnly = await prisma.coursActived.createManyAndReturn({
+     * // Create many CoursStarteds and only return the `id`
+     * const coursStartedWithIdOnly = await prisma.coursStarted.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -13832,28 +13832,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CoursActivedCreateManyAndReturnArgs>(args?: SelectSubset<T, CoursActivedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends CoursStartedCreateManyAndReturnArgs>(args?: SelectSubset<T, CoursStartedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a CoursActived.
-     * @param {CoursActivedDeleteArgs} args - Arguments to delete one CoursActived.
+     * Delete a CoursStarted.
+     * @param {CoursStartedDeleteArgs} args - Arguments to delete one CoursStarted.
      * @example
-     * // Delete one CoursActived
-     * const CoursActived = await prisma.coursActived.delete({
+     * // Delete one CoursStarted
+     * const CoursStarted = await prisma.coursStarted.delete({
      *   where: {
-     *     // ... filter to delete one CoursActived
+     *     // ... filter to delete one CoursStarted
      *   }
      * })
      * 
      */
-    delete<T extends CoursActivedDeleteArgs>(args: SelectSubset<T, CoursActivedDeleteArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CoursStartedDeleteArgs>(args: SelectSubset<T, CoursStartedDeleteArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one CoursActived.
-     * @param {CoursActivedUpdateArgs} args - Arguments to update one CoursActived.
+     * Update one CoursStarted.
+     * @param {CoursStartedUpdateArgs} args - Arguments to update one CoursStarted.
      * @example
-     * // Update one CoursActived
-     * const coursActived = await prisma.coursActived.update({
+     * // Update one CoursStarted
+     * const coursStarted = await prisma.coursStarted.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13863,30 +13863,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CoursActivedUpdateArgs>(args: SelectSubset<T, CoursActivedUpdateArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CoursStartedUpdateArgs>(args: SelectSubset<T, CoursStartedUpdateArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more CoursActiveds.
-     * @param {CoursActivedDeleteManyArgs} args - Arguments to filter CoursActiveds to delete.
+     * Delete zero or more CoursStarteds.
+     * @param {CoursStartedDeleteManyArgs} args - Arguments to filter CoursStarteds to delete.
      * @example
-     * // Delete a few CoursActiveds
-     * const { count } = await prisma.coursActived.deleteMany({
+     * // Delete a few CoursStarteds
+     * const { count } = await prisma.coursStarted.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends CoursActivedDeleteManyArgs>(args?: SelectSubset<T, CoursActivedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CoursStartedDeleteManyArgs>(args?: SelectSubset<T, CoursStartedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more CoursActiveds.
+     * Update zero or more CoursStarteds.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CoursStartedUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many CoursActiveds
-     * const coursActived = await prisma.coursActived.updateMany({
+     * // Update many CoursStarteds
+     * const coursStarted = await prisma.coursStarted.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13896,14 +13896,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends CoursActivedUpdateManyArgs>(args: SelectSubset<T, CoursActivedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CoursStartedUpdateManyArgs>(args: SelectSubset<T, CoursStartedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more CoursActiveds and returns the data updated in the database.
-     * @param {CoursActivedUpdateManyAndReturnArgs} args - Arguments to update many CoursActiveds.
+     * Update zero or more CoursStarteds and returns the data updated in the database.
+     * @param {CoursStartedUpdateManyAndReturnArgs} args - Arguments to update many CoursStarteds.
      * @example
-     * // Update many CoursActiveds
-     * const coursActived = await prisma.coursActived.updateManyAndReturn({
+     * // Update many CoursStarteds
+     * const coursStarted = await prisma.coursStarted.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -13912,8 +13912,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more CoursActiveds and only return the `id`
-     * const coursActivedWithIdOnly = await prisma.coursActived.updateManyAndReturn({
+     * // Update zero or more CoursStarteds and only return the `id`
+     * const coursStartedWithIdOnly = await prisma.coursStarted.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -13926,56 +13926,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CoursActivedUpdateManyAndReturnArgs>(args: SelectSubset<T, CoursActivedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends CoursStartedUpdateManyAndReturnArgs>(args: SelectSubset<T, CoursStartedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one CoursActived.
-     * @param {CoursActivedUpsertArgs} args - Arguments to update or create a CoursActived.
+     * Create or update one CoursStarted.
+     * @param {CoursStartedUpsertArgs} args - Arguments to update or create a CoursStarted.
      * @example
-     * // Update or create a CoursActived
-     * const coursActived = await prisma.coursActived.upsert({
+     * // Update or create a CoursStarted
+     * const coursStarted = await prisma.coursStarted.upsert({
      *   create: {
-     *     // ... data to create a CoursActived
+     *     // ... data to create a CoursStarted
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the CoursActived we want to update
+     *     // ... the filter for the CoursStarted we want to update
      *   }
      * })
      */
-    upsert<T extends CoursActivedUpsertArgs>(args: SelectSubset<T, CoursActivedUpsertArgs<ExtArgs>>): Prisma__CoursActivedClient<$Result.GetResult<Prisma.$CoursActivedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends CoursStartedUpsertArgs>(args: SelectSubset<T, CoursStartedUpsertArgs<ExtArgs>>): Prisma__CoursStartedClient<$Result.GetResult<Prisma.$CoursStartedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of CoursActiveds.
+     * Count the number of CoursStarteds.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedCountArgs} args - Arguments to filter CoursActiveds to count.
+     * @param {CoursStartedCountArgs} args - Arguments to filter CoursStarteds to count.
      * @example
-     * // Count the number of CoursActiveds
-     * const count = await prisma.coursActived.count({
+     * // Count the number of CoursStarteds
+     * const count = await prisma.coursStarted.count({
      *   where: {
-     *     // ... the filter for the CoursActiveds we want to count
+     *     // ... the filter for the CoursStarteds we want to count
      *   }
      * })
     **/
-    count<T extends CoursActivedCountArgs>(
-      args?: Subset<T, CoursActivedCountArgs>,
+    count<T extends CoursStartedCountArgs>(
+      args?: Subset<T, CoursStartedCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], CoursActivedCountAggregateOutputType>
+          : GetScalarType<T['select'], CoursStartedCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a CoursActived.
+     * Allows you to perform aggregations operations on a CoursStarted.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {CoursStartedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -13995,13 +13995,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CoursActivedAggregateArgs>(args: Subset<T, CoursActivedAggregateArgs>): Prisma.PrismaPromise<GetCoursActivedAggregateType<T>>
+    aggregate<T extends CoursStartedAggregateArgs>(args: Subset<T, CoursStartedAggregateArgs>): Prisma.PrismaPromise<GetCoursStartedAggregateType<T>>
 
     /**
-     * Group by CoursActived.
+     * Group by CoursStarted.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CoursActivedGroupByArgs} args - Group by arguments.
+     * @param {CoursStartedGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -14016,14 +14016,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends CoursActivedGroupByArgs,
+      T extends CoursStartedGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CoursActivedGroupByArgs['orderBy'] }
-        : { orderBy?: CoursActivedGroupByArgs['orderBy'] },
+        ? { orderBy: CoursStartedGroupByArgs['orderBy'] }
+        : { orderBy?: CoursStartedGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -14072,20 +14072,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CoursActivedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCoursActivedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CoursStartedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCoursStartedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the CoursActived model
+   * Fields of the CoursStarted model
    */
-  readonly fields: CoursActivedFieldRefs;
+  readonly fields: CoursStartedFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for CoursActived.
+   * The delegate class that acts as a "Promise-like" for CoursStarted.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CoursActivedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CoursStartedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     cours<T extends CoursDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CoursDefaultArgs<ExtArgs>>): Prisma__CoursClient<$Result.GetResult<Prisma.$CoursPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -14115,431 +14115,431 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the CoursActived model
+   * Fields of the CoursStarted model
    */
-  interface CoursActivedFieldRefs {
-    readonly id: FieldRef<"CoursActived", 'Int'>
-    readonly userId: FieldRef<"CoursActived", 'Int'>
-    readonly coursId: FieldRef<"CoursActived", 'Int'>
-    readonly IsEnd: FieldRef<"CoursActived", 'Boolean'>
-    readonly createdAt: FieldRef<"CoursActived", 'DateTime'>
-    readonly updatedAt: FieldRef<"CoursActived", 'DateTime'>
+  interface CoursStartedFieldRefs {
+    readonly id: FieldRef<"CoursStarted", 'Int'>
+    readonly userId: FieldRef<"CoursStarted", 'Int'>
+    readonly coursId: FieldRef<"CoursStarted", 'Int'>
+    readonly IsEnd: FieldRef<"CoursStarted", 'Boolean'>
+    readonly createdAt: FieldRef<"CoursStarted", 'DateTime'>
+    readonly updatedAt: FieldRef<"CoursStarted", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * CoursActived findUnique
+   * CoursStarted findUnique
    */
-  export type CoursActivedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter, which CoursActived to fetch.
+     * Filter, which CoursStarted to fetch.
      */
-    where: CoursActivedWhereUniqueInput
+    where: CoursStartedWhereUniqueInput
   }
 
   /**
-   * CoursActived findUniqueOrThrow
+   * CoursStarted findUniqueOrThrow
    */
-  export type CoursActivedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter, which CoursActived to fetch.
+     * Filter, which CoursStarted to fetch.
      */
-    where: CoursActivedWhereUniqueInput
+    where: CoursStartedWhereUniqueInput
   }
 
   /**
-   * CoursActived findFirst
+   * CoursStarted findFirst
    */
-  export type CoursActivedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter, which CoursActived to fetch.
+     * Filter, which CoursStarted to fetch.
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CoursActiveds to fetch.
+     * Determine the order of CoursStarteds to fetch.
      */
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for CoursActiveds.
+     * Sets the position for searching for CoursStarteds.
      */
-    cursor?: CoursActivedWhereUniqueInput
+    cursor?: CoursStartedWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CoursActiveds from the position of the cursor.
+     * Take `±n` CoursStarteds from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CoursActiveds.
+     * Skip the first `n` CoursStarteds.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CoursActiveds.
+     * Filter by unique combinations of CoursStarteds.
      */
-    distinct?: CoursActivedScalarFieldEnum | CoursActivedScalarFieldEnum[]
+    distinct?: CoursStartedScalarFieldEnum | CoursStartedScalarFieldEnum[]
   }
 
   /**
-   * CoursActived findFirstOrThrow
+   * CoursStarted findFirstOrThrow
    */
-  export type CoursActivedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter, which CoursActived to fetch.
+     * Filter, which CoursStarted to fetch.
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CoursActiveds to fetch.
+     * Determine the order of CoursStarteds to fetch.
      */
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for CoursActiveds.
+     * Sets the position for searching for CoursStarteds.
      */
-    cursor?: CoursActivedWhereUniqueInput
+    cursor?: CoursStartedWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CoursActiveds from the position of the cursor.
+     * Take `±n` CoursStarteds from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CoursActiveds.
+     * Skip the first `n` CoursStarteds.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CoursActiveds.
+     * Filter by unique combinations of CoursStarteds.
      */
-    distinct?: CoursActivedScalarFieldEnum | CoursActivedScalarFieldEnum[]
+    distinct?: CoursStartedScalarFieldEnum | CoursStartedScalarFieldEnum[]
   }
 
   /**
-   * CoursActived findMany
+   * CoursStarted findMany
    */
-  export type CoursActivedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter, which CoursActiveds to fetch.
+     * Filter, which CoursStarteds to fetch.
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CoursActiveds to fetch.
+     * Determine the order of CoursStarteds to fetch.
      */
-    orderBy?: CoursActivedOrderByWithRelationInput | CoursActivedOrderByWithRelationInput[]
+    orderBy?: CoursStartedOrderByWithRelationInput | CoursStartedOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing CoursActiveds.
+     * Sets the position for listing CoursStarteds.
      */
-    cursor?: CoursActivedWhereUniqueInput
+    cursor?: CoursStartedWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CoursActiveds from the position of the cursor.
+     * Take `±n` CoursStarteds from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CoursActiveds.
+     * Skip the first `n` CoursStarteds.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CoursActiveds.
+     * Filter by unique combinations of CoursStarteds.
      */
-    distinct?: CoursActivedScalarFieldEnum | CoursActivedScalarFieldEnum[]
+    distinct?: CoursStartedScalarFieldEnum | CoursStartedScalarFieldEnum[]
   }
 
   /**
-   * CoursActived create
+   * CoursStarted create
    */
-  export type CoursActivedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * The data needed to create a CoursActived.
+     * The data needed to create a CoursStarted.
      */
-    data: XOR<CoursActivedCreateInput, CoursActivedUncheckedCreateInput>
+    data: XOR<CoursStartedCreateInput, CoursStartedUncheckedCreateInput>
   }
 
   /**
-   * CoursActived createMany
+   * CoursStarted createMany
    */
-  export type CoursActivedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many CoursActiveds.
+     * The data used to create many CoursStarteds.
      */
-    data: CoursActivedCreateManyInput | CoursActivedCreateManyInput[]
+    data: CoursStartedCreateManyInput | CoursStartedCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * CoursActived createManyAndReturn
+   * CoursStarted createManyAndReturn
    */
-  export type CoursActivedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CoursStartedSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
-     * The data used to create many CoursActiveds.
+     * The data used to create many CoursStarteds.
      */
-    data: CoursActivedCreateManyInput | CoursActivedCreateManyInput[]
+    data: CoursStartedCreateManyInput | CoursStartedCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: CoursStartedIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * CoursActived update
+   * CoursStarted update
    */
-  export type CoursActivedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * The data needed to update a CoursActived.
+     * The data needed to update a CoursStarted.
      */
-    data: XOR<CoursActivedUpdateInput, CoursActivedUncheckedUpdateInput>
+    data: XOR<CoursStartedUpdateInput, CoursStartedUncheckedUpdateInput>
     /**
-     * Choose, which CoursActived to update.
+     * Choose, which CoursStarted to update.
      */
-    where: CoursActivedWhereUniqueInput
+    where: CoursStartedWhereUniqueInput
   }
 
   /**
-   * CoursActived updateMany
+   * CoursStarted updateMany
    */
-  export type CoursActivedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update CoursActiveds.
+     * The data used to update CoursStarteds.
      */
-    data: XOR<CoursActivedUpdateManyMutationInput, CoursActivedUncheckedUpdateManyInput>
+    data: XOR<CoursStartedUpdateManyMutationInput, CoursStartedUncheckedUpdateManyInput>
     /**
-     * Filter which CoursActiveds to update
+     * Filter which CoursStarteds to update
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
-     * Limit how many CoursActiveds to update.
+     * Limit how many CoursStarteds to update.
      */
     limit?: number
   }
 
   /**
-   * CoursActived updateManyAndReturn
+   * CoursStarted updateManyAndReturn
    */
-  export type CoursActivedUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: CoursStartedSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
-     * The data used to update CoursActiveds.
+     * The data used to update CoursStarteds.
      */
-    data: XOR<CoursActivedUpdateManyMutationInput, CoursActivedUncheckedUpdateManyInput>
+    data: XOR<CoursStartedUpdateManyMutationInput, CoursStartedUncheckedUpdateManyInput>
     /**
-     * Filter which CoursActiveds to update
+     * Filter which CoursStarteds to update
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
-     * Limit how many CoursActiveds to update.
+     * Limit how many CoursStarteds to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: CoursStartedIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * CoursActived upsert
+   * CoursStarted upsert
    */
-  export type CoursActivedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * The filter to search for the CoursActived to update in case it exists.
+     * The filter to search for the CoursStarted to update in case it exists.
      */
-    where: CoursActivedWhereUniqueInput
+    where: CoursStartedWhereUniqueInput
     /**
-     * In case the CoursActived found by the `where` argument doesn't exist, create a new CoursActived with this data.
+     * In case the CoursStarted found by the `where` argument doesn't exist, create a new CoursStarted with this data.
      */
-    create: XOR<CoursActivedCreateInput, CoursActivedUncheckedCreateInput>
+    create: XOR<CoursStartedCreateInput, CoursStartedUncheckedCreateInput>
     /**
-     * In case the CoursActived was found with the provided `where` argument, update it with this data.
+     * In case the CoursStarted was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CoursActivedUpdateInput, CoursActivedUncheckedUpdateInput>
+    update: XOR<CoursStartedUpdateInput, CoursStartedUncheckedUpdateInput>
   }
 
   /**
-   * CoursActived delete
+   * CoursStarted delete
    */
-  export type CoursActivedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
     /**
-     * Filter which CoursActived to delete.
+     * Filter which CoursStarted to delete.
      */
-    where: CoursActivedWhereUniqueInput
+    where: CoursStartedWhereUniqueInput
   }
 
   /**
-   * CoursActived deleteMany
+   * CoursStarted deleteMany
    */
-  export type CoursActivedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which CoursActiveds to delete
+     * Filter which CoursStarteds to delete
      */
-    where?: CoursActivedWhereInput
+    where?: CoursStartedWhereInput
     /**
-     * Limit how many CoursActiveds to delete.
+     * Limit how many CoursStarteds to delete.
      */
     limit?: number
   }
 
   /**
-   * CoursActived without action
+   * CoursStarted without action
    */
-  export type CoursActivedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CoursStartedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CoursActived
+     * Select specific fields to fetch from the CoursStarted
      */
-    select?: CoursActivedSelect<ExtArgs> | null
+    select?: CoursStartedSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CoursActived
+     * Omit specific fields from the CoursStarted
      */
-    omit?: CoursActivedOmit<ExtArgs> | null
+    omit?: CoursStartedOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CoursActivedInclude<ExtArgs> | null
+    include?: CoursStartedInclude<ExtArgs> | null
   }
 
 
@@ -22545,7 +22545,7 @@ export namespace Prisma {
   export type UserHasCoursScalarFieldEnum = (typeof UserHasCoursScalarFieldEnum)[keyof typeof UserHasCoursScalarFieldEnum]
 
 
-  export const CoursActivedScalarFieldEnum: {
+  export const CoursStartedScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
     coursId: 'coursId',
@@ -22554,7 +22554,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type CoursActivedScalarFieldEnum = (typeof CoursActivedScalarFieldEnum)[keyof typeof CoursActivedScalarFieldEnum]
+  export type CoursStartedScalarFieldEnum = (typeof CoursStartedScalarFieldEnum)[keyof typeof CoursStartedScalarFieldEnum]
 
 
   export const UserHasBadgeScalarFieldEnum: {
@@ -22814,7 +22814,7 @@ export namespace Prisma {
     createdCours?: CoursListRelationFilter
     badges?: UserHasBadgeListRelationFilter
     enrollments?: UserHasCoursListRelationFilter
-    activations?: CoursActivedListRelationFilter
+    activations?: CoursStartedListRelationFilter
     commentaires?: CommentListRelationFilter
     opinions?: OpinionListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -22840,7 +22840,7 @@ export namespace Prisma {
     createdCours?: CoursOrderByRelationAggregateInput
     badges?: UserHasBadgeOrderByRelationAggregateInput
     enrollments?: UserHasCoursOrderByRelationAggregateInput
-    activations?: CoursActivedOrderByRelationAggregateInput
+    activations?: CoursStartedOrderByRelationAggregateInput
     commentaires?: CommentOrderByRelationAggregateInput
     opinions?: OpinionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
@@ -22869,7 +22869,7 @@ export namespace Prisma {
     createdCours?: CoursListRelationFilter
     badges?: UserHasBadgeListRelationFilter
     enrollments?: UserHasCoursListRelationFilter
-    activations?: CoursActivedListRelationFilter
+    activations?: CoursStartedListRelationFilter
     commentaires?: CommentListRelationFilter
     opinions?: OpinionListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -22942,7 +22942,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveListRelationFilter
     content?: CoursContentListRelationFilter
     enrollments?: UserHasCoursListRelationFilter
-    activations?: CoursActivedListRelationFilter
+    activations?: CoursStartedListRelationFilter
     comments?: CommentListRelationFilter
     opinions?: OpinionListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -22969,7 +22969,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveOrderByRelationAggregateInput
     content?: CoursContentOrderByRelationAggregateInput
     enrollments?: UserHasCoursOrderByRelationAggregateInput
-    activations?: CoursActivedOrderByRelationAggregateInput
+    activations?: CoursStartedOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     opinions?: OpinionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
@@ -22999,7 +22999,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveListRelationFilter
     content?: CoursContentListRelationFilter
     enrollments?: UserHasCoursListRelationFilter
-    activations?: CoursActivedListRelationFilter
+    activations?: CoursStartedListRelationFilter
     comments?: CommentListRelationFilter
     opinions?: OpinionListRelationFilter
     notifications?: NotificationListRelationFilter
@@ -23423,21 +23423,21 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"UserHasCours"> | Date | string
   }
 
-  export type CoursActivedWhereInput = {
-    AND?: CoursActivedWhereInput | CoursActivedWhereInput[]
-    OR?: CoursActivedWhereInput[]
-    NOT?: CoursActivedWhereInput | CoursActivedWhereInput[]
-    id?: IntFilter<"CoursActived"> | number
-    userId?: IntFilter<"CoursActived"> | number
-    coursId?: IntFilter<"CoursActived"> | number
-    IsEnd?: BoolFilter<"CoursActived"> | boolean
-    createdAt?: DateTimeFilter<"CoursActived"> | Date | string
-    updatedAt?: DateTimeFilter<"CoursActived"> | Date | string
+  export type CoursStartedWhereInput = {
+    AND?: CoursStartedWhereInput | CoursStartedWhereInput[]
+    OR?: CoursStartedWhereInput[]
+    NOT?: CoursStartedWhereInput | CoursStartedWhereInput[]
+    id?: IntFilter<"CoursStarted"> | number
+    userId?: IntFilter<"CoursStarted"> | number
+    coursId?: IntFilter<"CoursStarted"> | number
+    IsEnd?: BoolFilter<"CoursStarted"> | boolean
+    createdAt?: DateTimeFilter<"CoursStarted"> | Date | string
+    updatedAt?: DateTimeFilter<"CoursStarted"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
   }
 
-  export type CoursActivedOrderByWithRelationInput = {
+  export type CoursStartedOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
@@ -23448,45 +23448,45 @@ export namespace Prisma {
     cours?: CoursOrderByWithRelationInput
   }
 
-  export type CoursActivedWhereUniqueInput = Prisma.AtLeast<{
+  export type CoursStartedWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    userId_coursId?: CoursActivedUserIdCoursIdCompoundUniqueInput
-    AND?: CoursActivedWhereInput | CoursActivedWhereInput[]
-    OR?: CoursActivedWhereInput[]
-    NOT?: CoursActivedWhereInput | CoursActivedWhereInput[]
-    userId?: IntFilter<"CoursActived"> | number
-    coursId?: IntFilter<"CoursActived"> | number
-    IsEnd?: BoolFilter<"CoursActived"> | boolean
-    createdAt?: DateTimeFilter<"CoursActived"> | Date | string
-    updatedAt?: DateTimeFilter<"CoursActived"> | Date | string
+    userId_coursId?: CoursStartedUserIdCoursIdCompoundUniqueInput
+    AND?: CoursStartedWhereInput | CoursStartedWhereInput[]
+    OR?: CoursStartedWhereInput[]
+    NOT?: CoursStartedWhereInput | CoursStartedWhereInput[]
+    userId?: IntFilter<"CoursStarted"> | number
+    coursId?: IntFilter<"CoursStarted"> | number
+    IsEnd?: BoolFilter<"CoursStarted"> | boolean
+    createdAt?: DateTimeFilter<"CoursStarted"> | Date | string
+    updatedAt?: DateTimeFilter<"CoursStarted"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
   }, "id" | "userId_coursId">
 
-  export type CoursActivedOrderByWithAggregationInput = {
+  export type CoursStartedOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
     IsEnd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: CoursActivedCountOrderByAggregateInput
-    _avg?: CoursActivedAvgOrderByAggregateInput
-    _max?: CoursActivedMaxOrderByAggregateInput
-    _min?: CoursActivedMinOrderByAggregateInput
-    _sum?: CoursActivedSumOrderByAggregateInput
+    _count?: CoursStartedCountOrderByAggregateInput
+    _avg?: CoursStartedAvgOrderByAggregateInput
+    _max?: CoursStartedMaxOrderByAggregateInput
+    _min?: CoursStartedMinOrderByAggregateInput
+    _sum?: CoursStartedSumOrderByAggregateInput
   }
 
-  export type CoursActivedScalarWhereWithAggregatesInput = {
-    AND?: CoursActivedScalarWhereWithAggregatesInput | CoursActivedScalarWhereWithAggregatesInput[]
-    OR?: CoursActivedScalarWhereWithAggregatesInput[]
-    NOT?: CoursActivedScalarWhereWithAggregatesInput | CoursActivedScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"CoursActived"> | number
-    userId?: IntWithAggregatesFilter<"CoursActived"> | number
-    coursId?: IntWithAggregatesFilter<"CoursActived"> | number
-    IsEnd?: BoolWithAggregatesFilter<"CoursActived"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"CoursActived"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"CoursActived"> | Date | string
+  export type CoursStartedScalarWhereWithAggregatesInput = {
+    AND?: CoursStartedScalarWhereWithAggregatesInput | CoursStartedScalarWhereWithAggregatesInput[]
+    OR?: CoursStartedScalarWhereWithAggregatesInput[]
+    NOT?: CoursStartedScalarWhereWithAggregatesInput | CoursStartedScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"CoursStarted"> | number
+    userId?: IntWithAggregatesFilter<"CoursStarted"> | number
+    coursId?: IntWithAggregatesFilter<"CoursStarted"> | number
+    IsEnd?: BoolWithAggregatesFilter<"CoursStarted"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"CoursStarted"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CoursStarted"> | Date | string
   }
 
   export type UserHasBadgeWhereInput = {
@@ -24014,7 +24014,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -24039,7 +24039,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -24063,7 +24063,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -24088,7 +24088,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -24162,7 +24162,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -24187,7 +24187,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -24211,7 +24211,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -24236,7 +24236,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -24663,7 +24663,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedCreateInput = {
+  export type CoursStartedCreateInput = {
     IsEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24671,7 +24671,7 @@ export namespace Prisma {
     cours: CoursCreateNestedOneWithoutActivationsInput
   }
 
-  export type CoursActivedUncheckedCreateInput = {
+  export type CoursStartedUncheckedCreateInput = {
     id?: number
     userId: number
     coursId: number
@@ -24680,7 +24680,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedUpdateInput = {
+  export type CoursStartedUpdateInput = {
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24688,7 +24688,7 @@ export namespace Prisma {
     cours?: CoursUpdateOneRequiredWithoutActivationsNestedInput
   }
 
-  export type CoursActivedUncheckedUpdateInput = {
+  export type CoursStartedUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     coursId?: IntFieldUpdateOperationsInput | number
@@ -24697,7 +24697,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedCreateManyInput = {
+  export type CoursStartedCreateManyInput = {
     id?: number
     userId: number
     coursId: number
@@ -24706,13 +24706,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedUpdateManyMutationInput = {
+  export type CoursStartedUpdateManyMutationInput = {
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedUncheckedUpdateManyInput = {
+  export type CoursStartedUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     coursId?: IntFieldUpdateOperationsInput | number
@@ -25302,10 +25302,10 @@ export namespace Prisma {
     none?: UserHasCoursWhereInput
   }
 
-  export type CoursActivedListRelationFilter = {
-    every?: CoursActivedWhereInput
-    some?: CoursActivedWhereInput
-    none?: CoursActivedWhereInput
+  export type CoursStartedListRelationFilter = {
+    every?: CoursStartedWhereInput
+    some?: CoursStartedWhereInput
+    none?: CoursStartedWhereInput
   }
 
   export type CommentListRelationFilter = {
@@ -25349,7 +25349,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type CoursActivedOrderByRelationAggregateInput = {
+  export type CoursStartedOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25807,12 +25807,12 @@ export namespace Prisma {
     coursId?: SortOrder
   }
 
-  export type CoursActivedUserIdCoursIdCompoundUniqueInput = {
+  export type CoursStartedUserIdCoursIdCompoundUniqueInput = {
     userId: number
     coursId: number
   }
 
-  export type CoursActivedCountOrderByAggregateInput = {
+  export type CoursStartedCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
@@ -25821,22 +25821,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CoursActivedAvgOrderByAggregateInput = {
+  export type CoursStartedAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
   }
 
-  export type CoursActivedMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    coursId?: SortOrder
-    IsEnd?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type CoursActivedMinOrderByAggregateInput = {
+  export type CoursStartedMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
@@ -25845,7 +25836,16 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CoursActivedSumOrderByAggregateInput = {
+  export type CoursStartedMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    coursId?: SortOrder
+    IsEnd?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CoursStartedSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     coursId?: SortOrder
@@ -26243,11 +26243,11 @@ export namespace Prisma {
     connect?: UserHasCoursWhereUniqueInput | UserHasCoursWhereUniqueInput[]
   }
 
-  export type CoursActivedCreateNestedManyWithoutUserInput = {
-    create?: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput> | CoursActivedCreateWithoutUserInput[] | CoursActivedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutUserInput | CoursActivedCreateOrConnectWithoutUserInput[]
-    createMany?: CoursActivedCreateManyUserInputEnvelope
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
+  export type CoursStartedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput> | CoursStartedCreateWithoutUserInput[] | CoursStartedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutUserInput | CoursStartedCreateOrConnectWithoutUserInput[]
+    createMany?: CoursStartedCreateManyUserInputEnvelope
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
   }
 
   export type CommentCreateNestedManyWithoutAuthorInput = {
@@ -26299,11 +26299,11 @@ export namespace Prisma {
     connect?: UserHasCoursWhereUniqueInput | UserHasCoursWhereUniqueInput[]
   }
 
-  export type CoursActivedUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput> | CoursActivedCreateWithoutUserInput[] | CoursActivedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutUserInput | CoursActivedCreateOrConnectWithoutUserInput[]
-    createMany?: CoursActivedCreateManyUserInputEnvelope
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
+  export type CoursStartedUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput> | CoursStartedCreateWithoutUserInput[] | CoursStartedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutUserInput | CoursStartedCreateOrConnectWithoutUserInput[]
+    createMany?: CoursStartedCreateManyUserInputEnvelope
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
   }
 
   export type CommentUncheckedCreateNestedManyWithoutAuthorInput = {
@@ -26396,18 +26396,18 @@ export namespace Prisma {
     deleteMany?: UserHasCoursScalarWhereInput | UserHasCoursScalarWhereInput[]
   }
 
-  export type CoursActivedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput> | CoursActivedCreateWithoutUserInput[] | CoursActivedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutUserInput | CoursActivedCreateOrConnectWithoutUserInput[]
-    upsert?: CoursActivedUpsertWithWhereUniqueWithoutUserInput | CoursActivedUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CoursActivedCreateManyUserInputEnvelope
-    set?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    disconnect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    delete?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    update?: CoursActivedUpdateWithWhereUniqueWithoutUserInput | CoursActivedUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CoursActivedUpdateManyWithWhereWithoutUserInput | CoursActivedUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
+  export type CoursStartedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput> | CoursStartedCreateWithoutUserInput[] | CoursStartedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutUserInput | CoursStartedCreateOrConnectWithoutUserInput[]
+    upsert?: CoursStartedUpsertWithWhereUniqueWithoutUserInput | CoursStartedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CoursStartedCreateManyUserInputEnvelope
+    set?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    disconnect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    delete?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    update?: CoursStartedUpdateWithWhereUniqueWithoutUserInput | CoursStartedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CoursStartedUpdateManyWithWhereWithoutUserInput | CoursStartedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
   }
 
   export type CommentUpdateManyWithoutAuthorNestedInput = {
@@ -26508,18 +26508,18 @@ export namespace Prisma {
     deleteMany?: UserHasCoursScalarWhereInput | UserHasCoursScalarWhereInput[]
   }
 
-  export type CoursActivedUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput> | CoursActivedCreateWithoutUserInput[] | CoursActivedUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutUserInput | CoursActivedCreateOrConnectWithoutUserInput[]
-    upsert?: CoursActivedUpsertWithWhereUniqueWithoutUserInput | CoursActivedUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CoursActivedCreateManyUserInputEnvelope
-    set?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    disconnect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    delete?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    update?: CoursActivedUpdateWithWhereUniqueWithoutUserInput | CoursActivedUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CoursActivedUpdateManyWithWhereWithoutUserInput | CoursActivedUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
+  export type CoursStartedUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput> | CoursStartedCreateWithoutUserInput[] | CoursStartedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutUserInput | CoursStartedCreateOrConnectWithoutUserInput[]
+    upsert?: CoursStartedUpsertWithWhereUniqueWithoutUserInput | CoursStartedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CoursStartedCreateManyUserInputEnvelope
+    set?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    disconnect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    delete?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    update?: CoursStartedUpdateWithWhereUniqueWithoutUserInput | CoursStartedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CoursStartedUpdateManyWithWhereWithoutUserInput | CoursStartedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
   }
 
   export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
@@ -26618,11 +26618,11 @@ export namespace Prisma {
     connect?: UserHasCoursWhereUniqueInput | UserHasCoursWhereUniqueInput[]
   }
 
-  export type CoursActivedCreateNestedManyWithoutCoursInput = {
-    create?: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput> | CoursActivedCreateWithoutCoursInput[] | CoursActivedUncheckedCreateWithoutCoursInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutCoursInput | CoursActivedCreateOrConnectWithoutCoursInput[]
-    createMany?: CoursActivedCreateManyCoursInputEnvelope
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
+  export type CoursStartedCreateNestedManyWithoutCoursInput = {
+    create?: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput> | CoursStartedCreateWithoutCoursInput[] | CoursStartedUncheckedCreateWithoutCoursInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutCoursInput | CoursStartedCreateOrConnectWithoutCoursInput[]
+    createMany?: CoursStartedCreateManyCoursInputEnvelope
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
   }
 
   export type CommentCreateNestedManyWithoutCoursInput = {
@@ -26674,11 +26674,11 @@ export namespace Prisma {
     connect?: UserHasCoursWhereUniqueInput | UserHasCoursWhereUniqueInput[]
   }
 
-  export type CoursActivedUncheckedCreateNestedManyWithoutCoursInput = {
-    create?: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput> | CoursActivedCreateWithoutCoursInput[] | CoursActivedUncheckedCreateWithoutCoursInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutCoursInput | CoursActivedCreateOrConnectWithoutCoursInput[]
-    createMany?: CoursActivedCreateManyCoursInputEnvelope
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
+  export type CoursStartedUncheckedCreateNestedManyWithoutCoursInput = {
+    create?: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput> | CoursStartedCreateWithoutCoursInput[] | CoursStartedUncheckedCreateWithoutCoursInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutCoursInput | CoursStartedCreateOrConnectWithoutCoursInput[]
+    createMany?: CoursStartedCreateManyCoursInputEnvelope
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
   }
 
   export type CommentUncheckedCreateNestedManyWithoutCoursInput = {
@@ -26774,18 +26774,18 @@ export namespace Prisma {
     deleteMany?: UserHasCoursScalarWhereInput | UserHasCoursScalarWhereInput[]
   }
 
-  export type CoursActivedUpdateManyWithoutCoursNestedInput = {
-    create?: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput> | CoursActivedCreateWithoutCoursInput[] | CoursActivedUncheckedCreateWithoutCoursInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutCoursInput | CoursActivedCreateOrConnectWithoutCoursInput[]
-    upsert?: CoursActivedUpsertWithWhereUniqueWithoutCoursInput | CoursActivedUpsertWithWhereUniqueWithoutCoursInput[]
-    createMany?: CoursActivedCreateManyCoursInputEnvelope
-    set?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    disconnect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    delete?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    update?: CoursActivedUpdateWithWhereUniqueWithoutCoursInput | CoursActivedUpdateWithWhereUniqueWithoutCoursInput[]
-    updateMany?: CoursActivedUpdateManyWithWhereWithoutCoursInput | CoursActivedUpdateManyWithWhereWithoutCoursInput[]
-    deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
+  export type CoursStartedUpdateManyWithoutCoursNestedInput = {
+    create?: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput> | CoursStartedCreateWithoutCoursInput[] | CoursStartedUncheckedCreateWithoutCoursInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutCoursInput | CoursStartedCreateOrConnectWithoutCoursInput[]
+    upsert?: CoursStartedUpsertWithWhereUniqueWithoutCoursInput | CoursStartedUpsertWithWhereUniqueWithoutCoursInput[]
+    createMany?: CoursStartedCreateManyCoursInputEnvelope
+    set?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    disconnect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    delete?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    update?: CoursStartedUpdateWithWhereUniqueWithoutCoursInput | CoursStartedUpdateWithWhereUniqueWithoutCoursInput[]
+    updateMany?: CoursStartedUpdateManyWithWhereWithoutCoursInput | CoursStartedUpdateManyWithWhereWithoutCoursInput[]
+    deleteMany?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
   }
 
   export type CommentUpdateManyWithoutCoursNestedInput = {
@@ -26886,18 +26886,18 @@ export namespace Prisma {
     deleteMany?: UserHasCoursScalarWhereInput | UserHasCoursScalarWhereInput[]
   }
 
-  export type CoursActivedUncheckedUpdateManyWithoutCoursNestedInput = {
-    create?: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput> | CoursActivedCreateWithoutCoursInput[] | CoursActivedUncheckedCreateWithoutCoursInput[]
-    connectOrCreate?: CoursActivedCreateOrConnectWithoutCoursInput | CoursActivedCreateOrConnectWithoutCoursInput[]
-    upsert?: CoursActivedUpsertWithWhereUniqueWithoutCoursInput | CoursActivedUpsertWithWhereUniqueWithoutCoursInput[]
-    createMany?: CoursActivedCreateManyCoursInputEnvelope
-    set?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    disconnect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    delete?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
-    update?: CoursActivedUpdateWithWhereUniqueWithoutCoursInput | CoursActivedUpdateWithWhereUniqueWithoutCoursInput[]
-    updateMany?: CoursActivedUpdateManyWithWhereWithoutCoursInput | CoursActivedUpdateManyWithWhereWithoutCoursInput[]
-    deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
+  export type CoursStartedUncheckedUpdateManyWithoutCoursNestedInput = {
+    create?: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput> | CoursStartedCreateWithoutCoursInput[] | CoursStartedUncheckedCreateWithoutCoursInput[]
+    connectOrCreate?: CoursStartedCreateOrConnectWithoutCoursInput | CoursStartedCreateOrConnectWithoutCoursInput[]
+    upsert?: CoursStartedUpsertWithWhereUniqueWithoutCoursInput | CoursStartedUpsertWithWhereUniqueWithoutCoursInput[]
+    createMany?: CoursStartedCreateManyCoursInputEnvelope
+    set?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    disconnect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    delete?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    connect?: CoursStartedWhereUniqueInput | CoursStartedWhereUniqueInput[]
+    update?: CoursStartedUpdateWithWhereUniqueWithoutCoursInput | CoursStartedUpdateWithWhereUniqueWithoutCoursInput[]
+    updateMany?: CoursStartedUpdateManyWithWhereWithoutCoursInput | CoursStartedUpdateManyWithWhereWithoutCoursInput[]
+    deleteMany?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
   }
 
   export type CommentUncheckedUpdateManyWithoutCoursNestedInput = {
@@ -27552,7 +27552,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -27576,7 +27576,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -27666,7 +27666,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -27690,7 +27690,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -27752,14 +27752,14 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CoursActivedCreateWithoutUserInput = {
+  export type CoursStartedCreateWithoutUserInput = {
     IsEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutActivationsInput
   }
 
-  export type CoursActivedUncheckedCreateWithoutUserInput = {
+  export type CoursStartedUncheckedCreateWithoutUserInput = {
     id?: number
     coursId: number
     IsEnd?: boolean
@@ -27767,13 +27767,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedCreateOrConnectWithoutUserInput = {
-    where: CoursActivedWhereUniqueInput
-    create: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput>
+  export type CoursStartedCreateOrConnectWithoutUserInput = {
+    where: CoursStartedWhereUniqueInput
+    create: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput>
   }
 
-  export type CoursActivedCreateManyUserInputEnvelope = {
-    data: CoursActivedCreateManyUserInput | CoursActivedCreateManyUserInput[]
+  export type CoursStartedCreateManyUserInputEnvelope = {
+    data: CoursStartedCreateManyUserInput | CoursStartedCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -27997,32 +27997,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserHasCours"> | Date | string
   }
 
-  export type CoursActivedUpsertWithWhereUniqueWithoutUserInput = {
-    where: CoursActivedWhereUniqueInput
-    update: XOR<CoursActivedUpdateWithoutUserInput, CoursActivedUncheckedUpdateWithoutUserInput>
-    create: XOR<CoursActivedCreateWithoutUserInput, CoursActivedUncheckedCreateWithoutUserInput>
+  export type CoursStartedUpsertWithWhereUniqueWithoutUserInput = {
+    where: CoursStartedWhereUniqueInput
+    update: XOR<CoursStartedUpdateWithoutUserInput, CoursStartedUncheckedUpdateWithoutUserInput>
+    create: XOR<CoursStartedCreateWithoutUserInput, CoursStartedUncheckedCreateWithoutUserInput>
   }
 
-  export type CoursActivedUpdateWithWhereUniqueWithoutUserInput = {
-    where: CoursActivedWhereUniqueInput
-    data: XOR<CoursActivedUpdateWithoutUserInput, CoursActivedUncheckedUpdateWithoutUserInput>
+  export type CoursStartedUpdateWithWhereUniqueWithoutUserInput = {
+    where: CoursStartedWhereUniqueInput
+    data: XOR<CoursStartedUpdateWithoutUserInput, CoursStartedUncheckedUpdateWithoutUserInput>
   }
 
-  export type CoursActivedUpdateManyWithWhereWithoutUserInput = {
-    where: CoursActivedScalarWhereInput
-    data: XOR<CoursActivedUpdateManyMutationInput, CoursActivedUncheckedUpdateManyWithoutUserInput>
+  export type CoursStartedUpdateManyWithWhereWithoutUserInput = {
+    where: CoursStartedScalarWhereInput
+    data: XOR<CoursStartedUpdateManyMutationInput, CoursStartedUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type CoursActivedScalarWhereInput = {
-    AND?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
-    OR?: CoursActivedScalarWhereInput[]
-    NOT?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
-    id?: IntFilter<"CoursActived"> | number
-    userId?: IntFilter<"CoursActived"> | number
-    coursId?: IntFilter<"CoursActived"> | number
-    IsEnd?: BoolFilter<"CoursActived"> | boolean
-    createdAt?: DateTimeFilter<"CoursActived"> | Date | string
-    updatedAt?: DateTimeFilter<"CoursActived"> | Date | string
+  export type CoursStartedScalarWhereInput = {
+    AND?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
+    OR?: CoursStartedScalarWhereInput[]
+    NOT?: CoursStartedScalarWhereInput | CoursStartedScalarWhereInput[]
+    id?: IntFilter<"CoursStarted"> | number
+    userId?: IntFilter<"CoursStarted"> | number
+    coursId?: IntFilter<"CoursStarted"> | number
+    IsEnd?: BoolFilter<"CoursStarted"> | boolean
+    createdAt?: DateTimeFilter<"CoursStarted"> | Date | string
+    updatedAt?: DateTimeFilter<"CoursStarted"> | Date | string
   }
 
   export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -28155,7 +28155,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -28179,7 +28179,7 @@ export namespace Prisma {
     roleId?: number
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -28311,14 +28311,14 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CoursActivedCreateWithoutCoursInput = {
+  export type CoursStartedCreateWithoutCoursInput = {
     IsEnd?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutActivationsInput
   }
 
-  export type CoursActivedUncheckedCreateWithoutCoursInput = {
+  export type CoursStartedUncheckedCreateWithoutCoursInput = {
     id?: number
     userId: number
     IsEnd?: boolean
@@ -28326,13 +28326,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedCreateOrConnectWithoutCoursInput = {
-    where: CoursActivedWhereUniqueInput
-    create: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput>
+  export type CoursStartedCreateOrConnectWithoutCoursInput = {
+    where: CoursStartedWhereUniqueInput
+    create: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput>
   }
 
-  export type CoursActivedCreateManyCoursInputEnvelope = {
-    data: CoursActivedCreateManyCoursInput | CoursActivedCreateManyCoursInput[]
+  export type CoursStartedCreateManyCoursInputEnvelope = {
+    data: CoursStartedCreateManyCoursInput | CoursStartedCreateManyCoursInput[]
     skipDuplicates?: boolean
   }
 
@@ -28444,7 +28444,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -28468,7 +28468,7 @@ export namespace Prisma {
     roleId?: IntFieldUpdateOperationsInput | number
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -28605,20 +28605,20 @@ export namespace Prisma {
     data: XOR<UserHasCoursUpdateManyMutationInput, UserHasCoursUncheckedUpdateManyWithoutCoursInput>
   }
 
-  export type CoursActivedUpsertWithWhereUniqueWithoutCoursInput = {
-    where: CoursActivedWhereUniqueInput
-    update: XOR<CoursActivedUpdateWithoutCoursInput, CoursActivedUncheckedUpdateWithoutCoursInput>
-    create: XOR<CoursActivedCreateWithoutCoursInput, CoursActivedUncheckedCreateWithoutCoursInput>
+  export type CoursStartedUpsertWithWhereUniqueWithoutCoursInput = {
+    where: CoursStartedWhereUniqueInput
+    update: XOR<CoursStartedUpdateWithoutCoursInput, CoursStartedUncheckedUpdateWithoutCoursInput>
+    create: XOR<CoursStartedCreateWithoutCoursInput, CoursStartedUncheckedCreateWithoutCoursInput>
   }
 
-  export type CoursActivedUpdateWithWhereUniqueWithoutCoursInput = {
-    where: CoursActivedWhereUniqueInput
-    data: XOR<CoursActivedUpdateWithoutCoursInput, CoursActivedUncheckedUpdateWithoutCoursInput>
+  export type CoursStartedUpdateWithWhereUniqueWithoutCoursInput = {
+    where: CoursStartedWhereUniqueInput
+    data: XOR<CoursStartedUpdateWithoutCoursInput, CoursStartedUncheckedUpdateWithoutCoursInput>
   }
 
-  export type CoursActivedUpdateManyWithWhereWithoutCoursInput = {
-    where: CoursActivedScalarWhereInput
-    data: XOR<CoursActivedUpdateManyMutationInput, CoursActivedUncheckedUpdateManyWithoutCoursInput>
+  export type CoursStartedUpdateManyWithWhereWithoutCoursInput = {
+    where: CoursStartedScalarWhereInput
+    data: XOR<CoursStartedUpdateManyMutationInput, CoursStartedUncheckedUpdateManyWithoutCoursInput>
   }
 
   export type CommentUpsertWithWhereUniqueWithoutCoursInput = {
@@ -28686,7 +28686,7 @@ export namespace Prisma {
     tools?: CoursHasToolCreateNestedManyWithoutCoursInput
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -28710,7 +28710,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedCreateNestedManyWithoutCoursInput
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -28749,7 +28749,7 @@ export namespace Prisma {
     tools?: CoursHasToolUpdateManyWithoutCoursNestedInput
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -28773,7 +28773,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedUpdateManyWithoutCoursNestedInput
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -28796,7 +28796,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -28820,7 +28820,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -28985,7 +28985,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -29009,7 +29009,7 @@ export namespace Prisma {
     roleId?: number
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -29038,7 +29038,7 @@ export namespace Prisma {
     tools?: CoursHasToolCreateNestedManyWithoutCoursInput
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -29062,7 +29062,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedCreateNestedManyWithoutCoursInput
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -29100,7 +29100,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -29124,7 +29124,7 @@ export namespace Prisma {
     roleId?: IntFieldUpdateOperationsInput | number
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -29159,7 +29159,7 @@ export namespace Prisma {
     tools?: CoursHasToolUpdateManyWithoutCoursNestedInput
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -29183,7 +29183,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedUpdateManyWithoutCoursNestedInput
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -29425,7 +29425,7 @@ export namespace Prisma {
     role?: RoleCreateNestedOneWithoutUsersInput
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -29449,7 +29449,7 @@ export namespace Prisma {
     roleId?: number
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -29512,7 +29512,7 @@ export namespace Prisma {
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -29536,7 +29536,7 @@ export namespace Prisma {
     roleId?: IntFieldUpdateOperationsInput | number
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -29590,7 +29590,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -29614,7 +29614,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -29673,7 +29673,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -29697,7 +29697,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -29746,7 +29746,7 @@ export namespace Prisma {
     tools?: CoursHasToolCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
@@ -29770,7 +29770,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
@@ -29829,7 +29829,7 @@ export namespace Prisma {
     tools?: CoursHasToolUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -29853,7 +29853,7 @@ export namespace Prisma {
     tools?: CoursHasToolUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -29903,7 +29903,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
   }
@@ -29927,7 +29927,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
   }
@@ -29954,7 +29954,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29978,7 +29978,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30018,7 +30018,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
   }
@@ -30042,7 +30042,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
   }
@@ -30075,7 +30075,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -30099,7 +30099,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30123,7 +30123,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     notifications?: NotificationCreateNestedManyWithoutCoursInput
   }
@@ -30147,7 +30147,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCoursInput
   }
@@ -30174,7 +30174,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -30198,7 +30198,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30238,7 +30238,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
   }
@@ -30262,7 +30262,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
   }
@@ -30295,7 +30295,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -30319,7 +30319,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30343,7 +30343,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveCreateNestedManyWithoutCoursInput
     content?: CoursContentCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedCreateNestedManyWithoutCoursInput
     comments?: CommentCreateNestedManyWithoutCoursInput
     opinions?: OpinionCreateNestedManyWithoutCoursInput
   }
@@ -30367,7 +30367,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedCreateNestedManyWithoutCoursInput
     content?: CoursContentUncheckedCreateNestedManyWithoutCoursInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutCoursInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutCoursInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutCoursInput
     comments?: CommentUncheckedCreateNestedManyWithoutCoursInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutCoursInput
   }
@@ -30394,7 +30394,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -30418,7 +30418,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -30458,7 +30458,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
   }
@@ -30482,7 +30482,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
   }
@@ -30515,7 +30515,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -30539,7 +30539,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30562,7 +30562,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    activations?: CoursActivedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedCreateNestedManyWithoutUserInput
     commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -30586,7 +30586,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
+    activations?: CoursStartedUncheckedCreateNestedManyWithoutUserInput
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -30625,7 +30625,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -30649,7 +30649,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -30687,7 +30687,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -30711,7 +30711,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutUserNestedInput
     commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -30764,7 +30764,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedCreateManyUserInput = {
+  export type CoursStartedCreateManyUserInput = {
     id?: number
     coursId: number
     IsEnd?: boolean
@@ -30823,7 +30823,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -30847,7 +30847,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput
@@ -30909,14 +30909,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedUpdateWithoutUserInput = {
+  export type CoursStartedUpdateWithoutUserInput = {
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutActivationsNestedInput
   }
 
-  export type CoursActivedUncheckedUpdateWithoutUserInput = {
+  export type CoursStartedUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     coursId?: IntFieldUpdateOperationsInput | number
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
@@ -30924,7 +30924,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedUncheckedUpdateManyWithoutUserInput = {
+  export type CoursStartedUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     coursId?: IntFieldUpdateOperationsInput | number
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
@@ -31059,7 +31059,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CoursActivedCreateManyCoursInput = {
+  export type CoursStartedCreateManyCoursInput = {
     id?: number
     userId: number
     IsEnd?: boolean
@@ -31177,14 +31177,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedUpdateWithoutCoursInput = {
+  export type CoursStartedUpdateWithoutCoursInput = {
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivationsNestedInput
   }
 
-  export type CoursActivedUncheckedUpdateWithoutCoursInput = {
+  export type CoursStartedUncheckedUpdateWithoutCoursInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
@@ -31192,7 +31192,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CoursActivedUncheckedUpdateManyWithoutCoursInput = {
+  export type CoursStartedUncheckedUpdateManyWithoutCoursInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     IsEnd?: BoolFieldUpdateOperationsInput | boolean
@@ -31311,7 +31311,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUpdateManyWithoutCoursNestedInput
     content?: CoursContentUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUpdateManyWithoutCoursNestedInput
     comments?: CommentUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUpdateManyWithoutCoursNestedInput
@@ -31335,7 +31335,7 @@ export namespace Prisma {
     learningObjectives?: CoursHasLearningObjectiveUncheckedUpdateManyWithoutCoursNestedInput
     content?: CoursContentUncheckedUpdateManyWithoutCoursNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutCoursNestedInput
-    activations?: CoursActivedUncheckedUpdateManyWithoutCoursNestedInput
+    activations?: CoursStartedUncheckedUpdateManyWithoutCoursNestedInput
     comments?: CommentUncheckedUpdateManyWithoutCoursNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutCoursNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCoursNestedInput

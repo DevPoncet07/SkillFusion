@@ -122,7 +122,7 @@ CREATE TABLE "user_has_cours" (
 );
 
 -- CreateTable
-CREATE TABLE "cours_actived" (
+CREATE TABLE "cours_started" (
     "id" SERIAL NOT NULL,
     "user_id" INTEGER NOT NULL,
     "cours_id" INTEGER NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE "cours_actived" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "cours_actived_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "cours_started_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -232,7 +232,7 @@ CREATE UNIQUE INDEX "courses_slug_key" ON "courses"("slug");
 CREATE UNIQUE INDEX "user_has_cours_user_id_cours_id_key" ON "user_has_cours"("user_id", "cours_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "cours_actived_user_id_cours_id_key" ON "cours_actived"("user_id", "cours_id");
+CREATE UNIQUE INDEX "cours_started_user_id_cours_id_key" ON "cours_started"("user_id", "cours_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_has_bagde_user_id_badge_id_key" ON "user_has_bagde"("user_id", "badge_id");
@@ -274,10 +274,10 @@ ALTER TABLE "user_has_cours" ADD CONSTRAINT "user_has_cours_user_id_fkey" FOREIG
 ALTER TABLE "user_has_cours" ADD CONSTRAINT "user_has_cours_cours_id_fkey" FOREIGN KEY ("cours_id") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "cours_actived" ADD CONSTRAINT "cours_actived_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "cours_started" ADD CONSTRAINT "cours_started_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "cours_actived" ADD CONSTRAINT "cours_actived_cours_id_fkey" FOREIGN KEY ("cours_id") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "cours_started" ADD CONSTRAINT "cours_started_cours_id_fkey" FOREIGN KEY ("cours_id") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "user_has_bagde" ADD CONSTRAINT "user_has_bagde_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

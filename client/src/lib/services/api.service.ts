@@ -7,7 +7,6 @@ interface IUser {
     role: string;
 }
 
-console.log("API_URL", import.meta.env.VITE_API_URL)
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 console.log(BASE_URL)
 
@@ -15,11 +14,9 @@ console.log(BASE_URL)
 export default async function api(endpoint: string, method = 'GET', body?: object) {
     getAuth()
     const { user, token } = authStore
-    console.log("user : ",user,"toke, :", token)
     let response
     if (user==null && token ==null){
         response = await apiWithoutToken(endpoint,method,body!)
-        console.log(response)
     }else{
         response = await apiWithToken(endpoint,method,body!)
     }

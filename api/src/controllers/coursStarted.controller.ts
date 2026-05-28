@@ -9,12 +9,12 @@ import { AuthenticatedRequest } from '../@types/express';
 export default {
     // Requête pour récuperer tous les cours actives
     getAll: async (req: Request, res: Response) => {
-        const coursActives = await prisma.coursActived.findMany();
+        const coursActives = await prisma.coursStarted.findMany();
         res.json(coursActives);
     },
     getEndedCoursByUser: async (req: Request, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
-        const coursByUser = await prisma.coursActived.findMany({
+        const coursByUser = await prisma.coursStarted.findMany({
             where: { IsEnd: true, userId: userId, cours: { visibility: true } },
             include: {
                 cours: { include: { category: true } },
@@ -34,7 +34,7 @@ export default {
             throw new ForbiddenError('Accès refusé');
         }
 
-        const coursByUser = await prisma.coursActived.findMany({
+        const coursByUser = await prisma.coursStarted.findMany({
             where: { IsEnd: false, userId: userId, cours: { visibility: true } },
             include: {
                 cours: { include: { category: true } },
@@ -47,7 +47,7 @@ export default {
     getOneCoursActive: async (req: AuthenticatedRequest, res: Response) => {
         const coursActiveId = await parseIdFromParams(req.params.id);
 
-        const coursActive = await prisma.coursActived.findUnique({ where: { id: coursActiveId } });
+        const coursActive = await prisma.coursStarted.findUnique({ where: { id: coursActiveId } });
         if (!coursActive) {
             throw new NotFoundError(`Cours active with id ${coursActiveId} not found`);
         }
@@ -68,7 +68,7 @@ export default {
         const data = await createCoursActiveBodySchema.parseAsync(req.body);
         const userId = req.user!.userId;
 
-        const alreadyExistingCours = await prisma.coursActived.findFirst({
+        const alreadyExistingCours = await prisma.coursStarted.findFirst({
             where: { coursId: data.coursId, userId },
         });
 
@@ -87,7 +87,7 @@ export default {
         if (enrollment) {
             return;
         }
-        const createdCoursActive = await prisma.coursActived.create({
+        const createdCoursActive = await prisma.coursStarted.create({
             data: {
                 coursId: data.coursId,
                 userId,
@@ -106,15 +106,15 @@ export default {
         });
         const data = await updateCoursActiveBodySchema.parseAsync(req.body);
 
-        const dataCoursActive = await prisma.coursActived.findMany({
+        const dataCoursActive = await prisma.coursStarted.findMany({
             where: { coursId: data.coursId, userId: data.userId },
         });
-        const updatedCoursActive = await prisma.coursActived.update({
+        const updatedCoursActive = await prisma.coursStarted.update({
             where: { id: dataCoursActive[0].id },
             data: { IsEnd: data.IsEnd },
         });
 
-        const coursForUser = await prisma.coursActived.findMany({
+        const coursForUser = await prisma.coursStarted.findMany({
             where: { userId: data.userId, IsEnd: true },
         });
         const bageForUser = await prisma.userHasBadge.findMany({
@@ -153,7 +153,7 @@ export default {
         const coursActiveId = await parseIdFromParams(req.params.id);
 
         // Récupération avant delete pour vérifier la propriété
-        const coursActive = await prisma.coursActived.findUnique({ where: { id: coursActiveId } });
+        const coursActive = await prisma.coursStarted.findUnique({ where: { id: coursActiveId } });
         if (!coursActive) {
             throw new NotFoundError(`Cours active with id ${coursActiveId} not found`);
         }
@@ -163,7 +163,7 @@ export default {
             throw new ForbiddenError('Accès refusé');
         }
 
-        await prisma.coursActived.delete({ where: { id: coursActiveId } });
+        await prisma.coursStarted.delete({ where: { id: coursActiveId } });
         res.status(204).send();
     },
 };

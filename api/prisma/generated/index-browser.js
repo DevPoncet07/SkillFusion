@@ -216,7 +216,7 @@ exports.Prisma.UserHasCoursScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CoursActivedScalarFieldEnum = {
+exports.Prisma.CoursStartedScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   coursId: 'coursId',
@@ -313,7 +313,7 @@ exports.Prisma.ModelName = {
   Tool: 'Tool',
   Badge: 'Badge',
   UserHasCours: 'UserHasCours',
-  CoursActived: 'CoursActived',
+  CoursStarted: 'CoursStarted',
   UserHasBadge: 'UserHasBadge',
   CoursHasTool: 'CoursHasTool',
   CoursHasLearningObjective: 'CoursHasLearningObjective',
