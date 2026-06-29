@@ -42,6 +42,7 @@ before(() => {
 beforeEach(async (t) => {
     (t as TestContext).mock.method(console, 'info', () => {});
     await truncateTables();
+    
 });
 
 after(async () => {
