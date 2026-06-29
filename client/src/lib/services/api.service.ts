@@ -8,7 +8,6 @@ interface IUser {
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-console.log(BASE_URL)
 
 
 export default async function api(endpoint: string, method = 'GET', body?: object) {

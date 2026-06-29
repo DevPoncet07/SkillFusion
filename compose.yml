@@ -35,6 +35,8 @@ services:
     container_name: skillfusion_api
     depends_on:
       - db
+    environment:
+      - DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy" 
     expose:
       - "3000"
     networks:
