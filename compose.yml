@@ -36,7 +36,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://dummy:dummy@localhost:5432/dummy
+      - DATABASE_URL=postgresql://usersf_test:usersf_test@localhost:5434/usersf_test
     expose:
       - "3000"
     networks:
