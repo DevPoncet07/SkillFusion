@@ -13,12 +13,5 @@ CMD ["npm", "run", "dev"]
 FROM base AS production
 RUN npm ci
 COPY . .
-# L'adresse est bidon, 
-# Car prisma generate a besoin d'une adresse pour generer les fichiers, 
-# Mais elle ne sont pas utilisés dans le projet.
-# L'idée est d'avoir une URL valide de type postgresql 
-# Pour que prisma generate puisse fonctionner.
 
-# Pourquoi ne pas mettre la vraie, car au moment du build, 
-# Elle n'existe simplement pas encore
 CMD ["npm", "run", "start"]
