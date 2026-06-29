@@ -17,9 +17,6 @@ services:
       POSTGRES_USER: usersf
       POSTGRES_PASSWORD: usersf
       POSTGRES_DB: usersf
-
-    ports:
-      - "5433:5432"
     volumes:
       - ./database/:/docker-entrypoint-initdb.d
       - db_volume:/var/lib/postgresql
