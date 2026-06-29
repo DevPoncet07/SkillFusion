@@ -36,7 +36,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://usersf_test:usersf_test@skillfusion_db:5434/usersf_test
+      - DATABASE_URL=postgresql://usersf_test:usersf_test@skillfusion_db:5433/usersf_test
     expose:
       - "3000"
     networks:
