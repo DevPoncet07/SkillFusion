@@ -37,6 +37,8 @@ services:
       - db
     environment:
       - DATABASE_URL=postgresql://usersf:usersf@skillfusion_db:5432/usersf
+    env_file:
+      - .env
     expose:
       - "3000"
     networks:
