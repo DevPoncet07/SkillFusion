@@ -35,8 +35,6 @@ services:
     container_name: skillfusion_api
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgresql://usersf:usersf@skillfusion_db:5432/usersf
     env_file:
       - ./api/.env
     expose:
@@ -44,7 +42,6 @@ services:
     networks:
       - skillfusion_network
       - proxy-network
-    command: sh -c "npm install && npm run start"
 
   client:
     build:
