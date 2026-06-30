@@ -1,4 +1,4 @@
-# Etape de base pour les deux developpements
+# Etape de base pour les deux environements
 FROM node:24-alpine AS base
 WORKDIR /app
 COPY package*.json ./
